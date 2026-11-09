@@ -66,9 +66,8 @@ def metric(report, name, subset, key, sd=False):
 
 
 def input_metric(report, name, subset):
-    """Table V(c) was transcribed through a two-decimal experiment summary."""
     value = statistics.fmean(r["ADE"] for r in report["rows"][name][subset])
-    return q(q(value, 2))
+    return q(value)
 
 
 def measurement():
@@ -162,7 +161,7 @@ def confidence_intervals(bootstrap=False):
                 mask = fraction < .1 if subset == "strict_unseen" else np.ones(len(fraction), bool)
                 regenerated = compare(z["errors"][names.index(target)], z["errors"][names.index(baseline)], z["day"], mask)
                 ci = regenerated["ci95"]
-        out[label] = [q(q(v * 100, 2)) if study.endswith("_mb") else q(v * 100) for v in ci]
+        out[label] = [q(v * 100) for v in ci]
     return out
 
 

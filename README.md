@@ -50,11 +50,7 @@ python scripts/draw_figures.py --output outputs/figures
 `reproduce_tables.py` exits with status 0 when all 270 printed cells agree. The optional bootstrap reruns
 the quoted prediction CIs from seed-averaged window errors. Table I uses the frozen measurement summaries
 and measurement bootstrap outputs. Raw-log measurement, including its day bootstrap, has a separate entry point.
-Tables III and IV use seed means and sample standard deviations. Table V(c) and the input-processing CIs
-follow the manuscript's two-stage display rounding through a two-decimal summary. This yields 245.5 m
-for an underlying KAGC filter/isotropic ADE of 245.445761 m. Direct one-decimal rounding would give 245.4 m.
-The same display convention affects CI endpoints -3.1% and -32.1%, whose direct-rounding values are -3.0%
-and -32.0%. The JSON results retain full precision.
+Tables III and IV use seed means and sample standard deviations. All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
 
 ### Preparing source data
 

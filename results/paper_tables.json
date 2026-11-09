@@ -345,7 +345,7 @@
     "c ftp_iso direct": [
       "134.0",
       "111.5",
-      "245.5",
+      "245.4",
       "960"
     ],
     "c ftp_merit direct": [
@@ -428,14 +428,14 @@
     ],
     "V filter iso KAGC": [
       "-22.2",
-      "-3.1"
+      "-3.0"
     ],
     "V filter MERIT": [
       "-0.1",
       "1.7"
     ],
     "V age KAGC": [
-      "-32.1",
+      "-32.0",
       "17.9"
     ],
     "V age residual structure": [
