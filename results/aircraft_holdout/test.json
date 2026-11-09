@@ -1,0 +1,136 @@
+{
+  "windows": 38,
+  "days": 5,
+  "aircraft": 7,
+  "test_aircraft": 176,
+  "ADE": {
+    "CV (last 5 s)": 272.9857482910156,
+    "KF-CV q=4 r=15": 264.0171203613281,
+    "iso direct": 227.56106567382812,
+    "iso projection": 231.22732543945312,
+    "iso gate_analytic": 236.76177978515625,
+    "iso patchtst": 380.57275390625,
+    "iso transformer": 267.7666015625,
+    "merit direct": 227.2967529296875,
+    "merit projection": 226.8425750732422,
+    "merit gate_analytic": 225.92190551757812,
+    "merit patchtst": 303.9171142578125,
+    "merit transformer": 261.5766906738281,
+    "gauss direct": 221.4533233642578,
+    "raw direct": 238.940185546875,
+    "heur direct": 206.8607940673828,
+    "iso trajairnet": 480.4134826660156,
+    "merit trajairnet": 447.10400390625
+  },
+  "FDE": {
+    "CV (last 5 s)": 489.9060974121094,
+    "KF-CV q=4 r=15": 474.996826171875,
+    "iso direct": 384.9835510253906,
+    "iso projection": 367.9176025390625,
+    "iso gate_analytic": 381.683837890625,
+    "iso patchtst": 631.5200805664062,
+    "iso transformer": 430.6956787109375,
+    "merit direct": 344.6568298339844,
+    "merit projection": 354.50933837890625,
+    "merit gate_analytic": 343.4333801269531,
+    "merit patchtst": 560.49755859375,
+    "merit transformer": 439.6890869140625,
+    "gauss direct": 377.8156433105469,
+    "raw direct": 380.5373229980469,
+    "heur direct": 351.6520690917969,
+    "iso trajairnet": 862.824951171875,
+    "merit trajairnet": 821.7926635742188
+  },
+  "comparisons": {
+    "merit direct vs iso direct": {
+      "change": -0.0011612772941589355,
+      "ci95": [
+        -0.2246202826499939,
+        0.08413898944854736
+      ],
+      "wilcoxon_p": 0.033134572207927704,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit projection vs iso projection": {
+      "change": -0.018962979316711426,
+      "ci95": [
+        -0.1869029402732849,
+        0.04515254497528076
+      ],
+      "wilcoxon_p": 0.046086836606264114,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit gate_analytic vs iso gate_analytic": {
+      "change": -0.04578375816345215,
+      "ci95": [
+        -0.22824162244796753,
+        0.017383456230163574
+      ],
+      "wilcoxon_p": 0.04446884244680405,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit patchtst vs iso patchtst": {
+      "change": -0.20142173767089844,
+      "ci95": [
+        -0.33955985456705096,
+        -0.12540676891803793
+      ],
+      "wilcoxon_p": 1.3897079043090343e-07,
+      "days_better": 5,
+      "days": 5
+    },
+    "merit transformer vs iso transformer": {
+      "change": -0.0231168270111084,
+      "ci95": [
+        -0.09886133670806885,
+        0.007306337356567383
+      ],
+      "wilcoxon_p": 0.9542837142944336,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit trajairnet vs iso trajairnet": {
+      "change": -0.0693349838256836,
+      "ci95": [
+        -0.12578463554382324,
+        -0.01034235954284668
+      ],
+      "wilcoxon_p": 0.04289785400032997,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit direct vs gauss direct": {
+      "change": 0.02638685703277588,
+      "ci95": [
+        -0.1934325098991394,
+        0.10252118408679962
+      ],
+      "wilcoxon_p": 0.14038456976413727,
+      "days_better": 3,
+      "days": 5
+    },
+    "merit direct vs raw direct": {
+      "change": -0.04872959852218628,
+      "ci95": [
+        -0.11819666624069214,
+        -0.010147452354431152
+      ],
+      "wilcoxon_p": 0.2204328328371048,
+      "days_better": 4,
+      "days": 5
+    },
+    "merit direct vs heur direct": {
+      "change": 0.09879100322723389,
+      "ci95": [
+        -0.01270216703414917,
+        0.1275118589401245
+      ],
+      "wilcoxon_p": 0.8074645400047302,
+      "days_better": 2,
+      "days": 5
+    }
+  }
+}

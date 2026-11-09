@@ -1,0 +1,39 @@
+{
+  "source_commit": "0a161f8c2b2e4ab5895e38fbfbc76ebfef3b5da6",
+  "release_scope": "MERIT core reproduction, independent source export",
+  "seeds": [
+    42,
+    123,
+    456,
+    0,
+    1
+  ],
+  "validation": {
+    "excluded_checkpoint_bytes": 701905170,
+    "unittest_tests": 16,
+    "unittest_passed": true,
+    "paper_cells": 270,
+    "paper_cells_matched": 270,
+    "prediction_CIs_regenerated": true,
+    "processed_cache_bytes_identical": true,
+    "normalized_train_val_arrays_identical": true,
+    "raw_replay_caches_bytes_identical": 6,
+    "residual_pool_bytes_identical": true,
+    "main_checkpoints_evaluated": 50,
+    "main_sites": 2,
+    "main_seed_subset_metrics": 900,
+    "input_control_checkpoints_evaluated": 20,
+    "input_control_sites": 2,
+    "input_seed_subset_metrics": 360,
+    "max_relative_metric_difference": 0.0,
+    "privacy_grep_matches": {
+      "absolute_paths": 0,
+      "private_labels": 0,
+      "assistant_labels": 0,
+      "internal_language": 0
+    },
+    "kagc_preparation_validation": "converted-log replay rebuilt exactly; source extraction unavailable; converter unit-tested",
+    "figure_validation": "nine PDF panels rendered; glyph floor checked; three rows aligned; curve annotation spacing adjusted",
+    "checkpoint_omission": "ten TrajAirNet checkpoints; implementation and five-seed test results retained"
+  }
+}

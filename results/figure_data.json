@@ -1,0 +1,65 @@
+{
+  "staleness_bins": [
+    {
+      "lower_s": 0.35006667772928873,
+      "upper_s": 0.5393533420562744,
+      "median_s": 0.5077583372592926,
+      "windows": 2650,
+      "ade_reduction_percent": {
+        "direct": 8.245647430419922,
+        "projection": 8.176994323730469
+      }
+    },
+    {
+      "lower_s": 0.5393533420562744,
+      "upper_s": 0.5954233400026957,
+      "median_s": 0.5672333359718322,
+      "windows": 2649,
+      "ade_reduction_percent": {
+        "direct": 9.891801834106445,
+        "projection": 9.439677238464355
+      }
+    },
+    {
+      "lower_s": 0.5954233400026957,
+      "upper_s": 0.667143329779307,
+      "median_s": 0.6264333208401998,
+      "windows": 2649,
+      "ade_reduction_percent": {
+        "direct": 11.804574966430664,
+        "projection": 11.040782928466797
+      }
+    },
+    {
+      "lower_s": 0.667143329779307,
+      "upper_s": 0.8739966495831808,
+      "median_s": 0.7249833305676778,
+      "windows": 2649,
+      "ade_reduction_percent": {
+        "direct": 14.456785202026367,
+        "projection": 13.565653800964355
+      }
+    },
+    {
+      "lower_s": 0.8739966495831808,
+      "upper_s": 2.4922799849510184,
+      "median_s": 1.262166686852773,
+      "windows": 1987,
+      "ade_reduction_percent": {
+        "direct": 21.300506591796875,
+        "projection": 18.28388023376465
+      }
+    },
+    {
+      "lower_s": 2.4922799849510184,
+      "upper_s": 63.70421664317449,
+      "median_s": 3.9586833238601686,
+      "windows": 663,
+      "ade_reduction_percent": {
+        "direct": 22.714078903198242,
+        "projection": 21.80831527709961
+      }
+    }
+  ],
+  "bin_population": "all KBTP test windows; inclusive bounds, matching Figure 3(c)"
+}

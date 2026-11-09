@@ -1,0 +1,6 @@
+*.pt binary
+*.npy binary
+* text=auto eol=lf
+
+*.pth binary
+*.npz binary

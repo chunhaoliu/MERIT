@@ -1,0 +1,762 @@
+{
+  "processed_cache_sha256": "cec14c173b52149f80f89e4331f2d11668f122e241e0789719870831bd2b6487",
+  "processed": {
+    "cache_sha256": "cec14c173b52149f80f89e4331f2d11668f122e241e0789719870831bd2b6487",
+    "train_windows": 30000,
+    "val_windows": 5208,
+    "normalization": "frozen-definition training-fitted cached six-channel scaler",
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "train_windows_sha256": "8ea74a454eb6fc0f32fb5b5f046b48649849dc52c35152db9a90c9e4b84ce9b0",
+    "val_windows_sha256": "e28d1bdcf8479c05b8fb8f2999c4f8e1e58cf190df6d448758cf83bbb875b8fe",
+    "test_container_deserialized": true,
+    "test_windows_evaluated": false
+  },
+  "raw_replay": {
+    "kagc_test.npz": {
+      "sha256": "9e5f184e3c2c4ea96713e63732c52ad929bcee72d99b8cbbeaa62b93e21d47ef",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "33a57e092b0ed6fd2a22d15054c8d078768593fd6976e09e4b5fbb79b5d894b1",
+          "shape": [
+            504,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "a61ba7ac28cf76f25f07df86ffe2f14c7a1bd0183e5bb8b6a32d3d3637a9d6c8",
+          "shape": [
+            504,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "99ce058e95255435dd4e1b27cc2e8abea932bacb1f54f006ae241a01fcef555d",
+          "shape": [
+            504,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "def1383c8e5e2d6b152385d07ef7de888393bedee097e11d15216f8c14a490f2",
+          "shape": [
+            504,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "15664c70c740d9007a987d69f1d28f2404172c0a42bb61371272e460b2f6ce08",
+          "shape": [
+            504,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "c756a91735f490dd9066aa59401508a3f4d08b653dc75ebacbec8c019aa5b835",
+          "shape": [
+            504,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "fc474856dd94aabd3e3120764b3dc39d7c4de2b84f0660501c4ba88ead0a8a29",
+          "shape": [
+            504,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "70a49b02d5bbbce5d62de3c2aab2e86be271f25be02091fcf7bf9ee3bb0cea63",
+          "shape": [
+            504,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "8b73692fccb5b4190e85cbad05cf9f15a580c134698aa4bf8c70adfe8e3fd267",
+          "shape": [
+            504,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "6afadfeb0b671bb4375ade5793900e8870f2fda0ec8c921c644cde3feb488d3d",
+          "shape": [
+            504
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "cf53e9d19d8880d737a827a197e140f27be634296526e43b62f37ee799ae8bf2",
+          "shape": [
+            504
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "363563bed7de2895c650f260a35cceff776c9e042a369621632b25dd16b70880",
+          "shape": [
+            504
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "bd028ca97137564973d4492c385a86563ad453505d71a3877d46cff35a8d9149",
+          "shape": [
+            504
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "782972264d2f448a7741cb6afbc10275ffde7e1d3f5f9005fd45543a7c2b81b5",
+          "shape": [
+            504
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "kagc_train.npz": {
+      "sha256": "19557a7d89dcce84e323dc55078dc63dfd865fea32b5e64972f991b2d78e2d3d",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "d6d367dd80164d80e9b4c538672a03edec41ae568453e1d576e4df3fe916677e",
+          "shape": [
+            863,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "e8fb9050c3044778f20efb6ad4fb02360b25af5601536beb23858de5845a24c2",
+          "shape": [
+            863,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "fcfe486be401eadb29a65b58c49f9292517057ebb05888b7db86107f7a981096",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "fcfbe1d16130077814bf7c4fe809e60adecbdb68e877be18afa357729397bf94",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "07a9f429981e821ae665adc49e9380638c5de1c034e5bcee6b314bdbb5dbf5ad",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "9dc28ec3f8f71f31965f477f3a3f6fb91004fdca3b1666e1c9eab49b9d236c35",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "267dec1105b0e9e11e247648f979df5b41b363a850268ec2c6aceee742830459",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "ede039207f4f7dbbf42a69ae3e216cce8c870914b6abdaef6aa1e72016bbead6",
+          "shape": [
+            863,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "2c1f04035cbdbb2a30856bfe213f093adacb12bf85fb0c65f4ed370113c637a0",
+          "shape": [
+            863,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "6f4f096371f93dbbd2f1a8d5d4bebbad0e8cdc7465182cddf47e018a03673d4e",
+          "shape": [
+            863
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "13e9472a934d0f4751c6036e5301ace6ece5a4941d2ceaa2989420546a19f872",
+          "shape": [
+            863
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "51661047823aabe368e2301fdf991885c44bb58765465d71c684b083e140d544",
+          "shape": [
+            863
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "96ac21a858ba65860b2072036584c33d4d477c67d08be1ce9bf2c6607aff2fb7",
+          "shape": [
+            863
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "72f11f6d3cf14e74e9624f459c6bc8d11963650cae993a0ea742e4d63189ccfc",
+          "shape": [
+            863
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "kagc_val.npz": {
+      "sha256": "7f81f7e0ca5dfa848c13d74cf2cdaf8d07005388d42da84058fd6f4a661ce3aa",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "906757cfe30f11cda2fe102514d585fe16ed55ce9eee09bd2b2c40a8b4b61d68",
+          "shape": [
+            184,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "4a0b031d4f42f683b6dfe0efb780e29ad460448ac2ebbbae8c97c9047c1c3902",
+          "shape": [
+            184,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "ec6a818731b6fe46d374fd6e2c1a768240b9fdda396b2a4f53e4041c1ec79801",
+          "shape": [
+            184,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "47e206ef623e0b4456f8b488219715d2cc12eefc909a8ace939cd7df533e0f11",
+          "shape": [
+            184,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "c5bdb23574ccf69ad1bd1449f387313ddac84bc4d6d2c5cb22a329727a0ea658",
+          "shape": [
+            184,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "82a13660f0f3749026b5db173f1a3cf205d4b1f4ab87e86a6f7ac46b53b16137",
+          "shape": [
+            184,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "2a316cf2cc547bc2753488da336876c179d7ed3cccd47bc80d80658e54351560",
+          "shape": [
+            184,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "d3aadeaea43779506c0d837665be3b905552ebb10ba893239c19c16c13ee9414",
+          "shape": [
+            184,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "43e92815f1ae184e9496412e604a8018e73aff76e03527a273cf1349ac3d4b51",
+          "shape": [
+            184,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "284fd3854edbab7d0076bf2579e4432ad00a4918134f0b51747246e0ccf50f9e",
+          "shape": [
+            184
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "0ee6bca43e3487c0105f96ffd2dff3d767db3518824333a0db497bb64faa210f",
+          "shape": [
+            184
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "22e094a693a9ac23e9245366d5077fe2e8dbc2a31745cc5469f55c791b8de5e7",
+          "shape": [
+            184
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "125598e00c4a8b740d65bc0c4adcaa2f70b1500fff36d8c3be9fc0315002ec05",
+          "shape": [
+            184
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "9232cc04ab27b5a912314608cd84190ca7954206063f2706b393f80d0e74ff3f",
+          "shape": [
+            184
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "test.npz": {
+      "sha256": "c7437af230835141427de25dff9821660866486dc000477f75043ff994ade9d3",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "c8ee8dae4735c4c398adf9b47f7a5a8b69d63e392e7945e4afa79fd8f6078c23",
+          "shape": [
+            13247,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "c8df75eaad85842d8a8dbf21a0e8762235ed77e7935cb9c9e2c6ce319e765fc9",
+          "shape": [
+            13247,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "43f467225da67b95bd85d606469d93c422da97d12973d04fcf9603fd0b8ee79c",
+          "shape": [
+            13247,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "02a865921994f80ba02d2a8a7671eb4cb29eb575bef48fa3fff9a96a70c4fbfc",
+          "shape": [
+            13247,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "0f672f927ef0505d5fc9a01237a929d08779229187f17388a293cc1c1f7fed8a",
+          "shape": [
+            13247,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "3f336fe8036026f38820cbc3199dca51aa4cb0ca78decfeecdc89b4738061e30",
+          "shape": [
+            13247,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "56a8bc8dff07300174952e793f3dc0c9a18855605a7d09b39c4e9cebfda0e67b",
+          "shape": [
+            13247,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "bfb2145f782cc3fe4e84d8abc9f1ffed10ae2614973f8e58dfb1676f00ee6524",
+          "shape": [
+            13247,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "cdb95f18d33e311652b7695a2aecfdb1c592ee51e37cc0f195a5a7258ca9e3ce",
+          "shape": [
+            13247,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "93087fe5037b21016e6d35eefe1d1f9d83854689fc3ed89a22a68de5f4fc4e6d",
+          "shape": [
+            13247
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "c2eb0cbf80f596b779dac031f6fea9dc2c0f7b6abdac451614b0fc09b41896d9",
+          "shape": [
+            13247
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "f9073f8545441bc8e99018e277621f32fe5856e36591eed81d934c25ac6acf1b",
+          "shape": [
+            13247
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "edd1a148ee55da150a331c1163eac8ecd1f3dacdce20d2c338be9f5c88cfef3d",
+          "shape": [
+            13247
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "d54cbc95a92780d168629e68f816e647840d191ea1664506009b386f7961d0ee",
+          "shape": [
+            13247
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "train.npz": {
+      "sha256": "b78b05db635892e04e89da05c291e6b11874fb5d7ec4402b963498b261d9dc08",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "ace0762174ced9c16671341a0f6cedd0432550fd88a12b6945ff2055cbb31cb7",
+          "shape": [
+            32249,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "80adc112fb913bc57b7caa0e960802278694e683841f454731c11ed71a8e2af3",
+          "shape": [
+            32249,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "c274730910242496cdb66801797358bc56fe5061eba64f0811d3c5f7a511f5b0",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "2c8c17724303e59818a08bd0c4c6b2cbc07ac29cc1e7b23cea27e06845e2cd24",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "d7a99c9abd5217231214e282baa640a326fc00708c2f69be905d9cff1c0b5873",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "a1a992c6fd005ce09892c222a9a3044b76ccbba6f9c9f6adebc021f9ca3be4f5",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "7ccd9cc79e903bd7fc8d7805b48a012b716d8bf7ab605b94e3685a35cb2a19ea",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "fa29f1c43c46a0e05b8435ae12d2f3d202e1fe18771bad98a5fa54186c511f42",
+          "shape": [
+            32249,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "06aacc98c9f27b5e831895e47842ce67d12549ec62988563bd4fe14dd747d6dc",
+          "shape": [
+            32249,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "282fa33caccc378b66900d81216d81891e9b7dc8a55e823d4f04137720936bde",
+          "shape": [
+            32249
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "4ad0034720c159ac1b73da64294112e164403e6e0c4863c0a5f319f9d58b58a6",
+          "shape": [
+            32249
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "ec23d3f4ff7d755a6f8127cf2af8ded83609e969f9565ecfc07174868caa22c2",
+          "shape": [
+            32249
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "1cd6bf94848c2bace420d3545089a5083b6653518aa9c70afb70b29e8cf0f6b3",
+          "shape": [
+            32249
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "00949438d3ec09a52544e728d46629ed5ea81a178d904d29c7a45544b647b184",
+          "shape": [
+            32249
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "val.npz": {
+      "sha256": "c46a03dfb5721fea7920e72212f53d2af1ef366461a867bac77a0fd53f0a6e98",
+      "arrays": {
+        "history_xy_m": {
+          "sha256": "9449f29a873f461543a9f20f93773dd4c63e8798df6d6e0497a2678d282df508",
+          "shape": [
+            7824,
+            60,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "reference_xy_m": {
+          "sha256": "78c77795471e7790806c976f0817281a92d8f65869af3dc0b252a578c3053618",
+          "shape": [
+            7824,
+            30,
+            2
+          ],
+          "dtype": "float64"
+        },
+        "report_age_s": {
+          "sha256": "60902b1ca4629aabea32ee75b8047868dbdadad4d6ddb02744d3e529b5aba35b",
+          "shape": [
+            7824,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "changed_position_age_s": {
+          "sha256": "23bd2015f8dd5b095c8147017d268946b8273813888f013dbb37782e36e67bad",
+          "shape": [
+            7824,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "timestamp_conflict": {
+          "sha256": "ce460c5c7754892d1fad21bf0cc9c6c28dc7d58569d363e65d898045ba80d43c",
+          "shape": [
+            7824,
+            60
+          ],
+          "dtype": "bool"
+        },
+        "input_source_row": {
+          "sha256": "8e5ab7e41141dd5a9d651397f25aae0a53ef36f2b22839a0f0b83ca949196469",
+          "shape": [
+            7824,
+            60
+          ],
+          "dtype": "int64"
+        },
+        "input_source_timestamp": {
+          "sha256": "1f9bf951eb47bc8bba9f219ac6fecd282ef863aed50a7224ca2511c3f500a9bc",
+          "shape": [
+            7824,
+            60
+          ],
+          "dtype": "float64"
+        },
+        "reference_left_row": {
+          "sha256": "bd0a8723811e0f542b40b9e3b363bd8883444f107a87aa14f1007e6e4aca6444",
+          "shape": [
+            7824,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "reference_right_row": {
+          "sha256": "e9442a82ca89a1debad3368e785f195cb685a576b16d65bbfa1cba69e15f5443",
+          "shape": [
+            7824,
+            30
+          ],
+          "dtype": "int64"
+        },
+        "origin_timestamp": {
+          "sha256": "9f70599aee36f549590d2251429a881db2f413ca9b3cf18f6dd5475588323d47",
+          "shape": [
+            7824
+          ],
+          "dtype": "float64"
+        },
+        "aircraft_id": {
+          "sha256": "710a3a71bb6cec3d556da1f2f6a927281eaeb016f3a909ed03440f4f1d3965b9",
+          "shape": [
+            7824
+          ],
+          "dtype": "<U8"
+        },
+        "segment_index": {
+          "sha256": "7d35977630f58bddc659991c9b201122a12c986a9616a49e69aaa89f3c69eb89",
+          "shape": [
+            7824
+          ],
+          "dtype": "int64"
+        },
+        "day": {
+          "sha256": "30fe1875944d445556c81a3460d9bd00b0c335c7f21fa1aedbee7b7a710d309a",
+          "shape": [
+            7824
+          ],
+          "dtype": "<U8"
+        },
+        "train_overlap_fraction": {
+          "sha256": "ccf7b316cc21e4d4dfb05659c52c47433227ecc10a9b6ebc81cfb99967a18588",
+          "shape": [
+            7824
+          ],
+          "dtype": "float64"
+        }
+      }
+    }
+  },
+  "derived": {
+    "ages_kagc.npz": {
+      "sha256": "75a63054e8d262dd63e06befc3cf8e7981becb7dfc3b564508b3d2ba00009fa0",
+      "arrays": {
+        "changed_position_age_s": {
+          "sha256": "fcfbe1d16130077814bf7c4fe809e60adecbdb68e877be18afa357729397bf94",
+          "shape": [
+            863,
+            60
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "ages_kbtp.npz": {
+      "sha256": "3c0ef0863df08fa15f62f1eec3351d49e1354deaab7d16739b1753a98ecdf8ff",
+      "arrays": {
+        "changed_position_age_s": {
+          "sha256": "2c8c17724303e59818a08bd0c4c6b2cbc07ac29cc1e7b23cea27e06845e2cd24",
+          "shape": [
+            32249,
+            60
+          ],
+          "dtype": "float64"
+        }
+      }
+    },
+    "residual_pool.npz": {
+      "sha256": "3401072073d24173172dac68f42deabc9b055552a1880c0a4a5dcab038d725da",
+      "arrays": {
+        "along": {
+          "sha256": "a2436a910b27434e0fb47ad8bede8c1109553fb732f688904d968b39a506c5f7",
+          "shape": [
+            578438
+          ],
+          "dtype": "float64"
+        },
+        "cross": {
+          "sha256": "cf94a791d67cc8ae2060346b35af56302b78d51e77b1653e76d30c4442569487",
+          "shape": [
+            578438
+          ],
+          "dtype": "float64"
+        }
+      }
+    }
+  }
+}

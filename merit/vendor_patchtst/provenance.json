@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/yuqinie98/PatchTST",
+  "commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+  "commit_date": "2023-08-11T00:40:14Z",
+  "files": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "PatchTST_supervised/layers/PatchTST_backbone.py": "df67173153787c2356bdfb6491159cd754332ef7382986efe879e1fbea8ebf26",
+    "PatchTST_supervised/layers/PatchTST_layers.py": "21c06c70a90c60ee2a269b5c600c702834dea22cdfd72915e6b0f8b4a28db3f6",
+    "PatchTST_supervised/layers/RevIN.py": "e64c0ccded9228b347134e7368420d3fb10f70c75145b5ff2d8bdd8c3af59df6",
+    "PatchTST_supervised/models/PatchTST.py": "49d8bb865e1226d6338842f4b33c4bc6992cefb048dc2a4a5a8c410ca708586b",
+    "PatchTST_supervised/run_longExp.py": "44345cb6c6a5e7a6ff95b8e95c988aef3386d9fff7ddd23cb5fee5d3a151bdfc",
+    "PatchTST_supervised/scripts/PatchTST/etth1.sh": "556c87cd7dd795094ff6cb73465e84c90686017e1535e0ba23ed43683b9b0897"
+  },
+  "vendored_files": {
+    "PatchTST_backbone.py": "ee21f3f7069e23870421d035bf68d0c22254a9ea94d684646c56bccb400f63b9",
+    "PatchTST_layers.py": "21c06c70a90c60ee2a269b5c600c702834dea22cdfd72915e6b0f8b4a28db3f6",
+    "RevIN.py": "e64c0ccded9228b347134e7368420d3fb10f70c75145b5ff2d8bdd8c3af59df6",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "allowed_import_edits": {
+    "from layers.PatchTST_layers import *": "from .PatchTST_layers import *",
+    "from layers.RevIN import RevIN": "from .RevIN import RevIN"
+  }
+}
