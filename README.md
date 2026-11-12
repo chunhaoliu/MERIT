@@ -26,11 +26,11 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks and Table I CIs |
 | `scripts/train.py` | paper training settings for all six predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
-| `scripts/reproduce_tables.py` | data-free reproduction of 270 printed cells from Tables I, III, IV, V and their quoted CIs |
+| `scripts/reproduce_tables.py` | data-free reproduction of 340 printed values: Tables I, III, IV, V, their quoted CIs, and the date-disjoint, timing-control and tail-error results quoted in the text |
 | `scripts/draw_figures.py` | redraws Figures 1, 3 and 4 from bundled derived statistics, errors and recentered case data |
-| `checkpoints/` | 108 checkpoints, 335.4 MB, with settings, SHA-256 and reference metrics in `index.json` |
+| `checkpoints/` | 125 checkpoints, 393.2 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
-| `results/runs.json` | 1,389 raw-evaluation records with explicit study, site, split, seed and subset labels |
+| `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
 | `results/paper_tables.json` | numerical cells as printed in the manuscript |
 | `results/figure_data.json`, `results/figure_cases.*` | staleness bins and de-identified, origin-relative example tracks |
 | `tests/` | model, replay, causality, data, hash, statistical and table checks |
@@ -47,7 +47,7 @@ python scripts/reproduce_tables.py --bootstrap
 python scripts/draw_figures.py --output outputs/figures
 ```
 
-`reproduce_tables.py` exits with status 0 when all 270 printed cells agree. The optional bootstrap reruns
+`reproduce_tables.py` exits with status 0 when all 340 printed values agree. The optional bootstrap reruns
 the quoted prediction CIs from seed-averaged window errors. Table I uses the frozen measurement summaries
 and measurement bootstrap outputs. Raw-log measurement, including its day bootstrap, has a separate entry point.
 Tables III and IV use seed means and sample standard deviations. All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
@@ -78,6 +78,8 @@ python scripts/evaluate.py --data data --site kbtp --groups iso merit --rows dir
 python scripts/evaluate.py --data data --site kbtp --groups iso merit --rows direct projection gate_analytic patchtst transformer --kf 4 15 --output outputs/kbtp_all
 python scripts/evaluate.py --data data --site kagc --groups iso merit --rows direct projection gate_analytic patchtst transformer --kf 1 60 --output outputs/kagc
 python scripts/evaluate.py --data data --site kbtp --groups ftp_iso ftp_merit merit_age iso_stale_age --output outputs/input_controls
+python scripts/evaluate.py --data data --site kbtp --groups merit near0 matched_stale --output outputs/timing_controls
+python scripts/evaluate.py --data data --site kbtp --groups dd_iso dd_merit --target "dd_merit direct" --output outputs/date_disjoint
 ```
 
 Evaluation reads input data and writes to the selected output directory. It verifies each checkpoint and replay
@@ -95,6 +97,7 @@ python scripts/measure_error.py --mode day-ci --raw <KBTP_raw_data> --train-repl
 python scripts/train.py --data data --row direct --noise merit --seed 42 --output runs/merit_direct_s42
 python scripts/train.py --data data --row direct --noise iso --seed 42 --output runs/iso_direct_s42
 python scripts/train.py --data data --row trajairnet --noise merit --seed 42 --output runs/merit_trajairnet_s42
+python scripts/train.py --data data --row direct --noise merit --date-disjoint --seed 42 --output runs/dd_merit_direct_s42
 ```
 
 The residual-pool reconstruction matched the released NPZ byte for byte. Recovery can regenerate its known
@@ -103,8 +106,8 @@ Run each training setting for seeds 42, 123, 456, 0 and 1, using the first three
 
 ## Checkpoint coverage
 
-The 108 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
-20 input-processing checkpoints, and 38 training/scale/age-bank controls. Main and selected training controls
+The 125 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
+20 input-processing checkpoints, 45 training/scale/age-bank controls, and 10 date-disjoint LSTM checkpoints. Main and selected training controls
 have five seeds, while factorial, scale and fine-tuning controls have three. Files are unchanged from the
 experiment artifacts and individually smaller than 100 MB. No large-file extension is required.
 

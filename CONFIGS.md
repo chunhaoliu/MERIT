@@ -99,10 +99,18 @@ plus the listed arguments. The index records each released checkpoint's exact se
 | MERIT plus KF (`ftp_merit`) | `--noise merit --filter-cv 8 15` |
 | MERIT plus age (`merit_age`) | `--noise merit --report-age` |
 | Matched residuals, measured ages, age input (`iso_stale_age`) | `--noise merit --pool gaussian:12.35 --report-age` |
+| Near-zero residuals plus measured ages (`near0`) | `--noise merit --pool gaussian:0.01 --kmax 2` |
+| Date-disjoint isotropic / MERIT (`dd_iso`, `dd_merit`) | `--noise iso --date-disjoint` / `--noise merit --kmax 2 --date-disjoint` |
 
 Raw-data training uses 28,644 input/reference windows and 3,605 selection windows from the final eight
 eligible training-period days. It retains the processed-training scaler. The factorial and scale/fine-tuning
-ablations use seeds 42/123/456. Selected main/raw/heuristic/age-bank/input comparisons use all five seeds.
+ablations use seeds 42/123/456. Selected main/raw/heuristic/age-bank/input comparisons use all five seeds,
+as do the `near0`, `matched_stale` and date-disjoint groups (`results/p8_*`).
+
+Date-disjoint retraining keeps the official training scenes whose tracks match same-aircraft raw reports on a
+unique day inside the 77 measurement days: 707 training and 83 selection scenes, 10,699 and 1,236 windows,
+listed by cache trajectory index in `merit/date_disjoint.json`. The scaler is refitted on these training
+trajectories. Raw validation and test windows, checkpoints selection and all other settings are unchanged.
 
 The 13 heuristic candidates are (s,p) = (0.01,0.25), (0.01,0.5), (3,0.25), (3,0.5), (6,0.1), (6,0.25),
 (6,0.5), (12.35,0.1), (12.35,0.25), (12.35,0.5), (25,0.1), (25,0.25), (25,0.5), selected using raw validation.
@@ -118,6 +126,6 @@ Age input adds the seventh channel, preserving six-channel targets and giving ze
 
 ADE/FDE are horizontal Euclidean distances in meters. Means and sample SDs are over seeds. P95 first averages
 each window's errors across seeds, then takes the 95th percentile of window ADE. Relative-change CIs use
-2,000 day-cluster resamples, seed 0. Wilcoxon uses paired, seed-averaged window errors, without multiplicity
+2,000 day-cluster resamples, seed 0. P95 relative-change CIs resample days in the same way (`compare_p95`). Wilcoxon uses paired, seed-averaged window errors, without multiplicity
 adjustment. A stored p=0 indicates floating-point underflow. The measurement CIs use the separate 1,000-draw
 procedure above. Reference-smoothing sensitivity uses Savitzky-Golay width 7, order 2, on future references only.

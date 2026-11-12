@@ -25,6 +25,7 @@ def main():
     p.add_argument("--pool", default="measured", help="measured or gaussian:STD")
     p.add_argument("--ages", help="NPZ age bank or bernoulli:P")
     p.add_argument("--data-mode", choices=["processed", "raw"], default="processed")
+    p.add_argument("--date-disjoint", action="store_true", help="train only on scenes dated in the measurement period")
     p.add_argument("--init", type=Path, help="checkpoint for raw-data fine-tuning")
     p.add_argument("--filter-cv", nargs=2, type=float)
     p.add_argument("--report-age", action="store_true")
@@ -40,6 +41,8 @@ def main():
         p.error("Input processing requires a processed-data direct LSTM without initialization")
     if a.output.resolve().is_relative_to(a.data.resolve()):
         raise ValueError("Training output must be outside the source data directory")
+    if a.date_disjoint and (a.row != "direct" or a.data_mode != "processed" or a.init or a.filter_cv or a.report_age):
+        p.error("Date-disjoint training covers the processed-data direct LSTM")
     if not math.isfinite(a.kmax) or a.kmax < 0:
         p.error("--kmax must be finite and nonnegative")
     budget = 1 if a.smoke else a.budget or {"transformer": 120, "trajairnet": 50}.get(a.row, 25)
@@ -51,7 +54,7 @@ def main():
     torch.backends.cudnn.benchmark = False
     torch.backends.cuda.matmul.allow_tf32 = False
     torch.backends.cudnn.allow_tf32 = False
-    tensors, scaler = load_data(a.data, a.device, raw=a.data_mode == "raw", smoke=a.smoke)
+    tensors, scaler = load_data(a.data, a.device, raw=a.data_mode == "raw", smoke=a.smoke, date_disjoint=a.date_disjoint)
     torch.manual_seed(a.seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(a.seed)

@@ -1,4 +1,4 @@
-"""Recompute every printed numerical cell of Tables I, III, IV and V without source data.
+"""Recompute every printed numerical cell of Tables I, III, IV and V, and the control results quoted in the text, without source data.
 
 Uses frozen measurement summaries and per-seed evaluation results. Standard deviations
 use ddof=1. Printed confidence intervals are checked against the frozen bootstrap outputs.
@@ -165,9 +165,48 @@ def confidence_intervals(bootstrap=False):
     return out
 
 
+def errors(study):
+    with np.load(ROOT / "results" / study / "test_errors.npz") as z:
+        return dict(zip(map(str, z["names"]), z["errors"])), z["day"], z["train_overlap_fraction"] < .1
+
+
+def signed(value):
+    return ("+" if value > 0 else "") + q(value * 100)
+
+
+def text_results():
+    """Date-disjoint retraining, five-seed timing controls and tail-error intervals quoted in the text."""
+    from merit.statistics import compare, compare_p95
+    out = {}
+
+    def ade(label, study, target, other, strict=False, values=True):
+        e, day, mask = errors(study)
+        mask = mask if strict else np.ones(len(day), bool)
+        c = compare(e[target], e[other], day, mask)
+        cells = [q(e[other][mask].mean()), q(e[target][mask].mean())] if values else []
+        out[label] = cells + [signed(c["change"])] + [signed(v) for v in c["ci95"]]
+
+    ade("date-disjoint KBTP all", "p8_dd_kbtp", "dd_merit direct", "dd_iso direct")
+    ade("date-disjoint KBTP strict", "p8_dd_kbtp", "dd_merit direct", "dd_iso direct", True)
+    ade("date-disjoint KAGC", "p8_dd_kagc", "dd_merit direct", "dd_iso direct")
+    for name, group in (("near-zero residuals", "near0 direct"), ("matched isotropic", "matched_stale direct")):
+        ade(f"{name} + ages KBTP strict", "p8_kbtp", group, "merit direct", True)
+        ade(f"{name} + ages KBTP all", "p8_kbtp", group, "merit direct")
+        ade(f"{name} + ages KAGC", "p8_kagc", group, "merit direct")
+    for label, study, other in (("P95 isotropic", "kagc_eval_test", "iso direct"),
+                                ("P95 local KF", "kagc_eval_test", "KF-CV q=1 r=60"),
+                                ("P95 heuristic", "kagc_eval_test", "heur direct"),
+                                ("P95 near-zero residuals + ages", "p8_kagc", "near0 direct"),
+                                ("P95 matched isotropic + ages", "p8_kagc", "matched_stale direct")):
+        e, day, _ = errors(study)
+        c = compare_p95(e["merit direct"], e[other], day)
+        out[label] = [q(c["p95"][1], 0), q(c["p95"][0], 0), signed(c["change"])] + [signed(v) for v in c["ci95"]]
+    return out
+
+
 def recompute(bootstrap=False):
     return {"I": measurement(), "III": main_table("kbtp"), "IV": main_table("kagc"),
-            "V": components(), "CI": confidence_intervals(bootstrap)}
+            "V": components(), "CI": confidence_intervals(bootstrap), "Text": text_results()}
 
 
 def main():

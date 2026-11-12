@@ -12,8 +12,8 @@
     "excluded_checkpoint_bytes": 701905170,
     "unittest_tests": 16,
     "unittest_passed": true,
-    "paper_cells": 270,
-    "paper_cells_matched": 270,
+    "paper_cells": 340,
+    "paper_cells_matched": 340,
     "prediction_CIs_regenerated": true,
     "processed_cache_bytes_identical": true,
     "normalized_train_val_arrays_identical": true,
@@ -35,5 +35,9 @@
     "kagc_preparation_validation": "converted-log replay rebuilt exactly; source extraction unavailable; converter unit-tested",
     "figure_validation": "nine PDF panels rendered; glyph floor checked; three rows aligned; curve annotation spacing adjusted",
     "checkpoint_omission": "ten TrajAirNet checkpoints; implementation and five-seed test results retained"
+  },
+  "update_2026_11_12": {
+    "source_commit": "40c748c",
+    "added": "17 checkpoints (near0, matched_stale seeds 0/1, dd_iso, dd_merit), results/p8_*, merit/date_disjoint.json, text-quoted values in reproduce_tables.py"
   }
 }

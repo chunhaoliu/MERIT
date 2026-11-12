@@ -47,7 +47,7 @@ class Models(unittest.TestCase):
 
     def test_checkpoint_hashes_and_reload(self):
         index = json.loads((ROOT / "checkpoints/index.json").read_text())
-        self.assertEqual(len(index), 108)
+        self.assertEqual(len(index), 125)
         seen = set()
         for entry in index:
             p = ROOT / "checkpoints" / entry["file"]

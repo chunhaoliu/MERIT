@@ -71,7 +71,7 @@ class ObservationReplay:
         return result
 
 
-def load_data(data, device, *, raw=False, smoke=False):
+def load_data(data, device, *, raw=False, smoke=False, date_disjoint=False):
     data = Path(data)
     cache = data / "trajair/trajair_trajectories_v3.pkl"
     if not cache.exists():
@@ -82,12 +82,15 @@ def load_data(data, device, *, raw=False, smoke=False):
     with cache.open("rb") as f:
         payload = pickle.load(f)
     args = SimpleNamespace(window_stride=30, max_train_windows=30000, max_val_windows=6000)
-    train = AircraftDataset(payload["trajectories"], payload["splits"], args, "train", [60, 30, 30])
-    val = AircraftDataset(payload["trajectories"], payload["splits"], args, "val", [60, 30, 30])
+    splits, expected = payload["splits"], manifest["processed"]
+    if date_disjoint:  # scenes dated inside the measurement period; the scaler is refitted on them
+        splits = expected = json.loads((ROOT / "merit/date_disjoint.json").read_text())
+    train = AircraftDataset(payload["trajectories"], splits, args, "train", [60, 30, 30])
+    val = AircraftDataset(payload["trajectories"], splits, args, "val", [60, 30, 30])
     val.set_scaler(train.scaler)
     arrays = (train.windows, val.windows)
     for name, array in zip(("train", "val"), arrays):
-        if hashlib.sha256(array.tobytes()).hexdigest() != manifest["processed"][f"{name}_windows_sha256"]:
+        if hashlib.sha256(array.tobytes()).hexdigest() != expected[f"{name}_windows_sha256"]:
             raise ValueError(f"{name} windows differ from the paper build")
     if raw:
         replay = data / "raw_replay/train.npz"
