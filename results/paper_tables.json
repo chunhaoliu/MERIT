@@ -55,6 +55,26 @@
       "128"
     ]
   },
+  "II": {
+    "direct": [
+      "0.84"
+    ],
+    "projection": [
+      "0.84"
+    ],
+    "gate_analytic": [
+      "0.84"
+    ],
+    "patchtst": [
+      "0.43"
+    ],
+    "transformer": [
+      "0.45"
+    ],
+    "trajairnet": [
+      "17.5"
+    ]
+  },
   "III": {
     "CV (last 5 s)": [
       "228.3",
@@ -80,37 +100,13 @@
       "232.5\u00b10.9",
       ""
     ],
-    "gauss direct": [
-      "131.2\u00b12.1",
-      "274.1\u00b13.7",
-      "",
-      "109.1\u00b11.6",
-      "228.9\u00b12.7",
-      ""
-    ],
-    "raw direct": [
-      "134.3\u00b16.0",
-      "284.7\u00b110.2",
-      "",
-      "110.7\u00b15.8",
-      "238.3\u00b110.4",
-      ""
-    ],
-    "heur direct": [
-      "119.6\u00b10.6",
-      "256.2\u00b12.2",
-      "",
-      "99.2\u00b10.6",
-      "213.9\u00b11.4",
-      ""
-    ],
     "merit direct": [
       "120.6\u00b10.4",
       "256.2\u00b11.4",
-      "-11.6",
+      "-11.6 [-14.3, -9.3]",
       "97.3\u00b10.1",
       "210.8\u00b10.3",
-      "-13.6"
+      "-13.6 [-14.7, -12.5]"
     ],
     "iso projection": [
       "134.5\u00b10.9",
@@ -123,10 +119,10 @@
     "merit projection": [
       "120.9\u00b10.6",
       "255.6\u00b11.0",
-      "-10.1",
+      "-10.1 [-12.5, -8.1]",
       "97.3\u00b10.5",
       "210.7\u00b10.9",
-      "-12.6"
+      "-12.6 [-13.7, -11.6]"
     ],
     "iso gate_analytic": [
       "137.9\u00b11.2",
@@ -139,10 +135,10 @@
     "merit gate_analytic": [
       "121.2\u00b12.2",
       "254.6\u00b14.7",
-      "-12.2",
+      "-12.2 [-15.3, -9.7]",
       "98.8\u00b11.6",
       "213.1\u00b13.4",
-      "-12.6"
+      "-12.6 [-13.8, -11.5]"
     ],
     "iso patchtst": [
       "348.5\u00b172.7",
@@ -155,10 +151,10 @@
     "merit patchtst": [
       "245.2\u00b19.7",
       "515.4\u00b18.5",
-      "-29.6",
+      "-29.6 [-30.9, -28.4]",
       "227.4\u00b18.9",
       "470.7\u00b17.0",
-      "-29.1"
+      "-29.1 [-29.6, -28.8]"
     ],
     "iso transformer": [
       "166.3\u00b14.9",
@@ -171,10 +167,10 @@
     "merit transformer": [
       "143.2\u00b13.4",
       "294.9\u00b110.1",
-      "-13.9",
+      "-13.9 [-16.6, -11.4]",
       "115.8\u00b14.3",
       "240.7\u00b19.0",
-      "-13.0"
+      "-13.0 [-13.7, -12.3]"
     ],
     "iso trajairnet": [
       "437.9\u00b133.1",
@@ -187,186 +183,166 @@
     "merit trajairnet": [
       "391.2\u00b126.9",
       "806.3\u00b180.6",
-      "-10.7",
+      "-10.7 [-11.6, -9.4]",
       "346.7\u00b133.2",
       "722.4\u00b196.6",
-      "-12.9"
+      "-12.9 [-13.4, -12.3]"
     ]
   },
   "IV": {
     "CV (last 5 s)": [
       "529.1",
       "970.9",
+      "2077",
       "--"
     ],
     "KF-CV q=1 r=60": [
       "241.3",
       "386.8",
+      "861",
       "--"
     ],
     "iso direct": [
       "253.6\u00b16.2",
       "414.1",
+      "1008",
       ""
-    ],
-    "heur direct": [
-      "260.6\u00b116.1",
-      "453.1",
-      ""
-    ],
-    "meritkagc direct": [
-      "219.5\u00b112.1",
-      "372.2",
-      "-13.5"
     ],
     "merit direct": [
       "210.9\u00b17.5",
       "366.0",
-      "-16.8"
+      "696",
+      "-16.8 [-25.0, -6.4]"
     ],
     "iso projection": [
       "244.5\u00b13.4",
       "411.0",
+      "931",
       ""
     ],
     "merit projection": [
       "214.9\u00b127.5",
       "368.8",
-      "-12.1"
+      "751",
+      "-12.1 [-19.0, -3.9]"
     ],
     "iso gate_analytic": [
       "247.9\u00b19.2",
       "414.3",
+      "993",
       ""
     ],
     "merit gate_analytic": [
       "211.7\u00b110.0",
       "367.1",
-      "-14.6"
+      "765",
+      "-14.6 [-21.9, -4.4]"
     ],
     "iso patchtst": [
       "356.9\u00b118.2",
       "524.1",
+      "1196",
       ""
     ],
     "merit patchtst": [
       "319.1\u00b15.4",
       "507.7",
-      "-10.6"
+      "1118",
+      "-10.6 [-14.7, -7.8]"
     ],
     "iso transformer": [
       "229.5\u00b117.7",
       "387.8",
+      "791",
       ""
     ],
     "merit transformer": [
       "232.3\u00b115.1",
       "390.6",
-      "+1.2"
+      "761",
+      "+1.2 [-6.2, +8.6]"
     ],
     "iso trajairnet": [
       "848.2\u00b124.9",
       "1522.5",
+      "2346",
       ""
     ],
     "merit trajairnet": [
       "841.0\u00b145.4",
       "1563.6",
-      "-0.8"
+      "2331",
+      "-0.8 [-7.6, +3.3]"
     ]
   },
   "V": {
-    "a iso100 direct": [
-      "132.8",
-      "273.9"
-    ],
-    "a gauss direct": [
-      "128.4",
-      "268.5"
-    ],
-    "a gauss+stale direct": [
-      "120.6",
-      "257.2"
-    ],
-    "a measured direct": [
-      "120.5",
-      "257.2"
-    ],
-    "a MERIT direct": [
-      "114.7",
-      "247.8"
-    ],
-    "a held_k10 direct": [
-      "120.5",
-      "257.7"
-    ],
-    "a held_k4 direct": [
-      "116.7",
-      "250.4"
-    ],
-    "a held_k1 direct": [
-      "114.6",
-      "248.5"
-    ],
-    "a raw_only direct": [
-      "127.8",
-      "276.6"
-    ],
-    "a MERIT_ft_raw direct": [
-      "123.7",
-      "267.0"
-    ],
-    "b iso_matched direct": [
-      "132.0",
-      "109.7",
-      "257.7"
-    ],
-    "b iso_matched_stale direct": [
-      "125.3",
-      "101.2",
-      "198.9"
-    ],
-    "b measured direct": [
-      "125.3",
-      "104.0",
-      "276.6"
-    ],
-    "b merit direct": [
-      "120.5",
-      "97.3",
-      "212.9"
-    ],
-    "c iso direct": [
+    "Isotropic | no timing": [
       "136.5",
       "112.6",
       "253.6",
       "1008"
     ],
-    "c ftp_iso direct": [
-      "134.0",
-      "111.5",
-      "245.4",
-      "960"
+    "Matched isotropic | no timing": [
+      "131.2",
+      "109.1",
+      "257.7\u2020",
+      "1053\u2020"
     ],
-    "c ftp_merit direct": [
-      "119.7",
-      "96.9",
-      "222.2",
-      "799"
+    "Measured | no timing": [
+      "125.3\u2020",
+      "104.0\u2020",
+      "276.6\u2020",
+      "1011\u2020"
     ],
-    "c merit direct": [
+    "Near-zero | Bernoulli": [
+      "119.6",
+      "99.2",
+      "260.6",
+      "943"
+    ],
+    "Near-zero | measured ages": [
+      "119.3",
+      "97.1",
+      "217.1",
+      "765"
+    ],
+    "Matched isotropic | measured ages": [
+      "126.2",
+      "101.2",
+      "198.0",
+      "784"
+    ],
+    "Measured (MERIT) | measured ages": [
       "120.6",
       "97.3",
       "210.9",
       "696"
     ],
-    "c iso_stale_age direct": [
+    "Raw-data training": [
+      "134.3",
+      "110.7",
+      "--",
+      "--"
+    ],
+    "Isotropic + Kalman front end": [
+      "134.0",
+      "111.5",
+      "245.4",
+      "960"
+    ],
+    "MERIT + Kalman front end": [
+      "119.7",
+      "96.9",
+      "222.2",
+      "799"
+    ],
+    "Matched isotropic + ages + age input": [
       "123.8",
       "97.3",
       "226.9",
       "606"
     ],
-    "c merit_age direct": [
+    "MERIT + age input": [
       "118.5",
       "94.2",
       "231.5",
@@ -374,77 +350,73 @@
     ]
   },
   "CI": {
-    "III LSTM": [
-      "-14.3",
-      "-9.3"
-    ],
-    "III matched isotropic": [
+    "matched isotropic KBTP strict": [
+      "-8.1",
       "-10.7",
       "-5.8"
     ],
-    "III raw training": [
+    "raw training KBTP strict": [
+      "-10.2",
       "-12.3",
       "-8.0"
     ],
-    "III heuristic strict": [
+    "heuristic KBTP strict": [
+      "+0.8",
       "-1.2",
-      "3.0"
+      "+3.0"
     ],
-    "III heuristic all": [
+    "heuristic KBTP all": [
+      "-2.0",
       "-3.1",
       "-0.9"
     ],
-    "IV LSTM": [
-      "-25.0",
-      "-6.4"
-    ],
-    "IV local KF": [
+    "local KF KAGC": [
+      "-12.6",
       "-25.4",
-      "3.4"
+      "+3.4"
     ],
-    "IV heuristic": [
+    "heuristic KAGC": [
+      "-19.1",
       "-25.8",
       "-9.7"
     ],
-    "IV local ages": [
+    "local ages KAGC": [
       "-26.1",
-      "16.2"
+      "+16.2"
     ],
-    "V staleness only": [
-      "-5.4",
-      "-2.2"
-    ],
-    "V structure only": [
-      "-6.1",
-      "-1.5"
-    ],
-    "V KAGC structure added": [
-      "0.1",
-      "18.0"
-    ],
-    "V filter iso KBTP": [
+    "filter iso KBTP strict": [
+      "-10.0",
       "-13.1",
       "-7.3"
     ],
-    "V filter iso KAGC": [
+    "filter iso KAGC": [
+      "-14.1",
       "-22.2",
       "-3.0"
     ],
-    "V filter MERIT": [
+    "filter MERIT KBTP strict": [
+      "+0.8",
       "-0.1",
-      "1.7"
+      "+1.7"
     ],
-    "V age KAGC": [
+    "age input KAGC": [
       "-32.0",
-      "17.9"
+      "+17.9"
     ],
-    "V age residual structure": [
+    "age input residual structure KBTP strict": [
+      "-4.3",
       "-6.0",
       "-2.8"
     ],
-    "III TrajAirNet": [
-      "-11.6",
-      "-9.4"
+    "measured timing KBTP strict (three seeds)": [
+      "-5.1",
+      "-8.2",
+      "-2.3"
+    ],
+    "measured timing KAGC (three seeds)": [
+      "-22.8",
+      "-30.3",
+      "-12.5"
     ]
   },
   "Text": {
@@ -456,18 +428,10 @@
       "-11.3"
     ],
     "date-disjoint KBTP strict": [
-      "156.1",
-      "137.8",
-      "-11.7",
-      "-14.3",
-      "-9.2"
+      "-11.7"
     ],
     "date-disjoint KAGC": [
-      "262.2",
-      "230.8",
-      "-12.0",
-      "-16.9",
-      "-8.6"
+      "-12.0"
     ],
     "near-zero residuals + ages KBTP strict": [
       "120.6",
@@ -475,13 +439,6 @@
       "-1.0",
       "-2.1",
       "+0.2"
-    ],
-    "near-zero residuals + ages KBTP all": [
-      "97.3",
-      "97.1",
-      "-0.2",
-      "-0.4",
-      "+0.1"
     ],
     "near-zero residuals + ages KAGC": [
       "210.9",
@@ -496,13 +453,6 @@
       "+4.6",
       "+3.0",
       "+6.3"
-    ],
-    "matched isotropic + ages KBTP all": [
-      "97.3",
-      "101.2",
-      "+4.0",
-      "+3.4",
-      "+4.6"
     ],
     "matched isotropic + ages KAGC": [
       "210.9",
@@ -532,19 +482,54 @@
       "-33.2",
       "-12.7"
     ],
-    "P95 near-zero residuals + ages": [
-      "765",
-      "696",
-      "-9.0",
-      "-14.9",
-      "+3.5"
+    "validation residual/timing ablation": [
+      "128.4",
+      "114.7"
     ],
-    "P95 matched isotropic + ages": [
-      "784",
-      "696",
-      "-11.2",
-      "-15.2",
-      "+5.6"
+    "validation raw fine-tuning": [
+      "114.7",
+      "123.7"
+    ],
+    "validation k bounds 1/2/10": [
+      "0.1",
+      "5.8"
+    ],
+    "KAGC local ages ADE": [
+      "219.5"
+    ],
+    "30 s horizon advantage": [
+      "24"
+    ],
+    "history-age gain": [
+      "0.51",
+      "8.2",
+      "1.26",
+      "21.3",
+      "3.96",
+      "22.7"
+    ],
+    "case mean ages": [
+      "1.6",
+      "2.2",
+      "2.0"
+    ],
+    "case ADE isotropic to MERIT": [
+      "44",
+      "12",
+      "59",
+      "33",
+      "239",
+      "191"
+    ],
+    "KAGC median window ADE": [
+      "101",
+      "89"
+    ],
+    "processed LSTM ADE/FDE": [
+      "91.4",
+      "202.5",
+      "89.8",
+      "198.6"
     ]
   }
 }

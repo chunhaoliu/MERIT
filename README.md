@@ -26,13 +26,13 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks and Table I CIs |
 | `scripts/train.py` | paper training settings for all six predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
-| `scripts/reproduce_tables.py` | data-free reproduction of 340 printed values: Tables I, III, IV, V, their quoted CIs, and the date-disjoint, timing-control and tail-error results quoted in the text |
+| `scripts/reproduce_tables.py` | source-data-free reproduction of 333 printed cells: Tables I-V, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
 | `scripts/draw_figures.py` | redraws Figures 1, 3 and 4 from bundled derived statistics, errors and recentered case data |
 | `checkpoints/` | 125 checkpoints, 393.2 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
 | `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
 | `results/paper_tables.json` | numerical cells as printed in the manuscript |
-| `results/figure_data.json`, `results/figure_cases.*` | staleness bins and de-identified, origin-relative example tracks |
+| `results/figure_data.json`, `results/figure_cases.*` | age bins, figure definitions and de-identified cases with origin-relative tracks and 60-step displayed-position ages |
 | `tests/` | model, replay, causality, data, hash, statistical and table checks |
 
 ## Usage
@@ -47,10 +47,13 @@ python scripts/reproduce_tables.py --bootstrap
 python scripts/draw_figures.py --output outputs/figures
 ```
 
-`reproduce_tables.py` exits with status 0 when all 340 printed values agree. The optional bootstrap reruns
-the quoted prediction CIs from seed-averaged window errors. Table I uses the frozen measurement summaries
+`reproduce_tables.py` exits with status 0 when all 333 printed cells agree. The optional bootstrap regenerates
+all paired prediction CIs from seed-averaged window errors, including intervals otherwise read from saved reports. Table I uses the frozen measurement summaries
 and measurement bootstrap outputs. Raw-log measurement, including its day bootstrap, has a separate entry point.
-Tables III and IV use seed means and sample standard deviations. All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
+Table II checks trainable parameter counts. Tables III and IV pair isotropic and MERIT training for six predictors,
+with a separate relative-change CI for each predictor and subset; Table IV also reports P95. Table V contains
+seven residual/timing combinations and five alternative remedies, with three-seed cells marked by a dagger.
+All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
 
 ### Preparing source data
 
@@ -116,8 +119,10 @@ Its complete five-seed results at both sites, window errors, model implementatio
 included. Retrain those weights with `scripts/train.py` for inference reproduction of that row.
 The other controls are selected by their `group`, `row` and `seed` in `checkpoints/index.json`.
 
-Figure 4(a) uses additional vertical headroom and a repositioned ADE label to keep the annotation clear of
-the reference curve. The plotted case coordinates, predictions and errors follow the original selection.
+The nine PDF panels reproduce Figures 1, 3 and 4. Figure 1 shows KBTP residual structure and contrasts
+displayed-position ages at the two sites. Figure 3 shows KBTP horizon errors, the KAGC window-error tail and age-dependent gains
+with 95% day-cluster bootstrap bars. Figure 4 shows each case's 60 s displayed-position age history and
+30-step displacement errors. Drawing uses only bundled statistics, window errors and de-identified cases.
 
 ## Third-party implementation
 

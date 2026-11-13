@@ -1,6 +1,6 @@
 {
   "source_commit": "0a161f8c2b2e4ab5895e38fbfbc76ebfef3b5da6",
-  "release_scope": "MERIT core reproduction, independent source export",
+  "release_scope": "MERIT reproduction code, checkpoints and derived evaluation results",
   "seeds": [
     42,
     123,
@@ -12,8 +12,8 @@
     "excluded_checkpoint_bytes": 701905170,
     "unittest_tests": 16,
     "unittest_passed": true,
-    "paper_cells": 340,
-    "paper_cells_matched": 340,
+    "paper_cells": 333,
+    "paper_cells_matched": 333,
     "prediction_CIs_regenerated": true,
     "processed_cache_bytes_identical": true,
     "normalized_train_val_arrays_identical": true,
@@ -29,15 +29,23 @@
     "privacy_grep_matches": {
       "absolute_paths": 0,
       "private_labels": 0,
-      "assistant_labels": 0,
-      "internal_language": 0
+      "internal_language": 0,
+      "attribution_labels": 0
     },
     "kagc_preparation_validation": "converted-log replay rebuilt exactly; source extraction unavailable; converter unit-tested",
-    "figure_validation": "nine PDF panels rendered; glyph floor checked; three rows aligned; curve annotation spacing adjusted",
+    "figure_validation": "Nine PDF panels pixel-identical to manuscript PDFs at 216 dpi; three rows aligned; minimum rendered glyph size 5.25 pt.",
     "checkpoint_omission": "ten TrajAirNet checkpoints; implementation and five-seed test results retained"
   },
   "update_2026_11_12": {
     "source_commit": "40c748c",
     "added": "17 checkpoints (near0, matched_stale seeds 0/1, dd_iso, dd_merit), results/p8_*, merit/date_disjoint.json, text-quoted values in reproduce_tables.py"
+  },
+  "figure_cases_sha256": "b761ab3fdad554878abff1d2dd04b024a2d78f310965efb51f573ae5c39aa3b1",
+  "update_2026_11_13": {
+    "source_commit": "8b889e113b6e9c35075157b150715ce5a1af3c3a",
+    "manuscript_sha256": "92d74576a4e7796bd920f26fe58f32683b825580769571631e42fbee62f6d329",
+    "scope": "Tables I-V, text-quoted controls and nine panels for Figures 1, 3 and 4.",
+    "figure_cases": "Added only three 60-step displayed-position age sequences; existing arrays unchanged and de-identified.",
+    "figure_geometry_audit": "Geometry flags in six panels are identical to the manuscript PDFs; manuscript layout, Times typography and PDF-only export retained."
   }
 }

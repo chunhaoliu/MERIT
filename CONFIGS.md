@@ -78,7 +78,7 @@ KL objective, while checkpoint selection uses the shared validation forecast los
 
 Some selected checkpoints reach the epoch budget. The fixed-budget results retain this stopping behavior.
 
-## Training and input controls, Tables II-V
+## Training and input controls, Tables III-V and text
 
 Each row below uses `python scripts/train.py --data data --row direct --seed <seed> --output <fresh_run>`
 plus the listed arguments. The index records each released checkpoint's exact settings.
@@ -107,6 +107,14 @@ eligible training-period days. It retains the processed-training scaler. The fac
 ablations use seeds 42/123/456. Selected main/raw/heuristic/age-bank/input comparisons use all five seeds,
 as do the `near0`, `matched_stale` and date-disjoint groups (`results/p8_*`).
 
+Table V has seven residual/timing rows and five alternative remedies. Its no-timing matched-isotropic KBTP
+cells use the five-seed `gauss direct` results in `raw_eval_test_final`; its KAGC cells use the three-seed
+`iso_matched direct` results in `kagc_eval_test_2x2`. Measured residuals without timing use the three-seed
+`measured direct` results in `raw_eval_test_2x2` / `kagc_eval_test_2x2`. These cells carry a dagger.
+The paired effect of adding measured ages to matched isotropic residuals uses the same three seeds on
+both sides (`iso_matched_stale direct` versus `iso_matched direct`), separately from the five-seed table rows.
+Validation ablations, scale bounds, raw fine-tuning and the KAGC-age sensitivity remain text controls.
+
 Date-disjoint retraining keeps the official training scenes whose tracks match same-aircraft raw reports on a
 unique day inside the 77 measurement days: 707 training and 83 selection scenes, 10,699 and 1,236 windows,
 listed by cache trajectory index in `merit/date_disjoint.json`. The scaler is refitted on these training
@@ -129,3 +137,11 @@ each window's errors across seeds, then takes the 95th percentile of window ADE.
 2,000 day-cluster resamples, seed 0. P95 relative-change CIs resample days in the same way (`compare_p95`). Wilcoxon uses paired, seed-averaged window errors, without multiplicity
 adjustment. A stored p=0 indicates floating-point underflow. The measurement CIs use the separate 1,000-draw
 procedure above. Reference-smoothing sensitivity uses Savitzky-Golay width 7, order 2, on future references only.
+
+Tables III and IV compare each MERIT predictor with its own isotropic counterpart. Saved comparisons in
+the main reports target the direct LSTM, so the other predictors' paired CIs are recomputed from their
+window errors. Table II counts trainable parameters, in millions, at the manuscript's displayed precision.
+Figure 3(c) uses 1,000 day-cluster draws with `RandomState(0)`, shared by the two predictors within each bin
+and advanced across bins; quantile bins have inclusive bounds. Figure 4 retains the seed-42 case selection
+and uses the bundled 3x60 displayed-position ages and 3x30 prediction/reference positions; source window
+indices, timestamps, dates and aircraft identifiers are omitted.

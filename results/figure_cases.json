@@ -3,5 +3,8 @@
   "selection": "strict-unseen, airborne speed >30 m/s, stalest decile; three gains closest to group median",
   "candidate_windows": 29,
   "median_gain_m": 31.63940825733733,
-  "coordinates": "recentered at each forecast origin; aircraft identifiers and original offsets omitted"
+  "coordinates": "recentered at each forecast origin; aircraft identifiers and original offsets omitted",
+  "panels": "Displayed-position age over the 60 s history (right axis) and displacement error over the 30 s forecast (left axis).",
+  "age_sequences": "changed_position_age_s: three 60-step histories, in the same order as the released cases; mean_age_s equals each row mean.",
+  "privacy": "Only origin-relative coordinates, derived errors and ages are retained; source window indices, dates, timestamps and aircraft identifiers are omitted."
 }

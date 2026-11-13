@@ -182,9 +182,24 @@ class DataAndStatistics(unittest.TestCase):
             with np.load(p) as z:
                 for key, array in spec["arrays"].items():
                     self.assertEqual(hashlib.sha256(z[key].tobytes()).hexdigest(), array["sha256"])
+        provenance = json.loads((ROOT / "results/provenance.json").read_text())
+        cases = ROOT / "results/figure_cases.npz"
+        self.assertEqual(hashlib.sha256(cases.read_bytes()).hexdigest(), provenance["figure_cases_sha256"])
+        with np.load(cases) as z:
+            self.assertEqual(set(z.files), {"history_m", "reference_m", "iso_m", "merit_m", "mean_age_s",
+                                            "iso_ade_m", "merit_ade_m", "changed_position_age_s"})
+            ages = z["changed_position_age_s"]
+            self.assertEqual(ages.shape, (3, 60))
+            self.assertTrue(np.isfinite(ages).all() and (ages >= 0).all())
+            np.testing.assert_array_equal(ages.mean(1), z["mean_age_s"])
+            np.testing.assert_array_equal(z["history_m"][:, -1], np.zeros((3, 2)))
+            for group in ("iso", "merit"):
+                ade = np.linalg.norm(z[group + "_m"] - z["reference_m"], axis=-1).mean(1)
+                np.testing.assert_allclose(ade, z[group + "_ade_m"], rtol=0, atol=1e-12)
 
     def test_all_printed_cells(self):
         expected = json.loads((ROOT / "results/paper_tables.json").read_text())
+        self.assertEqual(sum(len(cells) for rows in expected.values() for cells in rows.values()), 333)
         self.assertEqual(recompute(), expected)
         self.assertEqual(recompute(bootstrap=True), expected)
 

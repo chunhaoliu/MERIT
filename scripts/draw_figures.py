@@ -2,7 +2,7 @@
 
 Experimental panels are 2.30 by 1.82 inches with aligned physical plot areas.
 Insert PDFs without width/scale options and typeset panel captions with subfig.
-Runtime evidence is read-only; cases reuse the original seed-42 selection rule.
+Cases reuse the original seed-42 selection rule without loading checkpoints.
 """
 import argparse
 import json
@@ -87,12 +87,14 @@ def error_structure(out):
         density, edges = np.histogram(r, bins=bins, density=True)
         visible = (edges[:-1] >= -100) & (edges[1:] <= 100)
         shown = np.flatnonzero(visible)
-        # Same histogram/density as the legacy plot, trimmed at its view limits.
         ax.stairs(np.maximum(density[visible], 1e-5), edges[shown[0]:shown[-1] + 2], baseline=None,
-                  color=color, linestyle=ls, linewidth=1.0,
-                  label=f"{label} (MAD {1.4826 * np.median(np.abs(r - np.median(r))):.1f} m)")
+                  color=color, linestyle=ls, linewidth=1.0, label=label)
+    # Gaussian with the along-track scaled MAD: the measured tail lies far above it.
+    r = pool["along"]; sd = 1.4826 * np.median(np.abs(r - np.median(r))); g = np.linspace(-100, 100, 401)
+    ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), ":", color=GREY, linewidth=.9,
+            label="Gaussian, along-track MAD")
     ax.set_yscale("log"); ax.set_xlabel("Position residual (m)"); ax.set_ylabel("Density")
-    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 3)
+    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 8)
     ax.yaxis.set_major_locator(matplotlib.ticker.LogLocator(base=10, numticks=7))
     ax.yaxis.set_major_formatter(matplotlib.ticker.LogFormatterMathtext(base=10))
     ax.tick_params(axis="y", labelsize=7.5)  # Log exponents remain above 5 pt.
@@ -103,8 +105,8 @@ def error_structure(out):
     lags = [1, 2, 3, 5, 10]
     measured = summary["raw"]["half10"]["along"]["acf_clipped"]
     ax.plot(lags, [measured[str(l)] for l in lags], "o-", color=BLUE, markersize=3, linewidth=1.0, label="Measured along-track")
-    for key, color, ls, marker, label in (("sigma25_rho0_half10", "#444444", "--", "s", "White, 25 m"),
-                                   ("sigma25_rho0.8_half10", GREY, ":", "^", r"AR(1) $\rho$=0.8, 25 m")):
+    for key, color, ls, marker, label in (("sigma25_rho0_half10", "#444444", "--", "s", "Synthetic white noise"),
+                                   ("sigma25_rho0.8_half10", GREY, ":", "^", r"Synthetic AR(1), $\rho=0.8$")):
         c = summary["calibration"][key]["acf_clipped"]
         ax.plot(lags, [c[str(l)] for l in lags], ls, color=color, linewidth=1.0, marker=marker, markersize=3, label=label)
     ax.axhline(0, color="#aaaaaa", linewidth=.4, linestyle="--")
@@ -112,124 +114,120 @@ def error_structure(out):
     ax.set_xlim(.5, 10.5); ax.set_ylim(-.82, .56)
     ax.legend(loc="lower left")
     ax = axes[2]
-    x = np.sort(age)
-    ax.plot(x, np.arange(1, len(x) + 1) / len(x), color=BLUE, linewidth=1.0)
-    for q, ls in ((.5, "--"), (.9, ":")):
-        v = np.quantile(age, q); ax.axvline(v, color=GREY, linestyle=ls, linewidth=.8)
-        ax.annotate(f"P{int(q * 100)} = {v:.1f} s", (v, .06), xytext=(3, 0),
-                    textcoords="offset points", rotation=90, va="bottom", color="#555555", fontsize=6.5)
-    ax.set_xscale("log"); ax.set_xlim(.05, 60); ax.set_ylim(0, 1.03); ax.set_xlabel("Position age (s)")
-    ax.set_xticks([.1, 1, 10], labels=["0.1", "1", "10"])
+    kagc = np.load(ROOT / "merit/ages_kagc.npz")["changed_position_age_s"].ravel()
+    for a, color, ls, lw, label in ((age, BLUE, "-", 1.2, "KBTP"), (kagc, "#333333", "--", 1.0, "KAGC")):
+        x = np.sort(a)
+        ax.plot(x, np.arange(1, len(x) + 1) / len(x), ls, color=color, linewidth=lw,
+                label=f"{label} (median {np.median(a):.1f} s)")
+    ax.set_xscale("log"); ax.set_xlim(.05, 100); ax.set_ylim(0, 1.03); ax.set_xlabel("Displayed-position age (s)")
+    ax.set_xticks([.1, 1, 10, 100], labels=["0.1", "1", "10", "100"])
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
-    ax.grid(False, axis="x")
     ax.set_ylabel("Cumulative fraction")
+    ax.legend(loc="lower right")
     save_panels(fig, out, "fig_error")
-    print(f"error c: {np.mean(age >= 1):.0%} of steps >= 1 s")
-
-
-PREDICTORS = (("direct", "LSTM"), ("projection", "LSTM+Fixed"), ("gate_analytic", "LSTM+NARF"),
-              ("patchtst", "PatchTST"), ("transformer", "Transformer"), ("trajairnet", "TrajAirNet"))
+    print("error c medians", np.median(age), np.median(kagc))
 
 
 def results(out):
     z = np.load(RESULTS / "raw_eval_test_final/test_errors.npz")
     names = list(z["names"]); err = z["errors"]; strict = z["train_overlap_fraction"] < .1
-    sota = np.load(RESULTS / "raw_eval_test_sota/test_errors.npz")
-    # Only the new TrajAirNet row comes from SOTA; preserve all existing evidence.
-    for key in ("day", "train_overlap_fraction", "mean_staleness_s"):
-        np.testing.assert_array_equal(z[key], sota[key])
-
     def get(n):
-        if n.endswith(" trajairnet"):
-            return sota["errors"][list(sota["names"]).index(n)]
         return err[names.index(n)]
 
-    fig, axes = panel_row(left=.63)
+    fig, axes = panel_row()
     ax = axes[0]; h = np.arange(1, 31)
-    kf = [n for n in names if n.startswith("KF-CV")][0]
-    # NPZ errors are already averaged over seeds; no per-horizon seed spread is stored.
-    for n, label, color, ls, marker in ((kf, "KF-CV", "#555555", ":", "^"),
-                                ("iso direct", "LSTM, isotropic", BLUE, "--", "s"),
-                                ("merit direct", "LSTM, MERIT", MERIT, "-", "o")):
-        ax.plot(h, get(n)[strict].mean(0), ls, color=color, linewidth=1.4 if color == MERIT else 1.0,
+    iso, mer = get("iso direct")[strict].mean(0), get("merit direct")[strict].mean(0)
+    ax.fill_between(h, mer, iso, color=MERIT, alpha=.15, linewidth=0)
+    for curve, label, color, ls, marker in ((iso, "LSTM, isotropic", BLUE, "--", "s"), (mer, "LSTM, MERIT", MERIT, "-", "o")):
+        ax.plot(h, curve, ls, color=color, linewidth=1.4 if color == MERIT else 1.0,
                 marker=marker, markersize=2.6, markevery=[4, 9, 14, 19, 24, 29],
                 markerfacecolor="white" if color != MERIT else color, markeredgewidth=.6, label=label)
-    ax.set_xlabel("Prediction horizon (s)"); ax.set_ylabel("Displacement error (m)"); ax.set_xlim(1, 30); ax.set_ylim(0, None)
-    ax.set_xticks([0, 10, 20, 30]); ax.set_xlim(0, 30)
+    ax.text(.97, .05, f"$-${iso[-1] - mer[-1]:.0f} m at 30 s", transform=ax.transAxes, ha="right", fontsize=6.5, color=MERIT)
+    ax.set_xlabel("Prediction horizon (s)"); ax.set_ylabel("Displacement error (m)")
+    ax.set_xticks([0, 10, 20, 30]); ax.set_xlim(0, 31); ax.set_ylim(0, None)
     ax.legend(loc="upper left")
-    ax = axes[1]; x = np.arange(len(PREDICTORS)); w = .34
-    for j, (mask, label, face) in ((0, (strict, "Strict-unseen", MERIT)),
-                                   (1, (np.ones_like(strict), "All windows", "#fae5d9"))):
-        gain = [100 * (1 - get(f"merit {r}")[mask].mean() / get(f"iso {r}")[mask].mean()) for r, _ in PREDICTORS]
-        bars = ax.barh(x + (j - .5) * .50, gain, w, color=face,
-                       edgecolor=MERIT, label=label, linewidth=.45)
-        for b, g in zip(bars, gain):
-            ax.text(g + .7, b.get_y() + b.get_height() / 2, f"{g:.0f}", va="center", fontsize=6.5)
-        print(label, "ADE reduction (%)", dict(zip([p for _, p in PREDICTORS], np.round(gain, 2))))
-    ax.set_yticks(x, labels=[p for _, p in PREDICTORS]); ax.set_ylim(6.3, -.6)
-    ax.set_xlabel("ADE reduction (%)"); ax.set_xlim(0, 36); ax.set_xticks([0, 10, 20, 30])
-    ax.legend(loc="lower right", handlelength=1.1)
-    ax = axes[2]; s = z["mean_staleness_s"]
+
+    # (b) Second site: fraction of windows whose ADE exceeds a level, so the tail is visible.
+    k = np.load(RESULTS / "kagc_eval_test/test_errors.npz")
+    kn = list(k["names"]); ax = axes[1]
+    for n, label, color, ls, lw in (([x for x in kn if x.startswith("KF-CV")][0], "KF-CV (KAGC-tuned)", "#555555", ":", 1.0),
+                                    ("iso direct", "LSTM, isotropic", BLUE, "--", 1.0),
+                                    ("merit direct", "LSTM, MERIT", MERIT, "-", 1.4)):
+        v = np.sort(k["errors"][kn.index(n)].mean(1))
+        ax.step(v, 1 - np.arange(len(v)) / len(v), ls, where="post", color=color, linewidth=lw, label=label)
+        print("kagc P95", label, round(float(np.percentile(v, 95))))
+    ax.axhline(.05, color="#aaaaaa", linewidth=.4, linestyle="--")
+    ax.text(2350, .055, "P95", ha="right", va="bottom", fontsize=6.5, color="#555555")
+    ax.set_yscale("log"); ax.set_ylim(.01, 1.2); ax.set_xlim(0, 2400)
+    ax.set_yticks([.01, .1, 1], labels=["0.01", "0.1", "1"])
+    ax.set_xticks([0, 500, 1000, 1500, 2000])
+    ax.set_xlabel("Window ADE (m)"); ax.set_ylabel("Fraction of windows exceeding")
+    ax.legend(loc="upper right")
+
+    ax = axes[2]; s = z["mean_staleness_s"]; day = z["day"]
     edges = np.quantile(s, [0, .2, .4, .6, .8, .95, 1])
-    centers, gains, counts = [], [], []
+    rng = np.random.RandomState(0)
+    centers, gains, bars, counts = [], [], [], []
     for lo, hi in zip(edges[:-1], edges[1:]):
         m = (s >= lo) & (s <= hi)
         centers.append(np.median(s[m])); counts.append(m.sum())
-        gains.append([100 * (1 - get(f"merit {r}")[m].mean() / get(f"iso {r}")[m].mean()) for r in ("direct", "projection")])
-    gains = np.array(gains)
-    ax.plot(centers, gains[:, 0], "o-", color=MERIT, markersize=3, linewidth=1.4, label="LSTM")
-    ax.plot(centers, gains[:, 1], "s--", color=BLUE, markersize=3, markerfacecolor="white",
-            markeredgewidth=.6, linewidth=1.0, label="LSTM+Fixed")
+        row, ci = [], []
+        groups = [np.flatnonzero(m & (day == d)) for d in np.unique(day[m])]
+        draws = [np.concatenate([groups[g] for g in rng.randint(0, len(groups), len(groups))]) for _ in range(1000)]
+        for r in ("direct", "projection"):
+            a, b = get(f"merit {r}").mean(1), get(f"iso {r}").mean(1)
+            row.append(100 * (1 - a[m].mean() / b[m].mean()))
+            ci.append(np.percentile([100 * (1 - a[d].mean() / b[d].mean()) for d in draws], [2.5, 97.5]))
+        gains.append(row); bars.append(ci)
+    gains, bars = np.array(gains), np.array(bars)
+    for c, (label, color, fmt, lw, face) in enumerate((("LSTM", MERIT, "o-", 1.4, MERIT), ("LSTM+Fixed", BLUE, "s--", 1.0, "white"))):
+        ax.errorbar(centers, gains[:, c], yerr=[gains[:, c] - bars[:, c, 0], bars[:, c, 1] - gains[:, c]], fmt=fmt, color=color,
+                    markersize=3, markerfacecolor=face, markeredgewidth=.6, linewidth=lw, elinewidth=.6, capsize=1.5, label=label)
     ax.set_xscale("log"); ax.set_xlabel("Median history age (s)"); ax.set_ylabel("ADE reduction (%)")
     ax.set_xticks([.5, 1, 2, 4]); ax.set_xticklabels(["0.5", "1", "2", "4"]); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
-    ax.set_ylim(6, 25); ax.legend(loc="lower right")
+    ax.set_ylim(0, None); ax.legend(loc="lower right")
     save_panels(fig, out, "fig_results")
-    print("staleness bins", np.round(centers, 2), "gain", np.round(gains[:, 0], 1), "n", counts)
+    print("staleness bins", np.round(centers, 2), "gain", np.round(gains[:, 0], 1), "ci", np.round(bars[:, 0], 1), "n", counts)
 
 
 def cases(out):
-    """Strict-unseen windows: original median-gain selection in the airborne stale decile."""
+    """Strict-unseen windows (median-gain selection in the airborne stale decile): history age and horizon error."""
     data = np.load(RESULTS / "figure_cases.npz")
-    hist, ref = data["history_m"], data["reference_m"]
+    ref = data["reference_m"]
     pred = {"Isotropic": data["iso_m"], "MERIT": data["merit_m"]}
-    ade = {"Isotropic": data["iso_ade_m"], "MERIT": data["merit_ade_m"]}
+    age = data["changed_position_age_s"]
     stale = data["mean_age_s"]
-    order = pick = np.arange(3)
-    runs = ("Isotropic", "MERIT")
-    fig, axes = panel_row()
+    fig, axes = panel_row(left=.40)
     for i, ax in enumerate(axes):
-        # Track frame at the prediction origin: along-track (km) versus cross-track (m),
-        # so small lateral deviations stay visible on straight segments.
-        origin = hist[i][-1]
-        u = hist[i][-1] - hist[i][-11]; u = u / np.linalg.norm(u); n = np.array([-u[1], u[0]])
-        zoom = i < 2  # Straight segments: magnified cross-track axis in meters; the turn stays to scale.
-        frame = lambda q: np.stack([(q - origin) @ u / 1000, (q - origin) @ n / (1 if zoom else 1000)], -1)
-        h, r = frame(hist[i][-20:]), frame(ref[i])
-        ax.plot(h[:, 0], h[:, 1], "o", color=GREY, markersize=2, label="Raw history")
-        ax.plot(r[:, 0], r[:, 1], "-", color="#222222", linewidth=1.0, label="Future reference")
-        metrics, shown = [], [h[:, 1], r[:, 1]]
+        box = ax.get_position(); ax.set_position([box.x0, box.y0, box.width - .32 / fig.get_figwidth(), box.height])
+        # History (t <= 0): age of the displayed position, the input the predictor receives.
+        # Future (t > 0): displacement error of each predictor over the horizon.
+        twin = ax.twinx()
+        twin.fill_between(np.arange(-59, 1), age[i], step="mid", color="#cccccc", linewidth=0)
+        twin.set_ylim(0, max(6, 1.15 * age[i].max()) * 2.2); twin.set_yticks([0, 2, 4, 6] if age[i].max() <= 6 else [0, 5, 10])
+        twin.tick_params(axis="y", labelsize=6.5, colors="#555555", right=True)
+        twin.set_ylabel("Displayed age (s)", color="#555555", fontsize=7); twin.yaxis.set_label_coords(1.2, .23)
+        steps = np.arange(1, 31)
         for k, color, ls in (("Isotropic", BLUE, "--"), ("MERIT", MERIT, "-")):
-            p = frame(pred[k][i]); shown.append(p[:, 1])
-            e = np.linalg.norm(pred[k][i] - ref[i], axis=-1).mean()
-            ax.plot(p[:, 0], p[:, 1], ls, color=color, linewidth=1.4 if k == "MERIT" else 1.0, label=k)
-            metrics.append(f"{k} ADE {e:.0f} m")
-        ax.plot(0, 0, "o", markersize=3.5, markerfacecolor="white", markeredgecolor="black", markeredgewidth=.7, zorder=5)
-        ax.axhline(0, color="#bbbbbb", linewidth=.4, zorder=0)
-        ax.set_xlabel("Along-track distance (km)")
-        if zoom:
-            lo, hi = min(map(np.min, shown)), max(map(np.max, shown)); pad = .25 * (hi - lo)
-            ax.set_ylim(lo - pad - .9 * (hi - lo), hi + (.5 if i == 0 else .25) * (hi - lo)); ax.margins(x=.06)
-            ax.set_ylabel("Cross-track offset (m)")
-        else:
-            ax.set_aspect("equal", adjustable="datalim"); ax.margins(.08)
-            ax.set_ylabel("Cross-track offset (km)")
-            ax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(.5))
+            e = np.linalg.norm(pred[k][i] - ref[i], axis=-1)
+            ax.plot(steps, e, ls, color=color, linewidth=1.4 if k == "MERIT" else 1.0,
+                    label=k)
+        ax.axvline(0, color="black", linewidth=.5)
+        ax.set_zorder(twin.get_zorder() + 1); ax.patch.set_visible(False)
+        ax.set_xlim(-60, 30); ax.set_xticks([-60, -40, -20, 0, 10, 20, 30]); ax.set_ylim(0, None)
+        ax.tick_params(right=False)
+        ax.set_xlabel("Time relative to prediction (s)"); ax.set_ylabel("Displacement error (m)")
         if i == 0:
-            ax.legend(loc="lower left", ncol=2, columnspacing=.8, handlelength=1.6)
-        ax.text((.96, .96, .04)[i], .95 if i == 0 else .05, "\n".join(f"{k}: {ade[k][order[i]]:.0f} m" for k in runs),
-                transform=ax.transAxes, ha=("right", "right", "left")[i], va="top" if i == 0 else "bottom", fontsize=6.5, linespacing=1.25)
-        print(f"case {chr(97 + i)}: Mean age {stale[pick[i]]:.1f} s; " + "; ".join(metrics), "window", int(pick[i]))
-    save_panels(fig, out, "fig_cases")
+            ax.legend(loc="upper left", handlelength=1.6)
+        print(f"case {chr(97 + i)}: mean age {stale[i]:.1f} s, max {age[i].max():.1f} s")
+    width, height = fig.get_figwidth(), fig.get_figheight()
+    fig.canvas.draw()
+    for i, letter in enumerate("abc"):
+        for j in range(3):
+            fig.axes[j].set_visible(i == j); fig.axes[3 + j].set_visible(i == j)
+        left = i * (EXPERIMENT_WIDTH + GUTTER)
+        save(fig, out, f"fig_cases_{letter}", Bbox.from_extents(left, 0, left + EXPERIMENT_WIDTH, height))
+    plt.close(fig)
 
 
 

@@ -61,5 +61,9 @@
       }
     }
   ],
-  "bin_population": "all KBTP test windows; inclusive bounds, matching Figure 3(c)"
+  "bin_population": "all KBTP test windows; inclusive bounds, matching Figure 3(c)",
+  "figure_1": "Residual densities with a scaled-MAD Gaussian reference, residual autocorrelation calibration, and KBTP/KAGC displayed-position age CDFs from merit/ages_*.npz.",
+  "figure_3": "KBTP strict-unseen LSTM horizon errors, KAGC window-ADE exceedance curves from kagc_eval_test/test_errors.npz, and KBTP gain versus history age.",
+  "figure_3c_uncertainty": "95% day-cluster bootstrap intervals; 1000 draws with RandomState(0), shared between predictors within each bin and advanced across bins; inclusive bin bounds.",
+  "figure_4": "Three seed-42 cases: 60 s displayed-position age histories and 30-step displacement errors from figure_cases.npz; see figure_cases.json for selection and de-identification."
 }

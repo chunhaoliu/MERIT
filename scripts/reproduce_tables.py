@@ -1,14 +1,15 @@
-"""Recompute every printed numerical cell of Tables I, III, IV and V, and the control results quoted in the text, without source data.
+"""Recompute Tables I-V and the control results quoted in the text, without source data.
 
 Uses frozen measurement summaries and per-seed evaluation results. Standard deviations
-use ddof=1. Printed confidence intervals are checked against the frozen bootstrap outputs.
-Use --bootstrap to additionally regenerate paired CIs from the released window errors.
+use ddof=1. Paired intervals use 2000 day-cluster draws, seed 0; --bootstrap also
+regenerates the intervals available in the saved reports from released window errors.
 """
 import argparse
 import json
 import statistics
 import sys
 from decimal import Decimal, ROUND_HALF_UP
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -17,39 +18,29 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 PREDICTORS = ("direct", "projection", "gate_analytic", "patchtst", "transformer", "trajairnet")
-MAIN = ["CV (last 5 s)", "KF-CV q=4 r=15", "iso direct", "gauss direct", "raw direct", "heur direct", "merit direct"]
-MAIN += [f"{g} {r}" for r in PREDICTORS[1:] for g in ("iso", "merit")]
-SITE2 = ["CV (last 5 s)", "KF-CV q=1 r=60", "iso direct", "heur direct", "meritkagc direct", "merit direct"]
-SITE2 += [f"{g} {r}" for r in PREDICTORS[1:] for g in ("iso", "merit")]
-VAL = [("raw_eval_val_p1", n) for n in ["iso100 direct", "gauss direct", "gauss+stale direct", "measured direct", "MERIT direct"]]
-VAL += [("raw_eval_val_ablation", f"held_k{k} direct") for k in (10, 4, 1)]
-VAL += [("raw_eval_val_p1", n) for n in ("raw_only direct", "MERIT_ft_raw direct")]
-FACTOR = ["iso_matched direct", "iso_matched_stale direct", "measured direct", "merit direct"]
-INPUT = ["iso direct", "ftp_iso direct", "ftp_merit direct", "merit direct", "iso_stale_age direct", "merit_age direct"]
+MAIN = ["CV (last 5 s)", "KF-CV q=4 r=15"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
+SITE2 = ["CV (last 5 s)", "KF-CV q=1 r=60"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
 
 # These are the confidence intervals quoted alongside the corresponding tables.
 CI_SPECS = {
-    "III LSTM": ("raw_eval_test_final", "comparisons", "iso direct", "strict_unseen"),
-    "III TrajAirNet": ("raw_eval_test_sota", "comparisons", "iso trajairnet", "strict_unseen"),
-    "III matched isotropic": ("raw_eval_test_final", "comparisons", "gauss direct", "strict_unseen"),
-    "III raw training": ("raw_eval_test_final", "comparisons", "raw direct", "strict_unseen"),
-    "III heuristic strict": ("raw_eval_test_heur", "comparisons", "heur direct", "strict_unseen"),
-    "III heuristic all": ("raw_eval_test_heur", "comparisons", "heur direct", "all"),
-    "IV LSTM": ("kagc_eval_test", "comparisons", "iso direct", "all"),
-    "IV local KF": ("kagc_eval_test", "comparisons", "KF-CV q=1 r=60", "all"),
-    "IV heuristic": ("kagc_eval_test", "comparisons", "heur direct", "all"),
-    "IV local ages": ("kagc_eval_test", "comparisons", "meritkagc direct", "all"),
-    "V staleness only": ("raw_eval_test_2x2", "comparisons", "iso_matched_stale direct", "strict_unseen"),
-    "V structure only": ("raw_eval_test_2x2", "comparisons", "measured direct", "strict_unseen"),
-    "V KAGC structure added": ("kagc_eval_test_2x2", "comparisons", "iso_matched_stale direct", "all"),
-    "V filter iso KBTP": ("raw_eval_test_mb", "comparisons", "ftp_iso direct", "strict_unseen"),
-    "V filter iso KAGC": ("kagc_eval_test_mb", "comparisons", "ftp_iso direct", "all"),
-    "V filter MERIT": ("raw_eval_test_mb", "comparisons", "ftp_merit direct", "strict_unseen"),
-    "V age KAGC": ("kagc_eval_test_mb", "comparisons", "merit_age direct", "all"),
-    "V age residual structure": ("raw_eval_test_mb", "age_pair_comparisons_from_saved_errors", "ADE", "strict_unseen"),
+    "matched isotropic KBTP strict": ("raw_eval_test_final", "merit direct", "gauss direct", "strict_unseen"),
+    "raw training KBTP strict": ("raw_eval_test_final", "merit direct", "raw direct", "strict_unseen"),
+    "heuristic KBTP strict": ("raw_eval_test_heur", "merit direct", "heur direct", "strict_unseen"),
+    "heuristic KBTP all": ("raw_eval_test_heur", "merit direct", "heur direct", "all"),
+    "local KF KAGC": ("kagc_eval_test", "merit direct", "KF-CV q=1 r=60", "all"),
+    "heuristic KAGC": ("kagc_eval_test", "merit direct", "heur direct", "all"),
+    "local ages KAGC": ("kagc_eval_test", "merit direct", "meritkagc direct", "all"),
+    "filter iso KBTP strict": ("raw_eval_test_mb", "merit direct", "ftp_iso direct", "strict_unseen"),
+    "filter iso KAGC": ("kagc_eval_test_mb", "merit direct", "ftp_iso direct", "all"),
+    "filter MERIT KBTP strict": ("raw_eval_test_mb", "merit direct", "ftp_merit direct", "strict_unseen"),
+    "age input KAGC": ("kagc_eval_test_mb", "merit direct", "merit_age direct", "all"),
+    "age input residual structure KBTP strict": ("raw_eval_test_mb", "merit_age direct", "iso_stale_age direct", "strict_unseen"),
+    "measured timing KBTP strict (three seeds)": ("raw_eval_test_2x2", "iso_matched_stale direct", "iso_matched direct", "strict_unseen"),
+    "measured timing KAGC (three seeds)": ("kagc_eval_test_2x2", "iso_matched_stale direct", "iso_matched direct", "all"),
 }
 
 
+@lru_cache(maxsize=None)
 def load(study):
     filename = "val.json" if "_val" in study else "test.json"
     return json.loads((ROOT / "results" / study / filename).read_text(encoding="utf-8"))
@@ -63,11 +54,6 @@ def metric(report, name, subset, key, sd=False):
     values = [r[key] for r in report["rows"][name][subset]]
     out = q(statistics.fmean(values))
     return out + "±" + q(statistics.stdev(values)) if sd and len(values) > 1 else out
-
-
-def input_metric(report, name, subset):
-    value = statistics.fmean(r["ADE"] for r in report["rows"][name][subset])
-    return q(value)
 
 
 def measurement():
@@ -102,69 +88,102 @@ def measurement():
     return out
 
 
-def main_table(site):
-    base = load("raw_eval_test_final" if site == "kbtp" else "kagc_eval_test")
-    extra = load("raw_eval_test_heur") if site == "kbtp" else None
-    sota = load("raw_eval_test_sota" if site == "kbtp" else "kagc_eval_test_sota")
+def predictor_parameters():
+    from merit.evaluation import make_model
+    out = {}
+    for name in PREDICTORS:
+        model = make_model(name, np.zeros(6), np.ones(6))
+        count = sum(p.numel() for p in model.parameters() if p.requires_grad)
+        out[name] = [q(count / 1e6, 1 if name == "trajairnet" else 2)]
+    return out
+
+
+def comparison(study, target, baseline, subset, bootstrap=False):
+    # Saved comparisons target the direct LSTM, except in the TrajAirNet study.
+    report = load(study)
+    if not bootstrap:
+        if target == "merit direct" or (study.endswith("_sota") and target == "merit trajairnet"):
+            saved = report.get("comparisons", {}).get(baseline, {}).get(subset)
+            if saved is not None:
+                return saved
+        if target == "merit_age direct" and baseline == "iso_stale_age direct":
+            return report["age_pair_comparisons_from_saved_errors"]["ADE"][subset]
+    from merit.statistics import compare
+    e, day, strict = errors(study)
+    mask = strict if subset == "strict_unseen" else np.ones(len(day), bool)
+    return compare(e[target], e[baseline], day, mask, draws=2000, seed=0)
+
+
+def change_cells(c):
+    return [signed(c["change"])] + [signed(v) for v in c["ci95"]]
+
+
+def main_table(site, bootstrap=False):
+    base = "raw_eval_test_final" if site == "kbtp" else "kagc_eval_test"
+    sota = "raw_eval_test_sota" if site == "kbtp" else "kagc_eval_test_sota"
     names = MAIN if site == "kbtp" else SITE2
     out = {}
     for name in names:
-        report = sota if name.endswith(" trajairnet") else extra if name == "heur direct" and extra else base
+        study = sota if name.endswith(" trajairnet") else base
+        report = load(study)
         cells = []
         subsets = ("strict_unseen", "all") if site == "kbtp" else ("all",)
         for subset in subsets:
             cells += [metric(report, name, subset, "ADE", True), metric(report, name, subset, "FDE", site == "kbtp")]
-            delta = ""
-            if name.startswith("merit ") or name == "meritkagc direct":
+            if site == "kagc":
+                e, _, _ = errors(study)
+                cells.append(q(np.percentile(e[name].mean(1), 95), 0))
+            if name.startswith("merit "):
                 baseline = "iso " + name.split()[-1]
-                a = statistics.fmean(r["ADE"] for r in report["rows"][name][subset])
-                b = statistics.fmean(r["ADE"] for r in report["rows"][baseline][subset])
-                change = (a / b - 1) * 100
-                delta = ("+" if change > 0 else "") + q(change)
+                c = comparison(study, name, baseline, subset, bootstrap)
+                delta, lo, hi = change_cells(c)
+                cells.append(f"{delta} [{lo}, {hi}]")
             elif name.startswith(("CV ", "KF-CV")):
-                delta = "--"
-            cells.append(delta)
+                cells.append("--")
+            else:
+                cells.append("")
         out[name] = cells
     return out
 
 
 def components():
+    # Seven residual/timing combinations, followed by five alternative remedies.
+    specs = [
+        ("Isotropic | no timing", "raw_eval_test_final", "iso direct", "kagc_eval_test", "iso direct", False, False),
+        ("Matched isotropic | no timing", "raw_eval_test_final", "gauss direct", "kagc_eval_test_2x2", "iso_matched direct", False, True),
+        ("Measured | no timing", "raw_eval_test_2x2", "measured direct", "kagc_eval_test_2x2", "measured direct", True, True),
+        ("Near-zero | Bernoulli", "raw_eval_test_heur", "heur direct", "kagc_eval_test", "heur direct", False, False),
+        ("Near-zero | measured ages", "p8_kbtp", "near0 direct", "p8_kagc", "near0 direct", False, False),
+        ("Matched isotropic | measured ages", "p8_kbtp", "matched_stale direct", "p8_kagc", "matched_stale direct", False, False),
+        ("Measured (MERIT) | measured ages", "raw_eval_test_final", "merit direct", "kagc_eval_test", "merit direct", False, False),
+        ("Raw-data training", "raw_eval_test_final", "raw direct", None, None, False, False),
+        ("Isotropic + Kalman front end", "raw_eval_test_mb", "ftp_iso direct", "kagc_eval_test_mb", "ftp_iso direct", False, False),
+        ("MERIT + Kalman front end", "raw_eval_test_mb", "ftp_merit direct", "kagc_eval_test_mb", "ftp_merit direct", False, False),
+        ("Matched isotropic + ages + age input", "raw_eval_test_mb", "iso_stale_age direct", "kagc_eval_test_mb", "iso_stale_age direct", False, False),
+        ("MERIT + age input", "raw_eval_test_mb", "merit_age direct", "kagc_eval_test_mb", "merit_age direct", False, False),
+    ]
     out = {}
-    for study, name in VAL:
-        r = load(study)
-        out["a " + name] = [metric(r, name, "strict_unseen", k) for k in ("ADE", "FDE")]
-    for name in FACTOR:
-        kb, ka = load("raw_eval_test_2x2"), load("kagc_eval_test_2x2")
-        out["b " + name] = [metric(kb, name, s, "ADE") for s in ("strict_unseen", "all")]
-        out["b " + name].append(metric(ka, name, "all", "ADE"))
-    for name in INPUT:
-        kb, ka = load("raw_eval_test_mb"), load("kagc_eval_test_mb")
-        out["c " + name] = [input_metric(kb, name, s) for s in ("strict_unseen", "all")]
-        out["c " + name] += [input_metric(ka, name, "all"), q(ka["window_ADE_P95_m"][name]["all"], 0)]
+    for label, kb, bn, ka, an, kb_three, ka_three in specs:
+        cells = [metric(load(kb), bn, s, "ADE") + ("\u2020" if kb_three else "") for s in ("strict_unseen", "all")]
+        if ka is None:
+            cells += ["--", "--"]
+        else:
+            e, _, _ = errors(ka)
+            mark = "\u2020" if ka_three else ""
+            cells += [metric(load(ka), an, "all", "ADE") + mark, q(np.percentile(e[an].mean(1), 95), 0) + mark]
+        out[label] = cells
     return out
 
 
 def confidence_intervals(bootstrap=False):
-    from merit.statistics import compare
     out = {}
-    for label, (study, block, name, subset) in CI_SPECS.items():
-        r = load(study)
-        comparison = r[block][name][subset]
-        ci = comparison["ci95"]
-        if bootstrap:
-            with np.load(ROOT / "results" / study / "test_errors.npz") as z:
-                names = list(z["names"])
-                target = ("merit_age direct" if block == "age_pair_comparisons_from_saved_errors"
-                          else "merit trajairnet" if name.endswith(" trajairnet") else "merit direct")
-                baseline = "iso_stale_age direct" if block == "age_pair_comparisons_from_saved_errors" else name
-                fraction = z["train_overlap_fraction"]
-                mask = fraction < .1 if subset == "strict_unseen" else np.ones(len(fraction), bool)
-                regenerated = compare(z["errors"][names.index(target)], z["errors"][names.index(baseline)], z["day"], mask)
-                ci = regenerated["ci95"]
-        out[label] = [q(v * 100) for v in ci]
+    for label, (study, target, baseline, subset) in CI_SPECS.items():
+        cells = change_cells(comparison(study, target, baseline, subset, bootstrap))
+        out[label] = cells[1:] if label in ("local ages KAGC", "age input KAGC") else cells
     return out
 
 
+@lru_cache(maxsize=None)
 def errors(study):
     with np.load(ROOT / "results" / study / "test_errors.npz") as z:
         return dict(zip(map(str, z["names"]), z["errors"])), z["day"], z["train_overlap_fraction"] < .1
@@ -179,33 +198,59 @@ def text_results():
     from merit.statistics import compare, compare_p95
     out = {}
 
-    def ade(label, study, target, other, strict=False, values=True):
+    def ade(label, study, target, other, strict=False, values=True, intervals=True):
         e, day, mask = errors(study)
         mask = mask if strict else np.ones(len(day), bool)
-        c = compare(e[target], e[other], day, mask)
+        c = compare(e[target], e[other], day, mask, draws=2000, seed=0)
         cells = [q(e[other][mask].mean()), q(e[target][mask].mean())] if values else []
-        out[label] = cells + [signed(c["change"])] + [signed(v) for v in c["ci95"]]
+        out[label] = cells + [signed(c["change"])] + ([signed(v) for v in c["ci95"]] if intervals else [])
 
     ade("date-disjoint KBTP all", "p8_dd_kbtp", "dd_merit direct", "dd_iso direct")
-    ade("date-disjoint KBTP strict", "p8_dd_kbtp", "dd_merit direct", "dd_iso direct", True)
-    ade("date-disjoint KAGC", "p8_dd_kagc", "dd_merit direct", "dd_iso direct")
+    ade("date-disjoint KBTP strict", "p8_dd_kbtp", "dd_merit direct", "dd_iso direct", True, values=False, intervals=False)
+    ade("date-disjoint KAGC", "p8_dd_kagc", "dd_merit direct", "dd_iso direct", values=False, intervals=False)
     for name, group in (("near-zero residuals", "near0 direct"), ("matched isotropic", "matched_stale direct")):
         ade(f"{name} + ages KBTP strict", "p8_kbtp", group, "merit direct", True)
-        ade(f"{name} + ages KBTP all", "p8_kbtp", group, "merit direct")
         ade(f"{name} + ages KAGC", "p8_kagc", group, "merit direct")
     for label, study, other in (("P95 isotropic", "kagc_eval_test", "iso direct"),
                                 ("P95 local KF", "kagc_eval_test", "KF-CV q=1 r=60"),
-                                ("P95 heuristic", "kagc_eval_test", "heur direct"),
-                                ("P95 near-zero residuals + ages", "p8_kagc", "near0 direct"),
-                                ("P95 matched isotropic + ages", "p8_kagc", "matched_stale direct")):
+                                ("P95 heuristic", "kagc_eval_test", "heur direct")):
         e, day, _ = errors(study)
-        c = compare_p95(e["merit direct"], e[other], day)
+        c = compare_p95(e["merit direct"], e[other], day, draws=2000, seed=0)
         out[label] = [q(c["p95"][1], 0), q(c["p95"][0], 0), signed(c["change"])] + [signed(v) for v in c["ci95"]]
+    val = load("raw_eval_val_p1")
+    out["validation residual/timing ablation"] = [metric(val, n + " direct", "strict_unseen", "ADE")
+                                                for n in ("gauss", "MERIT")]
+    out["validation raw fine-tuning"] = [metric(val, n + " direct", "strict_unseen", "ADE")
+                                         for n in ("MERIT", "MERIT_ft_raw")]
+    scale = load("raw_eval_val_ablation")
+    values = [statistics.fmean(r["ADE"] for r in scale["rows"][f"held_k{k} direct"]["strict_unseen"]) for k in (1, 2, 10)]
+    out["validation k bounds 1/2/10"] = [q(abs(values[0] - values[1])), q(values[2] - values[1])]
+    out["KAGC local ages ADE"] = [metric(load("kagc_eval_test"), "meritkagc direct", "all", "ADE")]
+    e, _, strict = errors("raw_eval_test_final")
+    out["30 s horizon advantage"] = [q(e["iso direct"][strict, -1].mean() - e["merit direct"][strict, -1].mean(), 0)]
+    with np.load(ROOT / "results/raw_eval_test_final/test_errors.npz") as z:
+        age = z["mean_staleness_s"]
+    edges = np.quantile(age, [0, .2, .4, .6, .8, .95, 1])
+    cells = []
+    for i in (0, 4, 5):
+        mask = (age >= edges[i]) & (age <= edges[i + 1])
+        gain = 100 * (1 - e["merit direct"][mask].mean(1).mean() / e["iso direct"][mask].mean(1).mean())
+        cells += [q(np.median(age[mask]), 2), q(gain)]
+    out["history-age gain"] = cells
+    with np.load(ROOT / "results/figure_cases.npz") as cases:
+        out["case mean ages"] = [q(v) for v in cases["changed_position_age_s"].mean(1)]
+        out["case ADE isotropic to MERIT"] = [q(np.linalg.norm(cases[g + "_m"][i] - cases["reference_m"][i], axis=-1).mean(), 0)
+                                              for i in range(3) for g in ("iso", "merit")]
+    e, _, _ = errors("kagc_eval_test")
+    out["KAGC median window ADE"] = [q(np.median(e[g + " direct"].mean(1)), 0) for g in ("iso", "merit")]
+    processed = json.loads((ROOT / "results/processed_test.json").read_text())
+    out["processed LSTM ADE/FDE"] = [q(statistics.fmean(r["test"]["0"][k] for r in processed if r["group"] == g and r["row"] == "direct"))
+                                      for g in ("iso", "merit") for k in ("ADE", "FDE")]
     return out
 
 
 def recompute(bootstrap=False):
-    return {"I": measurement(), "III": main_table("kbtp"), "IV": main_table("kagc"),
+    return {"I": measurement(), "II": predictor_parameters(), "III": main_table("kbtp", bootstrap), "IV": main_table("kagc", bootstrap),
             "V": components(), "CI": confidence_intervals(bootstrap), "Text": text_results()}
 
 
