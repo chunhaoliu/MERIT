@@ -28,7 +28,7 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
 | `scripts/reproduce_tables.py` | source-data-free reproduction of 430 printed cells: Tables I-V, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
 | `scripts/draw_figures.py` | redraws Figures 1, 3 and 4 from bundled derived statistics, errors and recentered case data |
-| `checkpoints/` | 175 checkpoints, approximately 520 MB, with settings, SHA-256 and reference metrics in `index.json` |
+| `checkpoints/` | 175 checkpoints, 457.8 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
 | `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
 | `results/paper_tables.json` | numerical cells as printed in the manuscript |
