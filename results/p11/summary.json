@@ -1,0 +1,148 @@
+{
+  "schema": "p11_cost_v1",
+  "training_epochs": 5,
+  "seeds": [
+    42,
+    123,
+    456
+  ],
+  "records": [
+    {
+      "mode": "iso",
+      "seed": 42,
+      "epochs": 5,
+      "seconds": [
+        2.101730599999428,
+        1.2737404000072274,
+        1.2729759000067133,
+        1.2595468999934383,
+        1.258938400016632
+      ],
+      "mean_seconds": 1.4333864400046878,
+      "range_seconds": [
+        1.258938400016632,
+        2.101730599999428
+      ],
+      "trainable_parameters": 845993
+    },
+    {
+      "mode": "iso",
+      "seed": 123,
+      "epochs": 5,
+      "seconds": [
+        1.2654852999839932,
+        1.265234499995131,
+        1.2735959999845363,
+        1.2685569000022952,
+        1.2762968000024557
+      ],
+      "mean_seconds": 1.2698338999936822,
+      "range_seconds": [
+        1.265234499995131,
+        1.2762968000024557
+      ],
+      "trainable_parameters": 845993
+    },
+    {
+      "mode": "iso",
+      "seed": 456,
+      "epochs": 5,
+      "seconds": [
+        1.2710314000141807,
+        1.268509699992137,
+        1.2657506999967154,
+        1.2526238999853376,
+        1.2678152000007685
+      ],
+      "mean_seconds": 1.2651461799978279,
+      "range_seconds": [
+        1.2526238999853376,
+        1.2710314000141807
+      ],
+      "trainable_parameters": 845993
+    },
+    {
+      "mode": "merit",
+      "seed": 42,
+      "epochs": 5,
+      "seconds": [
+        2.0419643000059295,
+        1.6461790000030305,
+        1.6368660999869462,
+        1.6415563999908045,
+        1.6340192999923602
+      ],
+      "mean_seconds": 1.7201170199958142,
+      "range_seconds": [
+        1.6340192999923602,
+        2.0419643000059295
+      ],
+      "trainable_parameters": 845993
+    },
+    {
+      "mode": "merit",
+      "seed": 123,
+      "epochs": 5,
+      "seconds": [
+        1.6507224999950267,
+        1.6561883999966085,
+        1.6265812999918126,
+        1.650626899994677,
+        1.6383416000171565
+      ],
+      "mean_seconds": 1.6444921399990562,
+      "range_seconds": [
+        1.6265812999918126,
+        1.6561883999966085
+      ],
+      "trainable_parameters": 845993
+    },
+    {
+      "mode": "merit",
+      "seed": 456,
+      "epochs": 5,
+      "seconds": [
+        1.6454580000136048,
+        1.6480793999799062,
+        1.6755127999931574,
+        1.6504001000139397,
+        1.6687833000032697
+      ],
+      "mean_seconds": 1.6576467200007756,
+      "range_seconds": [
+        1.6454580000136048,
+        1.6755127999931574
+      ],
+      "trainable_parameters": 845993
+    }
+  ],
+  "throughput": [
+    {
+      "mode": "iso",
+      "batch_size": 256,
+      "windows_per_second": 294.1636750230694,
+      "parameters": 845993
+    },
+    {
+      "mode": "merit",
+      "batch_size": 256,
+      "windows_per_second": 295.1451863396199,
+      "parameters": 845993
+    }
+  ],
+  "validation_input_windows": 5208,
+  "test_windows_evaluated": false,
+  "environment": {
+    "python": "3.11.18",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "numpy": "2.4.6",
+    "torch": "2.7.1+cu128",
+    "cuda_available": true,
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5050"
+  },
+  "source_hashes": {
+    "scripts/tim/measure_p11_cost.py": "27e378d842c07813a30acdbb20cefcbdb9e6a77321b810c59df389e0a9e5bf3a",
+    "scripts/tim/matched_model.py": "7b7c7f4a73764d75d0cc261eb274c3f9b4d27d4f8ca05ec494244cc6862e3053"
+  }
+}

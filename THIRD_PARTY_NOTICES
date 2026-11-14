@@ -53,3 +53,16 @@ The full license is merit/vendor_patchtst/LICENSE. Package import changes and
 upstream hashes are recorded in that directory's NOTICE.md and provenance.json.
 RevIN.py retains the attribution to https://github.com/ts-kim/RevIN.
 Task-specific wrappers and training are outside the vendored dependency.
+
+
+## WTFTP
+
+The WTFTP-inspired encoder, attention blocks and Haar reconstruction in `merit/modern_models.py` are a local, dependency-free adaptation of the published WTFTP design. The repository's Haar implementation is original project code; no third-party wavelet package is redistributed. The direct 60-step plus 29-zero-placeholder reconstruction and final-30-step interface are documented in README.md.
+
+## iTransformer
+
+The iTransformer adapter in `merit/modern_models.py` follows the public architecture described by Liu et al., *iTransformer: Inverted Transformers Are Effective for Time Series Forecasting* (ICLR 2024). The adapter is original project code and uses PyTorch's Transformer modules. No upstream source files are redistributed.
+
+## DLinear
+
+The DLinear adapter in `merit/modern_models.py` follows the public decomposition-linear architecture described by Zeng et al., *Are Transformers Effective for Time Series Forecasting?* (AAAI 2023). The moving-average decomposition and linear heads are original project code and use PyTorch only. No upstream source files are redistributed.

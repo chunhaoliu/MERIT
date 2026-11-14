@@ -1,0 +1,129 @@
+{
+  "schema": "p12b_test_lock_v1",
+  "checkpoints": [
+    {
+      "N": 1,
+      "seed": 42,
+      "checkpoint": "n1/trajair/direct/residual1/seed42/checkpoint.pth",
+      "sha256": "ca16086a1f6dd75dd1c258c2d8e9092f0b79f4243b59a156074474e7adefaf88"
+    },
+    {
+      "N": 1,
+      "seed": 123,
+      "checkpoint": "n1/trajair/direct/residual1/seed123/checkpoint.pth",
+      "sha256": "bbe9e49d66a0caae014aa497fb2ec0b0d3ed3f13d1d860fe6cf91f321e43d10c"
+    },
+    {
+      "N": 1,
+      "seed": 456,
+      "checkpoint": "n1/trajair/direct/residual1/seed456/checkpoint.pth",
+      "sha256": "4648611f13208c49248c41bb1947168c8a0c2ee85083ed3de78ebc47db56f67b"
+    },
+    {
+      "N": 1,
+      "seed": 0,
+      "checkpoint": "n1/trajair/direct/residual1/seed0/checkpoint.pth",
+      "sha256": "741a162de23289c68549add3a2d4bcd759d03d3104f6952dd02647ac4eb72d6d"
+    },
+    {
+      "N": 1,
+      "seed": 1,
+      "checkpoint": "n1/trajair/direct/residual1/seed1/checkpoint.pth",
+      "sha256": "93d4ad05b5c2991c3299acd16f1d4e9885e1cafef2605ed8f7e8a44fca115cf3"
+    },
+    {
+      "N": 5,
+      "seed": 42,
+      "checkpoint": "n5/trajair/direct/residual1/seed42/checkpoint.pth",
+      "sha256": "94c95dbba807e792ce71f8b237d84a041e178ea9c0ba64145d8a81581d43cb8a"
+    },
+    {
+      "N": 5,
+      "seed": 123,
+      "checkpoint": "n5/trajair/direct/residual1/seed123/checkpoint.pth",
+      "sha256": "5427b5ea295e689b8b945a943244c068b17290b61e391c9ef7e2cb8136eb406a"
+    },
+    {
+      "N": 5,
+      "seed": 456,
+      "checkpoint": "n5/trajair/direct/residual1/seed456/checkpoint.pth",
+      "sha256": "196c8e5fc474271c9faab40ac8f91cc6f3848c2c4b93610bf0fef53740ca9278"
+    },
+    {
+      "N": 5,
+      "seed": 0,
+      "checkpoint": "n5/trajair/direct/residual1/seed0/checkpoint.pth",
+      "sha256": "591dcf4122ea4a91f0d03b976535840674256b7e41a78f5707cc2e0cdbc1bb28"
+    },
+    {
+      "N": 5,
+      "seed": 1,
+      "checkpoint": "n5/trajair/direct/residual1/seed1/checkpoint.pth",
+      "sha256": "28f2e39bf92a5e77b634af9c44609ac4179938b9d710a790377ed381fcbfd4e7"
+    },
+    {
+      "N": 20,
+      "seed": 42,
+      "checkpoint": "n20/trajair/direct/residual1/seed42/checkpoint.pth",
+      "sha256": "1d003dd8b29e8219e24c9eaa2800d58c4e316ba73a3a0ab341ed0b40c79c4131"
+    },
+    {
+      "N": 20,
+      "seed": 123,
+      "checkpoint": "n20/trajair/direct/residual1/seed123/checkpoint.pth",
+      "sha256": "5fc258d3a5b1a41b9736ecb5f95cef7bd4156665441d633789a0be2bb3bda461"
+    },
+    {
+      "N": 20,
+      "seed": 456,
+      "checkpoint": "n20/trajair/direct/residual1/seed456/checkpoint.pth",
+      "sha256": "0c0419d5a49d34bbe93c3ad81e9ac54771797b424a888b151648085286cabb74"
+    },
+    {
+      "N": 20,
+      "seed": 0,
+      "checkpoint": "n20/trajair/direct/residual1/seed0/checkpoint.pth",
+      "sha256": "d19909fca26f032f170120bf566dc72c947619db03ae10ac2f44d4d8833d8ec9"
+    },
+    {
+      "N": 20,
+      "seed": 1,
+      "checkpoint": "n20/trajair/direct/residual1/seed1/checkpoint.pth",
+      "sha256": "6d5a82d6f6686215977c21d971c02b396c322078da4402ec37ce3253a9fe9df4"
+    },
+    {
+      "N": 65,
+      "seed": 42,
+      "checkpoint": "n65/trajair/direct/residual1/seed42/checkpoint.pth",
+      "sha256": "0cbb5fff6dabd6b77341e8a94af42b4f395a0ce73ce1a923c79f5b07b44fc43f"
+    },
+    {
+      "N": 65,
+      "seed": 123,
+      "checkpoint": "n65/trajair/direct/residual1/seed123/checkpoint.pth",
+      "sha256": "c0613c0d0f3719ab07f718512791e3a9ce3250ce895fbe5829f5eeb58c060fd2"
+    },
+    {
+      "N": 65,
+      "seed": 456,
+      "checkpoint": "n65/trajair/direct/residual1/seed456/checkpoint.pth",
+      "sha256": "73f3647b764c90a5ac2a854c3789088631059f7c6e79f3c5a56db0af131d88d0"
+    },
+    {
+      "N": 65,
+      "seed": 0,
+      "checkpoint": "n65/trajair/direct/residual1/seed0/checkpoint.pth",
+      "sha256": "0ca9e2680c7eacaade6059d0a2d5ddf4d12e7ca309fe69dbcc42484d0c3b0d62"
+    },
+    {
+      "N": 65,
+      "seed": 1,
+      "checkpoint": "n65/trajair/direct/residual1/seed1/checkpoint.pth",
+      "sha256": "2addf2f0022135c000b15e5c2c0caad8eb93696bb62fd0841f687532d0ed0dd4"
+    }
+  ],
+  "banks_sha256": "37937145a734779d37dd78cf68b3ad66f7e17c3e2c85829b7878e2c616c1238a",
+  "validation_result": "results/val_kbtp/val.json",
+  "validation_sha256": "7a3bc47eea4a492bb66f3e99a456734b81802af7b9311cafbed78351531c25c4",
+  "test_windows_evaluated": false
+}

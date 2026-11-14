@@ -193,6 +193,8 @@ def results(out):
 def cases(out):
     """Strict-unseen windows (median-gain selection in the airborne stale decile): history age and horizon error."""
     data = np.load(RESULTS / "figure_cases.npz")
+    case_meta = json.loads((RESULTS / "figure_cases.json").read_text())
+    case_windows = case_meta.get("window_indices", [None] * 3)
     ref = data["reference_m"]
     pred = {"Isotropic": data["iso_m"], "MERIT": data["merit_m"]}
     age = data["changed_position_age_s"]
@@ -219,7 +221,7 @@ def cases(out):
         ax.set_xlabel("Time relative to prediction (s)"); ax.set_ylabel("Displacement error (m)")
         if i == 0:
             ax.legend(loc="upper left", handlelength=1.6)
-        print(f"case {chr(97 + i)}: mean age {stale[i]:.1f} s, max {age[i].max():.1f} s")
+        print(f"case {chr(97 + i)}: window {case_windows[i]}, mean age {stale[i]:.1f} s, max {age[i].max():.1f} s")
     width, height = fig.get_figwidth(), fig.get_figheight()
     fig.canvas.draw()
     for i, letter in enumerate("abc"):

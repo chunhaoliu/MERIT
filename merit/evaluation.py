@@ -10,14 +10,24 @@ from merit.lstm import EndpointResidual
 from merit.patchtst import PatchTSTReference
 from merit.trajairnet import TrajAirNet
 from merit.transformer import TrajectoryTransformer
+from merit.modern_models import ModernPredictor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-MODELS = ("direct", "projection", "gate_analytic", "patchtst", "transformer", "trajairnet")
+MODELS = ("direct", "projection", "gate_analytic", "patchtst", "transformer", "trajairnet", "seq2seq", "wtftp", "itransformer", "dlinear", "patchtst_r")
 SEEDS = (42, 123, 456, 0, 1)
 
 
-def make_model(row, mean, scale, *, filter_cv=None, report_age=False):
+def make_model(row, mean, scale, *, filter_cv=None, report_age=False, config=None):
+    if row in {"seq2seq", "wtftp", "itransformer", "dlinear", "patchtst_r"}:
+        core_row = "wtftp" if row == "seq2seq" else "wtftp_w" if row == "wtftp" else row
+        if config is None:
+            config = ({"hidden": 96, "enc_layers": 3, "dec_layers": 1} if core_row == "wtftp" else
+                      {"hidden": 96, "enc_layers": 3, "dec_layers": 1, "maxlevel": 1} if core_row == "wtftp_w" else
+                      {"d_model": 128, "heads": 4, "layers": 3, "ff": 256, "dropout": .1} if core_row == "itransformer" else
+                      {"individual": True, "moving_avg": 25} if core_row == "dlinear" else
+                      {"d_model": 128})
+        return ModernPredictor(core_row, mean, scale, config=config)
     if row == "patchtst":
         return PatchTSTReference(mean, scale)
     if row == "transformer":
@@ -35,13 +45,13 @@ def origin_local_input(x, scaler):
     return local
 
 
-def predict(checkpoint, row, history, mean, scale, *, filter_cv=None, report_age=None, device=None):
+def predict(checkpoint, row, history, mean, scale, *, filter_cv=None, report_age=None, config=None, device=None):
     device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
 
     class Scaler:
         mean_, scale_ = mean, scale
 
-    model = make_model(row, mean, scale, filter_cv=filter_cv, report_age=report_age is not None).to(device)
+    model = make_model(row, mean, scale, filter_cv=filter_cv, report_age=report_age is not None, config=config).to(device)
     model.load_state_dict(torch.load(checkpoint, weights_only=True, map_location=device))
     model.eval()
     x = torch.zeros(len(history), 60, 6, device=device)

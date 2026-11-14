@@ -47,7 +47,7 @@ class Models(unittest.TestCase):
 
     def test_checkpoint_hashes_and_reload(self):
         index = json.loads((ROOT / "checkpoints/index.json").read_text())
-        self.assertEqual(len(index), 125)
+        self.assertEqual(len(index), 175)
         seen = set()
         for entry in index:
             p = ROOT / "checkpoints" / entry["file"]
@@ -59,7 +59,7 @@ class Models(unittest.TestCase):
                 continue
             seen.add(kind)
             model = make_model(entry["row"], entry["mean"], entry["scale"],
-                               filter_cv=settings.get("filter_cv"), report_age=settings.get("report_age", False))
+                               filter_cv=settings.get("filter_cv"), report_age=settings.get("report_age", False), config=settings.get("config"))
             model.load_state_dict(torch.load(p, weights_only=True, map_location="cpu"))
             x = torch.zeros(2, 60, 7 if settings.get("report_age") else 6)
             self.assertTrue(torch.isfinite(model.eval()(x)[0]).all())
@@ -70,7 +70,7 @@ class Models(unittest.TestCase):
             self.assertEqual(model(torch.zeros(2, 60, 7 if age else 6))[0].shape, (2, 30, 6))
 
     def test_parameter_counts(self):
-        expected = {"direct": 845993, "trajairnet": 17541226}
+        expected = {"direct": 845993, "trajairnet": 17541226, "seq2seq": 300582, "wtftp": 436924, "itransformer": 409374, "dlinear": 21960, "patchtst_r": 423454}
         for row, count in expected.items():
             model = make_model(row, np.zeros(6), np.ones(6))
             self.assertEqual(sum(p.numel() for p in model.parameters()), count)
@@ -198,8 +198,8 @@ class DataAndStatistics(unittest.TestCase):
                 np.testing.assert_allclose(ade, z[group + "_ade_m"], rtol=0, atol=1e-12)
 
     def test_all_printed_cells(self):
-        expected = json.loads((ROOT / "results/paper_tables.json").read_text())
-        self.assertEqual(sum(len(cells) for rows in expected.values() for cells in rows.values()), 333)
+        expected = json.loads((ROOT / "results/paper_tables.json").read_text(encoding="utf-8"))
+        self.assertEqual(sum(len(cells) for rows in expected.values() for cells in rows.values()), 430)
         self.assertEqual(recompute(), expected)
         self.assertEqual(recompute(bootstrap=True), expected)
 

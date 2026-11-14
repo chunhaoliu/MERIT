@@ -1,0 +1,339 @@
+{
+  "site": "kbtp",
+  "split": "test",
+  "rows": {
+    "CV (last 5 s)": {
+      "strict_unseen": [
+        {
+          "ADE": 228.28894264055805,
+          "FDE": 518.5072337271068,
+          "day_equal_ADE": 209.99231515511588,
+          "windows": 949
+        }
+      ]
+    },
+    "modern_iso seq2seq": {
+      "strict_unseen": [
+        {
+          "ADE": 161.28593221091228,
+          "FDE": 307.38596582452743,
+          "day_equal_ADE": 153.27240816431248,
+          "windows": 949
+        },
+        {
+          "ADE": 163.05992985214795,
+          "FDE": 310.23614423372317,
+          "day_equal_ADE": 152.77356102277884,
+          "windows": 949
+        },
+        {
+          "ADE": 161.6778316822113,
+          "FDE": 308.9385739122837,
+          "day_equal_ADE": 149.0778458652225,
+          "windows": 949
+        },
+        {
+          "ADE": 158.460354426611,
+          "FDE": 306.2096309275462,
+          "day_equal_ADE": 149.1584734038954,
+          "windows": 949
+        },
+        {
+          "ADE": 160.7127168775649,
+          "FDE": 315.7119543811447,
+          "day_equal_ADE": 149.73705704952164,
+          "windows": 949
+        }
+      ]
+    },
+    "modern_merit seq2seq": {
+      "strict_unseen": [
+        {
+          "ADE": 139.13493941308764,
+          "FDE": 274.25207593475443,
+          "day_equal_ADE": 129.67019282869768,
+          "windows": 949
+        },
+        {
+          "ADE": 139.15889696369402,
+          "FDE": 275.20177391554614,
+          "day_equal_ADE": 130.51805491795088,
+          "windows": 949
+        },
+        {
+          "ADE": 142.3771123809497,
+          "FDE": 283.8469607540738,
+          "day_equal_ADE": 136.60240861587377,
+          "windows": 949
+        },
+        {
+          "ADE": 143.2541934120897,
+          "FDE": 284.6842068097657,
+          "day_equal_ADE": 134.9719951573717,
+          "windows": 949
+        },
+        {
+          "ADE": 143.13517687672135,
+          "FDE": 285.05056237659795,
+          "day_equal_ADE": 132.78384737591574,
+          "windows": 949
+        }
+      ]
+    }
+  },
+  "comparisons": {},
+  "checks": [
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_iso",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 42,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 123,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 456,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 0,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "ADE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "FDE",
+      "relative_difference": 0.0
+    },
+    {
+      "group": "modern_merit",
+      "row": "seq2seq",
+      "seed": 1,
+      "subset": "strict_unseen",
+      "metric": "day_equal_ADE",
+      "relative_difference": 0.0
+    }
+  ],
+  "window_ADE_P95_m": {
+    "CV (last 5 s)": {
+      "strict_unseen": 604.2114969694553
+    },
+    "modern_iso seq2seq": {
+      "strict_unseen": 361.289466605233
+    },
+    "modern_merit seq2seq": {
+      "strict_unseen": 341.82134180930774
+    }
+  },
+  "max_relative_difference": 0.0
+}

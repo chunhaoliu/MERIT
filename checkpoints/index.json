@@ -10228,5 +10228,4105 @@
         }
       }
     }
+  },
+  {
+    "file": "iso_seq2seq_s42.pth",
+    "group": "modern_iso",
+    "row": "seq2seq",
+    "seed": 42,
+    "sha256": "ea22701babb00499f2f898891b232bb8fddc278a92e145a446d23bdedd9e052d",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 161.28593221091228,
+          "FDE": 307.38596582452743,
+          "day_equal_ADE": 153.27240816431248,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 145.78719611605825,
+          "FDE": 275.1726567340613,
+          "day_equal_ADE": 146.21740434329166,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 132.78078490451435,
+          "FDE": 259.9647952770949,
+          "day_equal_ADE": 134.19056517186002,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 281.0644630904048,
+          "FDE": 447.7402921217869,
+          "day_equal_ADE": 442.8477023508291,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 281.0644630904048,
+          "FDE": 447.7402921217869,
+          "day_equal_ADE": 442.8477023508291,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 281.0644630904048,
+          "FDE": 447.7402921217869,
+          "day_equal_ADE": 442.8477023508291,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_seq2seq_s123.pth",
+    "group": "modern_iso",
+    "row": "seq2seq",
+    "seed": 123,
+    "sha256": "d0187c5fb2227dcaa94fbaf35d0164ef49a995c4b8b2183e09eb0ad429b6cd2f",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 163.05992985214795,
+          "FDE": 310.23614423372317,
+          "day_equal_ADE": 152.77356102277884,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 145.26584277499006,
+          "FDE": 273.9778484382111,
+          "day_equal_ADE": 143.06568560348012,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 131.50086527845156,
+          "FDE": 255.7486726718225,
+          "day_equal_ADE": 133.4938664590827,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 284.69601479522817,
+          "FDE": 453.14391506950096,
+          "day_equal_ADE": 450.1872957595201,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 284.69601479522817,
+          "FDE": 453.14391506950096,
+          "day_equal_ADE": 450.1872957595201,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 284.69601479522817,
+          "FDE": 453.14391506950096,
+          "day_equal_ADE": 450.1872957595201,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_seq2seq_s456.pth",
+    "group": "modern_iso",
+    "row": "seq2seq",
+    "seed": 456,
+    "sha256": "23ccdf9b951b9996b6cb04e78790ee394251a92b8811505f3e784ae645405b3f",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 161.6778316822113,
+          "FDE": 308.9385739122837,
+          "day_equal_ADE": 149.0778458652225,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 145.09181059062232,
+          "FDE": 274.98719425640064,
+          "day_equal_ADE": 144.26838561021657,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 131.80530841319919,
+          "FDE": 258.7312610243831,
+          "day_equal_ADE": 132.7157068978821,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 255.82019983502246,
+          "FDE": 410.3871536524376,
+          "day_equal_ADE": 430.8412470078257,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 255.82019983502246,
+          "FDE": 410.3871536524376,
+          "day_equal_ADE": 430.8412470078257,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 255.82019983502246,
+          "FDE": 410.3871536524376,
+          "day_equal_ADE": 430.8412470078257,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_seq2seq_s0.pth",
+    "group": "modern_iso",
+    "row": "seq2seq",
+    "seed": 0,
+    "sha256": "2debd98b7287f808a0664bc8096a1e65fa25ac09c96fdd892c65ef67c0084e90",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 158.460354426611,
+          "FDE": 306.2096309275462,
+          "day_equal_ADE": 149.1584734038954,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 141.61269030511426,
+          "FDE": 271.11702358584864,
+          "day_equal_ADE": 139.82467663654913,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 129.84210627660897,
+          "FDE": 254.9715382063633,
+          "day_equal_ADE": 130.43870023569468,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 273.694053919143,
+          "FDE": 435.595687860235,
+          "day_equal_ADE": 434.2148799433181,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 273.694053919143,
+          "FDE": 435.595687860235,
+          "day_equal_ADE": 434.2148799433181,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 273.694053919143,
+          "FDE": 435.595687860235,
+          "day_equal_ADE": 434.2148799433181,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_seq2seq_s1.pth",
+    "group": "modern_iso",
+    "row": "seq2seq",
+    "seed": 1,
+    "sha256": "84767479ad3224c57b5a8e520e05642f23cd1f8965729c58debbbe61e82237cf",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 160.7127168775649,
+          "FDE": 315.7119543811447,
+          "day_equal_ADE": 149.73705704952164,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 142.68587708133856,
+          "FDE": 276.5411833468751,
+          "day_equal_ADE": 138.94818403235655,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 130.13822639354683,
+          "FDE": 258.514071772464,
+          "day_equal_ADE": 130.79885671073671,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 257.04570944811576,
+          "FDE": 409.7206058906437,
+          "day_equal_ADE": 437.72587439487,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 257.04570944811576,
+          "FDE": 409.7206058906437,
+          "day_equal_ADE": 437.72587439487,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 257.04570944811576,
+          "FDE": 409.7206058906437,
+          "day_equal_ADE": 437.72587439487,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_seq2seq_s42.pth",
+    "group": "modern_merit",
+    "row": "seq2seq",
+    "seed": 42,
+    "sha256": "b031e89a6232e8dea48d3a0c805e30514cad7db76bf7f978e777aaba0ad1c407",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 139.13493941308764,
+          "FDE": 274.25207593475443,
+          "day_equal_ADE": 129.67019282869768,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 122.56285131728895,
+          "FDE": 244.37420853830304,
+          "day_equal_ADE": 121.22152699295528,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 110.9197590744196,
+          "FDE": 228.87694940477837,
+          "day_equal_ADE": 112.91892213163769,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 193.75175307796542,
+          "FDE": 337.80762896509043,
+          "day_equal_ADE": 317.03999588885466,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 193.75175307796542,
+          "FDE": 337.80762896509043,
+          "day_equal_ADE": 317.03999588885466,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 193.75175307796542,
+          "FDE": 337.80762896509043,
+          "day_equal_ADE": 317.03999588885466,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_seq2seq_s123.pth",
+    "group": "modern_merit",
+    "row": "seq2seq",
+    "seed": 123,
+    "sha256": "caa653049e06a5302c6718633bc60f49c5657764de637f86ab7b7ef96362ef3d",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 139.15889696369402,
+          "FDE": 275.20177391554614,
+          "day_equal_ADE": 130.51805491795088,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 123.05002715070935,
+          "FDE": 243.9738134411006,
+          "day_equal_ADE": 121.63438249885186,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 110.78962546987381,
+          "FDE": 226.29934827699475,
+          "day_equal_ADE": 111.82258213644354,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 225.08055630332814,
+          "FDE": 386.72439219156604,
+          "day_equal_ADE": 331.25626624248105,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 225.08055630332814,
+          "FDE": 386.72439219156604,
+          "day_equal_ADE": 331.25626624248105,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 225.08055630332814,
+          "FDE": 386.72439219156604,
+          "day_equal_ADE": 331.25626624248105,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_seq2seq_s456.pth",
+    "group": "modern_merit",
+    "row": "seq2seq",
+    "seed": 456,
+    "sha256": "5e94a6f416740e1895df468d62b62b3a98afc925b3cdf4bfd100b50587cfd539",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 142.3771123809497,
+          "FDE": 283.8469607540738,
+          "day_equal_ADE": 136.60240861587377,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 126.56863199712699,
+          "FDE": 252.13713309069306,
+          "day_equal_ADE": 125.0422437879896,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 113.57682378770097,
+          "FDE": 232.03149324463223,
+          "day_equal_ADE": 114.87920917196735,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 194.47264249888082,
+          "FDE": 345.6309395878775,
+          "day_equal_ADE": 301.77458027435284,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 194.47264249888082,
+          "FDE": 345.6309395878775,
+          "day_equal_ADE": 301.77458027435284,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 194.47264249888082,
+          "FDE": 345.6309395878775,
+          "day_equal_ADE": 301.77458027435284,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_seq2seq_s0.pth",
+    "group": "modern_merit",
+    "row": "seq2seq",
+    "seed": 0,
+    "sha256": "f1a15c6deaafef5424498854e9effeb8217bc5747c779a099252f005c1e7b098",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 143.2541934120897,
+          "FDE": 284.6842068097657,
+          "day_equal_ADE": 134.9719951573717,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 126.21757698679079,
+          "FDE": 250.04616513911338,
+          "day_equal_ADE": 126.2537301107808,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 113.08872388008405,
+          "FDE": 229.8968192875092,
+          "day_equal_ADE": 115.03512737712909,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 202.7094480595556,
+          "FDE": 358.1909616693771,
+          "day_equal_ADE": 321.0978756446576,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 202.7094480595556,
+          "FDE": 358.1909616693771,
+          "day_equal_ADE": 321.0978756446576,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 202.7094480595556,
+          "FDE": 358.1909616693771,
+          "day_equal_ADE": 321.0978756446576,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_seq2seq_s1.pth",
+    "group": "modern_merit",
+    "row": "seq2seq",
+    "seed": 1,
+    "sha256": "cd0c8fcb45adb8ea1e151a5ffb57b31b384ee8d19ee2aca8f5346432076f9e4a",
+    "bytes": 1219637,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 143.13517687672135,
+          "FDE": 285.05056237659795,
+          "day_equal_ADE": 132.78384737591574,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 129.96958943624793,
+          "FDE": 255.7581738662418,
+          "day_equal_ADE": 127.74734173128203,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 117.27138637915276,
+          "FDE": 237.67441015273266,
+          "day_equal_ADE": 117.87884183426871,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 254.67603620994646,
+          "FDE": 421.771436366764,
+          "day_equal_ADE": 400.37677427339946,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 254.67603620994646,
+          "FDE": 421.771436366764,
+          "day_equal_ADE": 400.37677427339946,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 254.67603620994646,
+          "FDE": 421.771436366764,
+          "day_equal_ADE": 400.37677427339946,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_itransformer_s42.pth",
+    "group": "modern_iso",
+    "row": "itransformer",
+    "seed": 42,
+    "sha256": "eef3a7e9db25729ecba8af58b9f23503396518c5909b1af08ff41186e2428e1f",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 169.97260309025168,
+          "FDE": 339.70625089429296,
+          "day_equal_ADE": 162.79190916026297,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 150.3181068567929,
+          "FDE": 291.9111215749207,
+          "day_equal_ADE": 148.3838078704958,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 135.73885194674799,
+          "FDE": 266.1399660111326,
+          "day_equal_ADE": 140.43304998979056,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 272.98440084649053,
+          "FDE": 411.32382563013044,
+          "day_equal_ADE": 417.8586589133452,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 272.98440084649053,
+          "FDE": 411.32382563013044,
+          "day_equal_ADE": 417.8586589133452,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 272.98440084649053,
+          "FDE": 411.32382563013044,
+          "day_equal_ADE": 417.8586589133452,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_itransformer_s123.pth",
+    "group": "modern_iso",
+    "row": "itransformer",
+    "seed": 123,
+    "sha256": "7f75a3bd5d07ee555b4d09b86e0cd3b139a9ac1b8226874c0f24aa2e2abb151a",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 174.54986927519832,
+          "FDE": 336.2580668543474,
+          "day_equal_ADE": 175.26419981837452,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 154.3265664465558,
+          "FDE": 291.8913456536604,
+          "day_equal_ADE": 151.5353110872233,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 138.78988562974448,
+          "FDE": 266.1101764071097,
+          "day_equal_ADE": 143.1839057211441,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 263.96975125026637,
+          "FDE": 364.7793046450026,
+          "day_equal_ADE": 400.1969680043302,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 263.96975125026637,
+          "FDE": 364.7793046450026,
+          "day_equal_ADE": 400.1969680043302,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 263.96975125026637,
+          "FDE": 364.7793046450026,
+          "day_equal_ADE": 400.1969680043302,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_itransformer_s456.pth",
+    "group": "modern_iso",
+    "row": "itransformer",
+    "seed": 456,
+    "sha256": "af170afc7e1de9a479fd89e127cf721f8bb653d7ee76689f245da1a35b37ebb1",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 168.28707362635237,
+          "FDE": 336.0907384697203,
+          "day_equal_ADE": 166.65405548970273,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 148.10671533630432,
+          "FDE": 288.3738372905173,
+          "day_equal_ADE": 147.0989543362216,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 133.93015694565236,
+          "FDE": 263.94966222574635,
+          "day_equal_ADE": 137.5617090481276,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 277.9238688169152,
+          "FDE": 396.0205077181361,
+          "day_equal_ADE": 442.57840389122464,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 277.9238688169152,
+          "FDE": 396.0205077181361,
+          "day_equal_ADE": 442.57840389122464,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 277.9238688169152,
+          "FDE": 396.0205077181361,
+          "day_equal_ADE": 442.57840389122464,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_itransformer_s0.pth",
+    "group": "modern_iso",
+    "row": "itransformer",
+    "seed": 0,
+    "sha256": "204227b9ee870b1ce1433715957e6ca1760aac24529788400545aeb224ae9154",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 168.1618079551621,
+          "FDE": 332.35498728570747,
+          "day_equal_ADE": 169.8169664762488,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 148.47417026718858,
+          "FDE": 289.74970426931117,
+          "day_equal_ADE": 146.84254269032516,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 135.2519722136769,
+          "FDE": 265.8086378573756,
+          "day_equal_ADE": 139.7327490770342,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 262.1292259849398,
+          "FDE": 376.80243013108577,
+          "day_equal_ADE": 430.94258310356327,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 262.1292259849398,
+          "FDE": 376.80243013108577,
+          "day_equal_ADE": 430.94258310356327,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 262.1292259849398,
+          "FDE": 376.80243013108577,
+          "day_equal_ADE": 430.94258310356327,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_itransformer_s1.pth",
+    "group": "modern_iso",
+    "row": "itransformer",
+    "seed": 1,
+    "sha256": "c38ea93bfd15ea4ce9bcf8679949289363f59d82519448b5acd0ca1c592183e0",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 173.12990667008617,
+          "FDE": 339.1441634185022,
+          "day_equal_ADE": 165.9487091292078,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 153.03366912142587,
+          "FDE": 291.82472551916686,
+          "day_equal_ADE": 148.5252108871419,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 138.39339625565208,
+          "FDE": 267.4807810918167,
+          "day_equal_ADE": 140.9454878740157,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 280.2171538738,
+          "FDE": 382.6455156831401,
+          "day_equal_ADE": 458.0039014197411,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 280.2171538738,
+          "FDE": 382.6455156831401,
+          "day_equal_ADE": 458.0039014197411,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 280.2171538738,
+          "FDE": 382.6455156831401,
+          "day_equal_ADE": 458.0039014197411,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_itransformer_s42.pth",
+    "group": "modern_merit",
+    "row": "itransformer",
+    "seed": 42,
+    "sha256": "24446ece6d81b5e47fad70d7d55c8806899fa96f506d6af57677ab9449b4e5a7",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 157.0443734859265,
+          "FDE": 315.2047720329741,
+          "day_equal_ADE": 151.68978682732433,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 141.32086174755014,
+          "FDE": 278.2909871079797,
+          "day_equal_ADE": 138.13512296066418,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 126.0133941886046,
+          "FDE": 252.1404500265279,
+          "day_equal_ADE": 128.8851168876048,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 256.4194048322713,
+          "FDE": 359.1281134079507,
+          "day_equal_ADE": 382.97236468577916,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 256.4194048322713,
+          "FDE": 359.1281134079507,
+          "day_equal_ADE": 382.97236468577916,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 256.4194048322713,
+          "FDE": 359.1281134079507,
+          "day_equal_ADE": 382.97236468577916,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_itransformer_s123.pth",
+    "group": "modern_merit",
+    "row": "itransformer",
+    "seed": 123,
+    "sha256": "3cad680d787566700c68ea6bfc64c71c3493f6435bc9fdc05813988d15b9ea39",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 160.2644532841859,
+          "FDE": 317.68486690605,
+          "day_equal_ADE": 155.71469392688996,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 143.07172975073905,
+          "FDE": 279.06306860438735,
+          "day_equal_ADE": 140.2400576044882,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 128.76097039854756,
+          "FDE": 254.12257745858568,
+          "day_equal_ADE": 133.651062152586,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 260.7769117065416,
+          "FDE": 371.7716172190009,
+          "day_equal_ADE": 390.15187168073425,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 260.7769117065416,
+          "FDE": 371.7716172190009,
+          "day_equal_ADE": 390.15187168073425,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 260.7769117065416,
+          "FDE": 371.7716172190009,
+          "day_equal_ADE": 390.15187168073425,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_itransformer_s456.pth",
+    "group": "modern_merit",
+    "row": "itransformer",
+    "seed": 456,
+    "sha256": "63d572dd3e86b6e72bc72b256bf0a2e09ea9cd1d094b23765e5576376853caad",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 155.75253356060523,
+          "FDE": 315.242728767646,
+          "day_equal_ADE": 155.44290846530208,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 137.41746121604197,
+          "FDE": 273.5100693527451,
+          "day_equal_ADE": 133.67267773578754,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 122.7472341159981,
+          "FDE": 247.85019633739302,
+          "day_equal_ADE": 126.56695735567922,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 247.70424073935953,
+          "FDE": 386.04985927280427,
+          "day_equal_ADE": 385.33625344645696,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 247.70424073935953,
+          "FDE": 386.04985927280427,
+          "day_equal_ADE": 385.33625344645696,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 247.70424073935953,
+          "FDE": 386.04985927280427,
+          "day_equal_ADE": 385.33625344645696,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_itransformer_s0.pth",
+    "group": "modern_merit",
+    "row": "itransformer",
+    "seed": 0,
+    "sha256": "ad6d62f5efca4f1619899ed5a95efe991ff47e7f69d119379e654502da79bb06",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 159.8306403543579,
+          "FDE": 315.8951713448105,
+          "day_equal_ADE": 157.02816143258855,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 140.57193935537683,
+          "FDE": 275.39465947122585,
+          "day_equal_ADE": 137.99591911782414,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 126.81261404380217,
+          "FDE": 251.68637235818812,
+          "day_equal_ADE": 130.7014280967903,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 265.11749805717216,
+          "FDE": 355.44374581424637,
+          "day_equal_ADE": 397.8484536306999,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 265.11749805717216,
+          "FDE": 355.44374581424637,
+          "day_equal_ADE": 397.8484536306999,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 265.11749805717216,
+          "FDE": 355.44374581424637,
+          "day_equal_ADE": 397.8484536306999,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_itransformer_s1.pth",
+    "group": "modern_merit",
+    "row": "itransformer",
+    "seed": 1,
+    "sha256": "04a06d639c316e2c40d35129024fe5bbac29135e7044ff9ff0d499238ed5bb7a",
+    "bytes": 1654197,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128,
+        "heads": 4,
+        "layers": 3,
+        "ff": 256,
+        "dropout": 0.1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 163.15547759883577,
+          "FDE": 326.01609264135953,
+          "day_equal_ADE": 161.09679066298872,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 143.45834040137302,
+          "FDE": 281.31232372516223,
+          "day_equal_ADE": 141.46614852306962,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 127.13342456196713,
+          "FDE": 254.36688011465307,
+          "day_equal_ADE": 132.0481166670282,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 258.52772819720457,
+          "FDE": 354.9413664199778,
+          "day_equal_ADE": 377.67447667395334,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 258.52772819720457,
+          "FDE": 354.9413664199778,
+          "day_equal_ADE": 377.67447667395334,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 258.52772819720457,
+          "FDE": 354.9413664199778,
+          "day_equal_ADE": 377.67447667395334,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_dlinear_s42.pth",
+    "group": "modern_iso",
+    "row": "dlinear",
+    "seed": 42,
+    "sha256": "745e28ceb2f24ee8b07b5d2cb9b809bf1fe945585efc37b343c567040bc7e41a",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 239.76022076508025,
+          "FDE": 518.9598471517606,
+          "day_equal_ADE": 238.70939560959044,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 235.5790566249785,
+          "FDE": 503.62450216597534,
+          "day_equal_ADE": 236.5474918447315,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 214.10253928722113,
+          "FDE": 461.2017276354771,
+          "day_equal_ADE": 213.48024642671518,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 338.6793371557163,
+          "FDE": 598.6070076965043,
+          "day_equal_ADE": 573.4292150428009,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 338.6793371557163,
+          "FDE": 598.6070076965043,
+          "day_equal_ADE": 573.4292150428009,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 338.6793371557163,
+          "FDE": 598.6070076965043,
+          "day_equal_ADE": 573.4292150428009,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_dlinear_s123.pth",
+    "group": "modern_iso",
+    "row": "dlinear",
+    "seed": 123,
+    "sha256": "6b8196fdbb0e3c71cdc081aebdf7aa4f9bf676651b73feef8f03d484e07f4be8",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 239.1797665051075,
+          "FDE": 517.6656933822253,
+          "day_equal_ADE": 238.08000750843416,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 235.0234701273236,
+          "FDE": 502.34023953867154,
+          "day_equal_ADE": 235.99757869388222,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 213.6685996478304,
+          "FDE": 460.2759423013892,
+          "day_equal_ADE": 212.9959202997965,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 339.12367476540686,
+          "FDE": 598.933533464847,
+          "day_equal_ADE": 575.041045764613,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 339.12367476540686,
+          "FDE": 598.933533464847,
+          "day_equal_ADE": 575.041045764613,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 339.12367476540686,
+          "FDE": 598.933533464847,
+          "day_equal_ADE": 575.041045764613,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_dlinear_s456.pth",
+    "group": "modern_iso",
+    "row": "dlinear",
+    "seed": 456,
+    "sha256": "9a874769835b0aee77f766ff1430976cababaf54d6aacee7803fe90ddf265976",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 239.08672847200577,
+          "FDE": 517.2717557958096,
+          "day_equal_ADE": 238.02741929345387,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 234.96247249992314,
+          "FDE": 502.0907790130235,
+          "day_equal_ADE": 235.90261642650475,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 213.60821807355777,
+          "FDE": 459.94238223241734,
+          "day_equal_ADE": 212.9289337229542,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 340.268088942981,
+          "FDE": 604.7137555090509,
+          "day_equal_ADE": 576.1871923966858,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 340.268088942981,
+          "FDE": 604.7137555090509,
+          "day_equal_ADE": 576.1871923966858,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 340.268088942981,
+          "FDE": 604.7137555090509,
+          "day_equal_ADE": 576.1871923966858,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_dlinear_s0.pth",
+    "group": "modern_iso",
+    "row": "dlinear",
+    "seed": 0,
+    "sha256": "e700aeba4bdaa28e1a7dd77109a6ec0b6399c27fdd34ad4d51f7c6e93a3ba28e",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 239.10049688434586,
+          "FDE": 518.0815251274016,
+          "day_equal_ADE": 238.33673974592293,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 234.99272137137456,
+          "FDE": 502.58946326967254,
+          "day_equal_ADE": 236.08571810056088,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 213.66001863444436,
+          "FDE": 460.4860031957488,
+          "day_equal_ADE": 213.0557733116654,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 338.75308005854674,
+          "FDE": 599.0486234838096,
+          "day_equal_ADE": 574.7765756365932,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 338.75308005854674,
+          "FDE": 599.0486234838096,
+          "day_equal_ADE": 574.7765756365932,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 338.75308005854674,
+          "FDE": 599.0486234838096,
+          "day_equal_ADE": 574.7765756365932,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_dlinear_s1.pth",
+    "group": "modern_iso",
+    "row": "dlinear",
+    "seed": 1,
+    "sha256": "bb1879d7fb0809c61b30b948980f9f99a3ec0e14faf3cc120288788b0c3baad6",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 239.45751492708797,
+          "FDE": 518.3013351465077,
+          "day_equal_ADE": 238.41211531527583,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 235.46164390005833,
+          "FDE": 503.08711597045044,
+          "day_equal_ADE": 236.45721529101297,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 214.09843748033947,
+          "FDE": 460.9380085125131,
+          "day_equal_ADE": 213.41852358117583,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 338.98640430012205,
+          "FDE": 599.1142144731716,
+          "day_equal_ADE": 574.994498508643,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 338.98640430012205,
+          "FDE": 599.1142144731716,
+          "day_equal_ADE": 574.994498508643,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 338.98640430012205,
+          "FDE": 599.1142144731716,
+          "day_equal_ADE": 574.994498508643,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_dlinear_s42.pth",
+    "group": "modern_merit",
+    "row": "dlinear",
+    "seed": 42,
+    "sha256": "caf65eee6e7a64e46d98d740c2175f3820cfab1941f4ddf58a1f5eb96a56cd1a",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 229.71733632783196,
+          "FDE": 514.5293763884889,
+          "day_equal_ADE": 225.9750166850195,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 224.6557951669937,
+          "FDE": 496.674621465261,
+          "day_equal_ADE": 225.2678643243931,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 203.75436102162624,
+          "FDE": 454.92335676137765,
+          "day_equal_ADE": 202.9306200877425,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 330.4667434937662,
+          "FDE": 581.4348356749334,
+          "day_equal_ADE": 562.7302506921445,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 330.4667434937662,
+          "FDE": 581.4348356749334,
+          "day_equal_ADE": 562.7302506921445,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 330.4667434937662,
+          "FDE": 581.4348356749334,
+          "day_equal_ADE": 562.7302506921445,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_dlinear_s123.pth",
+    "group": "modern_merit",
+    "row": "dlinear",
+    "seed": 123,
+    "sha256": "c10f61fcdc6ef183ba367dfe10af46b374394b6f3563fb61c97f72e47fd55dd9",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 236.54318670148962,
+          "FDE": 529.0764637992984,
+          "day_equal_ADE": 235.87143946365717,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 231.93640247955088,
+          "FDE": 511.2392703892139,
+          "day_equal_ADE": 233.47661380825207,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 212.1123284319115,
+          "FDE": 468.55461737350043,
+          "day_equal_ADE": 212.17349889577326,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 315.1329209878936,
+          "FDE": 517.6070719131513,
+          "day_equal_ADE": 537.563301199675,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 315.1329209878936,
+          "FDE": 517.6070719131513,
+          "day_equal_ADE": 537.563301199675,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 315.1329209878936,
+          "FDE": 517.6070719131513,
+          "day_equal_ADE": 537.563301199675,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_dlinear_s456.pth",
+    "group": "modern_merit",
+    "row": "dlinear",
+    "seed": 456,
+    "sha256": "51d95d71c94f7da2c1fffe21afb64f6fb4a13bad6bec35e8697986ff5f9858e4",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 230.07293907398986,
+          "FDE": 513.4897287311709,
+          "day_equal_ADE": 226.63794888178919,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 225.1854241813471,
+          "FDE": 496.06319691468815,
+          "day_equal_ADE": 225.8481384181238,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 204.24639847672157,
+          "FDE": 454.1290716138729,
+          "day_equal_ADE": 203.4641889524419,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 324.5825379571828,
+          "FDE": 577.7777649128767,
+          "day_equal_ADE": 550.0544780326234,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 324.5825379571828,
+          "FDE": 577.7777649128767,
+          "day_equal_ADE": 550.0544780326234,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 324.5825379571828,
+          "FDE": 577.7777649128767,
+          "day_equal_ADE": 550.0544780326234,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_dlinear_s0.pth",
+    "group": "modern_merit",
+    "row": "dlinear",
+    "seed": 0,
+    "sha256": "e227a3494df0f26be85852a37fdc33cd51d69cef9e04a43fc41af49841afc22d",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 230.36487623072964,
+          "FDE": 515.3024738838142,
+          "day_equal_ADE": 226.76769935373994,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 225.16263110266829,
+          "FDE": 496.86059259367806,
+          "day_equal_ADE": 225.80354785808862,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 204.21152272917138,
+          "FDE": 455.18400804297437,
+          "day_equal_ADE": 203.46514136172502,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 323.90847192107043,
+          "FDE": 567.8584132424032,
+          "day_equal_ADE": 549.411585355202,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 323.90847192107043,
+          "FDE": 567.8584132424032,
+          "day_equal_ADE": 549.411585355202,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 323.90847192107043,
+          "FDE": 567.8584132424032,
+          "day_equal_ADE": 549.411585355202,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_dlinear_s1.pth",
+    "group": "modern_merit",
+    "row": "dlinear",
+    "seed": 1,
+    "sha256": "a04add33a194ead1b7db86d795f5722556886614eecc42e5b42c911a4dad3884",
+    "bytes": 96373,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "individual": true,
+        "moving_avg": 25
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 238.94993656549894,
+          "FDE": 534.2726204386448,
+          "day_equal_ADE": 236.81433513050075,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 234.63265319544985,
+          "FDE": 513.802307751855,
+          "day_equal_ADE": 235.86658155145605,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 212.83977778611847,
+          "FDE": 472.1057717781888,
+          "day_equal_ADE": 211.85122424472726,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 305.39079106742054,
+          "FDE": 516.4147453280142,
+          "day_equal_ADE": 517.6219628762491,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 305.39079106742054,
+          "FDE": 516.4147453280142,
+          "day_equal_ADE": 517.6219628762491,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 305.39079106742054,
+          "FDE": 516.4147453280142,
+          "day_equal_ADE": 517.6219628762491,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_patchtst_r_s42.pth",
+    "group": "modern_iso",
+    "row": "patchtst_r",
+    "seed": 42,
+    "sha256": "57bdc151eb3f51115bd38814e618da877fcb65b3ba6d6ca1cf0356cff7ecf97c",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 294.73920433111726,
+          "FDE": 567.9985732968511,
+          "day_equal_ADE": 324.4495944933503,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 279.95976590016727,
+          "FDE": 523.3227943711142,
+          "day_equal_ADE": 291.9144197991553,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 237.71008169640402,
+          "FDE": 458.4432716604491,
+          "day_equal_ADE": 245.93574752844845,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 479.01475272626044,
+          "FDE": 520.6461451895511,
+          "day_equal_ADE": 908.0874031360235,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 479.01475272626044,
+          "FDE": 520.6461451895511,
+          "day_equal_ADE": 908.0874031360235,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 479.01475272626044,
+          "FDE": 520.6461451895511,
+          "day_equal_ADE": 908.0874031360235,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_patchtst_r_s123.pth",
+    "group": "modern_iso",
+    "row": "patchtst_r",
+    "seed": 123,
+    "sha256": "96bb47969820a127ca9081b16cffd0e0f3bb6a98308f53871e81df778c57d34d",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 293.31060568977955,
+          "FDE": 558.1023128789451,
+          "day_equal_ADE": 330.6809199723211,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 278.47628093716236,
+          "FDE": 517.4501413096059,
+          "day_equal_ADE": 292.5483719732964,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 233.52924271329215,
+          "FDE": 451.25620247560073,
+          "day_equal_ADE": 242.82911738660297,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 518.7857764599445,
+          "FDE": 554.9683740618534,
+          "day_equal_ADE": 970.1626512079755,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 518.7857764599445,
+          "FDE": 554.9683740618534,
+          "day_equal_ADE": 970.1626512079755,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 518.7857764599445,
+          "FDE": 554.9683740618534,
+          "day_equal_ADE": 970.1626512079755,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_patchtst_r_s456.pth",
+    "group": "modern_iso",
+    "row": "patchtst_r",
+    "seed": 456,
+    "sha256": "6721525419522f0849a202b0ee43e43cc1c204e84d37009eef6e5a21ad0138bb",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 291.15640620158104,
+          "FDE": 568.1872886739791,
+          "day_equal_ADE": 310.97578087960875,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 277.36723363354855,
+          "FDE": 529.1982849663896,
+          "day_equal_ADE": 285.4223381410804,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 239.6271491149397,
+          "FDE": 468.86418636016367,
+          "day_equal_ADE": 244.84337043600962,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 416.0372705108225,
+          "FDE": 506.9998810256258,
+          "day_equal_ADE": 750.903966085285,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 416.0372705108225,
+          "FDE": 506.9998810256258,
+          "day_equal_ADE": 750.903966085285,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 416.0372705108225,
+          "FDE": 506.9998810256258,
+          "day_equal_ADE": 750.903966085285,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_patchtst_r_s0.pth",
+    "group": "modern_iso",
+    "row": "patchtst_r",
+    "seed": 0,
+    "sha256": "d6722a16bad778e6fe27e4eb62911b3d80c21b74d925c3aacc9c1a89a13cf265",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 295.13492013503037,
+          "FDE": 562.5582400412841,
+          "day_equal_ADE": 329.44848852834133,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 277.9292325919293,
+          "FDE": 520.2032459577215,
+          "day_equal_ADE": 291.9995265885907,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 234.69612908796756,
+          "FDE": 455.4394021544853,
+          "day_equal_ADE": 242.84482912447695,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 453.7108552954425,
+          "FDE": 515.9031807946591,
+          "day_equal_ADE": 821.3312275441791,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 453.7108552954425,
+          "FDE": 515.9031807946591,
+          "day_equal_ADE": 821.3312275441791,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 453.7108552954425,
+          "FDE": 515.9031807946591,
+          "day_equal_ADE": 821.3312275441791,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_patchtst_r_s1.pth",
+    "group": "modern_iso",
+    "row": "patchtst_r",
+    "seed": 1,
+    "sha256": "32b9269442121c5b53faaa1a3fd565243482d2d6888cc5fdaef43d28701642d9",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 293.8053045209625,
+          "FDE": 566.1010166977857,
+          "day_equal_ADE": 326.99796479693447,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 280.2732773500937,
+          "FDE": 525.7100121164228,
+          "day_equal_ADE": 292.3541239266384,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 237.98256374772347,
+          "FDE": 458.5878710878237,
+          "day_equal_ADE": 245.96701435471942,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 469.70289608583556,
+          "FDE": 525.0766897665148,
+          "day_equal_ADE": 855.7307467069959,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 469.70289608583556,
+          "FDE": 525.0766897665148,
+          "day_equal_ADE": 855.7307467069959,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 469.70289608583556,
+          "FDE": 525.0766897665148,
+          "day_equal_ADE": 855.7307467069959,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_patchtst_r_s42.pth",
+    "group": "modern_merit",
+    "row": "patchtst_r",
+    "seed": 42,
+    "sha256": "debf88ed4444e6fa2de962f69bdfd8e19ab14a00e8592cdf17f13042a4d3b634",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 284.8751891932479,
+          "FDE": 568.0188226697685,
+          "day_equal_ADE": 299.43145621288585,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 270.9291611187501,
+          "FDE": 532.708977462682,
+          "day_equal_ADE": 277.4070399027726,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 239.98133926957493,
+          "FDE": 478.3742082185648,
+          "day_equal_ADE": 242.4463954698029,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 353.5591479360676,
+          "FDE": 482.4332412621094,
+          "day_equal_ADE": 588.2102544284735,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 353.5591479360676,
+          "FDE": 482.4332412621094,
+          "day_equal_ADE": 588.2102544284735,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 353.5591479360676,
+          "FDE": 482.4332412621094,
+          "day_equal_ADE": 588.2102544284735,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_patchtst_r_s123.pth",
+    "group": "modern_merit",
+    "row": "patchtst_r",
+    "seed": 123,
+    "sha256": "9454ccbe9dcecfb2186808d31606b6bbb5d5dfdb4bbbdd624ac62efdea2dcd36",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 258.6174803238826,
+          "FDE": 526.7520746495945,
+          "day_equal_ADE": 274.79317002813434,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 243.48765309329957,
+          "FDE": 483.4584062554528,
+          "day_equal_ADE": 250.77500730453184,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 214.744825317217,
+          "FDE": 433.1245074946198,
+          "day_equal_ADE": 220.74629058384772,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 361.9827031953359,
+          "FDE": 466.1605839141929,
+          "day_equal_ADE": 613.7009307903992,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 361.9827031953359,
+          "FDE": 466.1605839141929,
+          "day_equal_ADE": 613.7009307903992,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 361.9827031953359,
+          "FDE": 466.1605839141929,
+          "day_equal_ADE": 613.7009307903992,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_patchtst_r_s456.pth",
+    "group": "modern_merit",
+    "row": "patchtst_r",
+    "seed": 456,
+    "sha256": "2df6e412af1bf6276753093894679bf4cd26e708625e42cbdfa42a30391a6ff6",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 266.20458299565877,
+          "FDE": 540.6649120023928,
+          "day_equal_ADE": 281.9578817120187,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 250.50460257001578,
+          "FDE": 495.4898022738673,
+          "day_equal_ADE": 257.02470083331843,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 221.0629965866553,
+          "FDE": 440.55901816326866,
+          "day_equal_ADE": 225.4955179556685,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 364.1993983404712,
+          "FDE": 483.5343366867686,
+          "day_equal_ADE": 558.1469113915657,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 364.1993983404712,
+          "FDE": 483.5343366867686,
+          "day_equal_ADE": 558.1469113915657,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 364.1993983404712,
+          "FDE": 483.5343366867686,
+          "day_equal_ADE": 558.1469113915657,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_patchtst_r_s0.pth",
+    "group": "modern_merit",
+    "row": "patchtst_r",
+    "seed": 0,
+    "sha256": "1f81f12285af427c778b5921f39dadfd88de02b5e7dfed98563dab6a36b47642",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 262.76054588783796,
+          "FDE": 535.1066095571625,
+          "day_equal_ADE": 272.6740952598816,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 248.59802110700093,
+          "FDE": 497.1709359468539,
+          "day_equal_ADE": 253.2991668467455,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 220.39023847790767,
+          "FDE": 441.71894816782657,
+          "day_equal_ADE": 224.47417168054415,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 372.2628160826258,
+          "FDE": 453.9097417662046,
+          "day_equal_ADE": 585.4931137045837,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 372.2628160826258,
+          "FDE": 453.9097417662046,
+          "day_equal_ADE": 585.4931137045837,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 372.2628160826258,
+          "FDE": 453.9097417662046,
+          "day_equal_ADE": 585.4931137045837,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_patchtst_r_s1.pth",
+    "group": "modern_merit",
+    "row": "patchtst_r",
+    "seed": 1,
+    "sha256": "1a5eb93331bb423b4358c9ea1fa2c1a1fd6ed66936bc49272875fde56ffae845",
+    "bytes": 1710133,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "d_model": 128
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 261.2435505887271,
+          "FDE": 532.3590454553694,
+          "day_equal_ADE": 274.71652832469175,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 244.5437966117555,
+          "FDE": 486.0594674800658,
+          "day_equal_ADE": 250.43317911076707,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 216.4750079077529,
+          "FDE": 433.2480183169753,
+          "day_equal_ADE": 220.60576104627083,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 347.27489284119537,
+          "FDE": 466.65713311909303,
+          "day_equal_ADE": 577.437300354632,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 347.27489284119537,
+          "FDE": 466.65713311909303,
+          "day_equal_ADE": 577.437300354632,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 347.27489284119537,
+          "FDE": 466.65713311909303,
+          "day_equal_ADE": 577.437300354632,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_wtftp_s42.pth",
+    "group": "faithful_iso",
+    "row": "wtftp",
+    "seed": 42,
+    "sha256": "5b401d6395ed16727dd8f0bd805dd5ae59306d4c4963f7dc425b691601cfad56",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 212.40876710981797,
+          "FDE": 456.69086813617685,
+          "day_equal_ADE": 198.35451406483887,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 197.090603026871,
+          "FDE": 411.60447335397373,
+          "day_equal_ADE": 193.40911877376092,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 172.69988928972404,
+          "FDE": 359.4844223674871,
+          "day_equal_ADE": 174.4585887704389,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 227.29612237968988,
+          "FDE": 355.428918339488,
+          "day_equal_ADE": 375.3478797648634,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 227.29612237968988,
+          "FDE": 355.428918339488,
+          "day_equal_ADE": 375.3478797648634,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 227.29612237968988,
+          "FDE": 355.428918339488,
+          "day_equal_ADE": 375.3478797648634,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_wtftp_s123.pth",
+    "group": "faithful_iso",
+    "row": "wtftp",
+    "seed": 123,
+    "sha256": "e027dee2d9807bcfcfb255a0d6d77232f2eb508f8ea7f0a5e150121e9992dab8",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 194.9338728281788,
+          "FDE": 442.44093672807924,
+          "day_equal_ADE": 188.55955881390406,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 176.95667353459731,
+          "FDE": 395.6873125519568,
+          "day_equal_ADE": 173.68705357476426,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 161.16014768137782,
+          "FDE": 354.874244664239,
+          "day_equal_ADE": 162.00618622728427,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 223.51439415867824,
+          "FDE": 367.09753051835986,
+          "day_equal_ADE": 341.91593477248455,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 223.51439415867824,
+          "FDE": 367.09753051835986,
+          "day_equal_ADE": 341.91593477248455,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 223.51439415867824,
+          "FDE": 367.09753051835986,
+          "day_equal_ADE": 341.91593477248455,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_wtftp_s456.pth",
+    "group": "faithful_iso",
+    "row": "wtftp",
+    "seed": 456,
+    "sha256": "153d12bc17db16c4dcf0eff4fd4b0200cc41deb4a378cad206ea30e8a88360ee",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 197.5873309992232,
+          "FDE": 443.7247105462337,
+          "day_equal_ADE": 189.43571806244427,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 180.68271767697647,
+          "FDE": 396.6050179392119,
+          "day_equal_ADE": 177.47864336094878,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 161.74158824795327,
+          "FDE": 352.8485572241557,
+          "day_equal_ADE": 162.66447381160586,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 214.40050803665085,
+          "FDE": 358.2252099853488,
+          "day_equal_ADE": 352.9503151273179,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 214.40050803665085,
+          "FDE": 358.2252099853488,
+          "day_equal_ADE": 352.9503151273179,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 214.40050803665085,
+          "FDE": 358.2252099853488,
+          "day_equal_ADE": 352.9503151273179,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_wtftp_s0.pth",
+    "group": "faithful_iso",
+    "row": "wtftp",
+    "seed": 0,
+    "sha256": "6aea555c91d9e63717ccf3d6f681f5749e164b7e99af54d00d8629908ff26f68",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 202.98820253949333,
+          "FDE": 457.024118360711,
+          "day_equal_ADE": 193.2993975951177,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 185.48511252171855,
+          "FDE": 404.7489378991813,
+          "day_equal_ADE": 182.8873660250831,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 165.633113240662,
+          "FDE": 357.5521523770251,
+          "day_equal_ADE": 167.63049920762637,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 222.57835857092317,
+          "FDE": 357.69114075643415,
+          "day_equal_ADE": 351.90802440894606,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 222.57835857092317,
+          "FDE": 357.69114075643415,
+          "day_equal_ADE": 351.90802440894606,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 222.57835857092317,
+          "FDE": 357.69114075643415,
+          "day_equal_ADE": 351.90802440894606,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "iso_wtftp_s1.pth",
+    "group": "faithful_iso",
+    "row": "wtftp",
+    "seed": 1,
+    "sha256": "557c8cb1df1b70a14ca9a1be111830d30b59c1d51dab4a99b9ca82685c964e3e",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "iso",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 220.01943162961365,
+          "FDE": 478.36425851647414,
+          "day_equal_ADE": 210.51384618219154,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 199.3756545523952,
+          "FDE": 416.0251646223999,
+          "day_equal_ADE": 198.31010723517676,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 176.71899040321483,
+          "FDE": 369.58600578319755,
+          "day_equal_ADE": 179.28709809553172,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 228.22668145092183,
+          "FDE": 370.5922094441945,
+          "day_equal_ADE": 377.9442445190107,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 228.22668145092183,
+          "FDE": 370.5922094441945,
+          "day_equal_ADE": 377.9442445190107,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 228.22668145092183,
+          "FDE": 370.5922094441945,
+          "day_equal_ADE": 377.9442445190107,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_wtftp_s42.pth",
+    "group": "faithful_merit",
+    "row": "wtftp",
+    "seed": 42,
+    "sha256": "41803e4be1db0bbcc5afb38a2cf6b61e096a1389a437df36567ba18169e2f97a",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 168.04518842648977,
+          "FDE": 387.8460255766221,
+          "day_equal_ADE": 157.1235050975301,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 152.47694518695732,
+          "FDE": 345.7084980237675,
+          "day_equal_ADE": 148.24649075272447,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 136.66271643512408,
+          "FDE": 308.99751198673744,
+          "day_equal_ADE": 138.27844170541795,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 208.12066865031443,
+          "FDE": 370.5091764185134,
+          "day_equal_ADE": 328.607233517574,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 208.12066865031443,
+          "FDE": 370.5091764185134,
+          "day_equal_ADE": 328.607233517574,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 208.12066865031443,
+          "FDE": 370.5091764185134,
+          "day_equal_ADE": 328.607233517574,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_wtftp_s123.pth",
+    "group": "faithful_merit",
+    "row": "wtftp",
+    "seed": 123,
+    "sha256": "10aa2d683e1e75ef9f59f662b67dc8978a00d79bc753a7c2c2db138a7e63c65e",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 240.43000529829064,
+          "FDE": 525.3033906696858,
+          "day_equal_ADE": 224.8187565249756,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 226.2138058272634,
+          "FDE": 472.3450523792049,
+          "day_equal_ADE": 222.22625599627108,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 198.89382740193307,
+          "FDE": 419.1503186999243,
+          "day_equal_ADE": 199.20642242541805,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 226.6659969879119,
+          "FDE": 403.8355196010781,
+          "day_equal_ADE": 356.8112506917244,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 226.6659969879119,
+          "FDE": 403.8355196010781,
+          "day_equal_ADE": 356.8112506917244,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 226.6659969879119,
+          "FDE": 403.8355196010781,
+          "day_equal_ADE": 356.8112506917244,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_wtftp_s456.pth",
+    "group": "faithful_merit",
+    "row": "wtftp",
+    "seed": 456,
+    "sha256": "9a5fc8c8af4de60bf3c1926a42ec33add647661884f0e0cfb68cdaf7927e9353",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 182.32607324569125,
+          "FDE": 411.53985922112724,
+          "day_equal_ADE": 171.33107322670133,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 166.48698628547922,
+          "FDE": 365.7901231599941,
+          "day_equal_ADE": 164.65247411378337,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 149.0710237945807,
+          "FDE": 324.9072795656893,
+          "day_equal_ADE": 150.5729415574942,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 207.91369013878645,
+          "FDE": 360.196914980225,
+          "day_equal_ADE": 339.48300456303355,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 207.91369013878645,
+          "FDE": 360.196914980225,
+          "day_equal_ADE": 339.48300456303355,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 207.91369013878645,
+          "FDE": 360.196914980225,
+          "day_equal_ADE": 339.48300456303355,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_wtftp_s0.pth",
+    "group": "faithful_merit",
+    "row": "wtftp",
+    "seed": 0,
+    "sha256": "397dea95389dcbed8bfb3cc2baf0ccdf6872700e3dfbda50c4344e99f06f7953",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 166.55340640478028,
+          "FDE": 375.74593013598263,
+          "day_equal_ADE": 161.6935216843927,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 151.25715278957585,
+          "FDE": 338.15321137994056,
+          "day_equal_ADE": 148.01533794271694,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 135.84465455986924,
+          "FDE": 303.62584963251567,
+          "day_equal_ADE": 137.2124423190855,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 212.99856716931407,
+          "FDE": 355.8384358958417,
+          "day_equal_ADE": 345.40754887057733,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 212.99856716931407,
+          "FDE": 355.8384358958417,
+          "day_equal_ADE": 345.40754887057733,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 212.99856716931407,
+          "FDE": 355.8384358958417,
+          "day_equal_ADE": 345.40754887057733,
+          "windows": 504
+        }
+      }
+    }
+  },
+  {
+    "file": "merit_wtftp_s1.pth",
+    "group": "faithful_merit",
+    "row": "wtftp",
+    "seed": 1,
+    "sha256": "1fce00228e6a381c643c36005b1601b547f578d4d7a458191a4c40eeac1dca1c",
+    "bytes": 1774069,
+    "settings": {
+      "train_noise": "merit",
+      "train_data": "processed",
+      "staleness": "kbtp",
+      "budget": 25,
+      "lr": 0.002,
+      "batch": 256,
+      "clean_probability": 0.35,
+      "patience": 5,
+      "config": {
+        "hidden": 96,
+        "enc_layers": 3,
+        "dec_layers": 1,
+        "maxlevel": 1
+      },
+      "source": "locked runtime artifact"
+    },
+    "mean": [
+      729.493532227189,
+      52.622544324577554,
+      -0.27276188129422324,
+      0.7108934037897057,
+      -0.0006171129086131678,
+      0.009572209366924097
+    ],
+    "scale": [
+      1906.7331054301044,
+      1501.7364494157414,
+      32.52280520910061,
+      21.932367781798146,
+      4.723978065088398,
+      3.443509365232431
+    ],
+    "metrics": {
+      "kbtp_test": {
+        "strict_unseen": {
+          "ADE": 166.6642787482396,
+          "FDE": 382.93114455333244,
+          "day_equal_ADE": 161.26312661815413,
+          "windows": 949
+        },
+        "unseen": {
+          "ADE": 151.954654476524,
+          "FDE": 341.61270050553225,
+          "day_equal_ADE": 147.32476259317625,
+          "windows": 2258
+        },
+        "all": {
+          "ADE": 136.77105700339632,
+          "FDE": 306.4366564758828,
+          "day_equal_ADE": 137.73588144950693,
+          "windows": 13247
+        }
+      },
+      "kagc_test": {
+        "strict_unseen": {
+          "ADE": 196.48795414943515,
+          "FDE": 343.4878021990484,
+          "day_equal_ADE": 337.8638747568239,
+          "windows": 504
+        },
+        "unseen": {
+          "ADE": 196.48795414943515,
+          "FDE": 343.4878021990484,
+          "day_equal_ADE": 337.8638747568239,
+          "windows": 504
+        },
+        "all": {
+          "ADE": 196.48795414943515,
+          "FDE": 343.4878021990484,
+          "day_equal_ADE": 337.8638747568239,
+          "windows": 504
+        }
+      }
+    }
   }
 ]

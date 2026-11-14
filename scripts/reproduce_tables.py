@@ -17,7 +17,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-PREDICTORS = ("direct", "projection", "gate_analytic", "patchtst", "transformer", "trajairnet")
+PREDICTORS = ("direct", "projection", "gate_analytic", "seq2seq", "wtftp", "transformer", "itransformer", "patchtst", "dlinear", "trajairnet")
+MODERN = {"seq2seq": ("p10", "wtftp"), "wtftp": ("p13", "wtftp_w"), "itransformer": ("p10", "itransformer"), "patchtst": ("p10", "patchtst_r"), "dlinear": ("p10", "dlinear")}
 MAIN = ["CV (last 5 s)", "KF-CV q=4 r=15"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
 SITE2 = ["CV (last 5 s)", "KF-CV q=1 r=60"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
 
@@ -43,7 +44,24 @@ CI_SPECS = {
 @lru_cache(maxsize=None)
 def load(study):
     filename = "val.json" if "_val" in study else "test.json"
-    return json.loads((ROOT / "results" / study / filename).read_text(encoding="utf-8"))
+    if study.startswith("p10_"):
+        site = study.split("_", 1)[1]; path = ROOT / "results/p10" / site / filename
+    elif study.startswith("p13_"):
+        site = study.split("_", 1)[1]; path = ROOT / "results/p13" / site / filename
+    elif study.startswith("p12b_"):
+        site = study.split("_", 1)[1]; path = ROOT / "results/p12b" / site / filename
+    else:
+        path = ROOT / "results" / study / filename
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def source_for(display, site):
+    if display in MODERN:
+        family, source = MODERN[display]
+        return f"{family}_{site}", source
+    return ("raw_eval_test_sota" if site == "kbtp" and display == "trajairnet" else
+            "kagc_eval_test_sota" if site == "kagc" and display == "trajairnet" else
+            "raw_eval_test_final" if site == "kbtp" else "kagc_eval_test"), display
 
 
 def q(value, places=1):
@@ -90,9 +108,19 @@ def measurement():
 
 def predictor_parameters():
     from merit.evaluation import make_model
+    from merit.modern_models import ModernPredictor
     out = {}
     for name in PREDICTORS:
-        model = make_model(name, np.zeros(6), np.ones(6))
+        if name in MODERN:
+            source = MODERN[name][1]
+            cfg = ({"hidden": 96, "enc_layers": 3, "dec_layers": 1} if source == "wtftp" else
+                   {"hidden": 96, "enc_layers": 3, "dec_layers": 1, "maxlevel": 1} if source == "wtftp_w" else
+                   {"d_model": 128, "heads": 4, "layers": 3, "ff": 256, "dropout": .1} if source == "itransformer" else
+                   {"individual": True, "moving_avg": 25} if source == "dlinear" else
+                   {"d_model": 128})
+            model = ModernPredictor(source, np.zeros(6), np.ones(6), config=cfg)
+        else:
+            model = make_model(name, np.zeros(6), np.ones(6))
         count = sum(p.numel() for p in model.parameters() if p.requires_grad)
         out[name] = [q(count / 1e6, 1 if name == "trajairnet" else 2)]
     return out
@@ -119,31 +147,36 @@ def change_cells(c):
 
 
 def main_table(site, bootstrap=False):
-    base = "raw_eval_test_final" if site == "kbtp" else "kagc_eval_test"
-    sota = "raw_eval_test_sota" if site == "kbtp" else "kagc_eval_test_sota"
-    names = MAIN if site == "kbtp" else SITE2
     out = {}
-    for name in names:
-        study = sota if name.endswith(" trajairnet") else base
+    for display in PREDICTORS:
+        study, source = source_for(display, site)
         report = load(study)
-        cells = []
         subsets = ("strict_unseen", "all") if site == "kbtp" else ("all",)
-        for subset in subsets:
-            cells += [metric(report, name, subset, "ADE", True), metric(report, name, subset, "FDE", site == "kbtp")]
+        for group in ("iso", "merit"):
+            name = f"{group} {display}"; source_name = f"{group} {source}"
+            cells = []
+            for subset in subsets:
+                cells += [metric(report, source_name, subset, "ADE", True), metric(report, source_name, subset, "FDE", site == "kbtp")]
+                if site == "kagc":
+                    e, _, _ = errors(study); cells.append(q(np.percentile(e[source_name].mean(1), 95), 0))
+                if group == "merit":
+                    c = comparison(study, source_name, f"iso {source}", subset, bootstrap)
+                    cells.append(f"{signed(c['change'])} [{signed(c['ci95'][0])}, {signed(c['ci95'][1])}]")
+                else:
+                    cells.append("")
+            out[name] = cells
+    # Preserve reference rows in their manuscript order.
+    refs = {}
+    for name in (("CV (last 5 s)", "KF-CV q=4 r=15") if site == "kbtp" else ("CV (last 5 s)", "KF-CV q=1 r=60")):
+        report = load("raw_eval_test_final" if site == "kbtp" else "kagc_eval_test")
+        cells = []
+        for subset in (("strict_unseen", "all") if site == "kbtp" else ("all",)):
+            cells += [metric(report, name, subset, "ADE"), metric(report, name, subset, "FDE", site == "kbtp")]
             if site == "kagc":
-                e, _, _ = errors(study)
-                cells.append(q(np.percentile(e[name].mean(1), 95), 0))
-            if name.startswith("merit "):
-                baseline = "iso " + name.split()[-1]
-                c = comparison(study, name, baseline, subset, bootstrap)
-                delta, lo, hi = change_cells(c)
-                cells.append(f"{delta} [{lo}, {hi}]")
-            elif name.startswith(("CV ", "KF-CV")):
-                cells.append("--")
-            else:
-                cells.append("")
-        out[name] = cells
-    return out
+                e, _, _ = errors("kagc_eval_test"); cells.append(q(np.percentile(e[name].mean(1),95),0))
+            cells.append("--")
+        refs[name]=cells
+    return {**refs, **out}
 
 
 def components():
@@ -185,7 +218,13 @@ def confidence_intervals(bootstrap=False):
 
 @lru_cache(maxsize=None)
 def errors(study):
-    with np.load(ROOT / "results" / study / "test_errors.npz") as z:
+    if study.startswith("p10_"):
+        site = study.split("_", 1)[1]; path = ROOT / "results/p10" / site / "test_errors.npz"
+    elif study.startswith("p13_"):
+        site = study.split("_", 1)[1]; path = ROOT / "results/p13" / site / "test_errors.npz"
+    else:
+        path = ROOT / "results" / study / "test_errors.npz"
+    with np.load(path) as z:
         return dict(zip(map(str, z["names"]), z["errors"])), z["day"], z["train_overlap_fraction"] < .1
 
 
@@ -246,6 +285,16 @@ def text_results():
     processed = json.loads((ROOT / "results/processed_test.json").read_text())
     out["processed LSTM ADE/FDE"] = [q(statistics.fmean(r["test"]["0"][k] for r in processed if r["group"] == g and r["row"] == "direct"))
                                       for g in ("iso", "merit") for k in ("ADE", "FDE")]
+    # Frozen age-bank and training-cost receipts used by the revised text.
+    out["age-bank KBTP all ADE"] = [metric(load("p12b_kbtp"), f"n{n} direct", "all", "ADE") for n in (1, 5, 20, 65)]
+    out["age-bank KAGC ADE"] = [metric(load("p12b_kagc"), f"n{n} direct", "all", "ADE") for n in (1, 5, 20, 65)]
+    cost = json.loads((ROOT / "results/p11/summary.json").read_text())
+    by_mode = {}
+    for rec in cost["records"]:
+        by_mode.setdefault(rec["mode"], []).extend(rec["seconds"][1:])
+    out["training epoch cost"] = [q(statistics.fmean(by_mode["iso"]), 2), q(statistics.fmean(by_mode["merit"]), 2)]
+    old_patch = load("raw_eval_test_final")
+    out["original PatchTST strict ADE"] = [metric(old_patch, "iso patchtst", "strict_unseen", "ADE"), metric(old_patch, "merit patchtst", "strict_unseen", "ADE"), signed(-0.296)]
     return out
 
 

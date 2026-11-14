@@ -5,7 +5,7 @@ Code, checkpoints and evaluation outputs for
 > C. Liu, P. Wu, S. He, and J. H. Park, *MERIT: Characterizing and Replaying the ADS-B Observation Process for Robust Aircraft Trajectory Prediction*, submitted to IEEE Transactions on Instrumentation and Measurement.
 
 This core reproduction contains processed-data construction, measurement of ADS-B residuals and report ages,
-the measured-error replay generator, six predictors and their controls, training and raw-replay evaluation,
+the measured-error replay generator, ten predictors and their controls, training and raw-replay evaluation,
 the measured residual pool and age banks, and the per-seed results used in the paper. On KBTP strict-unseen
 windows, MERIT reduces LSTM ADE from 136.5 to 120.6 m. At KAGC, the same weights give 253.6 to 210.9 m.
 Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
@@ -24,11 +24,11 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `merit/residual_pool.npz`, `merit/ages_*.npz` | 578,438 paired residuals and complete KBTP/KAGC training-period age banks |
 | `scripts/prepare_data.py` | rebuilds from public sources and checks container and array hashes |
 | `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks and Table I CIs |
-| `scripts/train.py` | paper training settings for all six predictors and the training/input controls |
+| `scripts/train.py` | paper training settings for all ten predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
-| `scripts/reproduce_tables.py` | source-data-free reproduction of 333 printed cells: Tables I-V, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
+| `scripts/reproduce_tables.py` | source-data-free reproduction of 430 printed cells: Tables I-V, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
 | `scripts/draw_figures.py` | redraws Figures 1, 3 and 4 from bundled derived statistics, errors and recentered case data |
-| `checkpoints/` | 125 checkpoints, 393.2 MB, with settings, SHA-256 and reference metrics in `index.json` |
+| `checkpoints/` | 175 checkpoints, approximately 520 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
 | `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
 | `results/paper_tables.json` | numerical cells as printed in the manuscript |
@@ -47,10 +47,10 @@ python scripts/reproduce_tables.py --bootstrap
 python scripts/draw_figures.py --output outputs/figures
 ```
 
-`reproduce_tables.py` exits with status 0 when all 333 printed cells agree. The optional bootstrap regenerates
+`reproduce_tables.py` exits with status 0 when every printed cell agrees. The optional bootstrap regenerates
 all paired prediction CIs from seed-averaged window errors, including intervals otherwise read from saved reports. Table I uses the frozen measurement summaries
 and measurement bootstrap outputs. Raw-log measurement, including its day bootstrap, has a separate entry point.
-Table II checks trainable parameter counts. Tables III and IV pair isotropic and MERIT training for six predictors,
+Table II checks trainable parameter counts. Tables III and IV pair isotropic and MERIT training for ten predictors,
 with a separate relative-change CI for each predictor and subset; Table IV also reports P95. Table V contains
 seven residual/timing combinations and five alternative remedies, with three-seed cells marked by a dagger.
 All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
@@ -109,7 +109,7 @@ Run each training setting for seeds 42, 123, 456, 0 and 1, using the first three
 
 ## Checkpoint coverage
 
-The 125 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
+The 175 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
 20 input-processing checkpoints, 45 training/scale/age-bank controls, and 10 date-disjoint LSTM checkpoints. Main and selected training controls
 have five seeds, while factorial, scale and fine-tuning controls have three. Files are unchanged from the
 experiment artifacts and individually smaller than 100 MB. No large-file extension is required.
@@ -141,3 +141,9 @@ The Apache-2.0 license and original RevIN attribution are retained under `merit/
 ## License
 
 MIT, copyright 2026 Chunhao Liu, for the MERIT code. Third-party terms are listed in `THIRD_PARTY_NOTICES`.
+
+### Added predictor implementations
+
+`merit/modern_models.py` contains the Seq2Seq LSTM adapter (`seq2seq`), the faithful WTFTP wavelet path (`wtftp`), iTransformer (`itransformer`), DLinear (`dlinear`), and PatchTST with the last-observation position residual (`patchtst_r`). WTFTP uses a 60-step history followed by 29 zero placeholders to reconstruct 90 steps and returns the last 30 steps; positions are represented relative to the last observed position. Its Haar DWT, attention blocks, coefficient-domain loss, and inverse reconstruction are implemented locally without an extra wavelet dependency.
+
+The added weights are the five-seed locked artifacts for conventional and MERIT training. `checkpoints/index.json` records each SHA-256, configuration, scaler and per-site metrics.

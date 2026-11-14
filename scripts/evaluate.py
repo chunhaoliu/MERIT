@@ -79,7 +79,8 @@ def main():
                 mean, scale = np.array(entry["mean"]), np.array(entry["scale"])
                 prediction = predict(checkpoint, row, history, mean, scale, device=a.device,
                                      filter_cv=settings.get("filter_cv"),
-                                     report_age=data["changed_position_age_s"] if settings.get("report_age") else None)
+                                     report_age=data["changed_position_age_s"] if settings.get("report_age") else None,
+                                     config=settings.get("config"))
                 error = np.linalg.norm(prediction - reference, axis=-1)
                 errors_by_name[name].append(error)
                 key = f"{a.site}_{a.split}"
