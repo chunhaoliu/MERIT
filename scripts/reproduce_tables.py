@@ -18,7 +18,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 PREDICTORS = ("direct", "projection", "gate_analytic", "seq2seq", "wtftp", "transformer", "itransformer", "patchtst", "dlinear", "trajairnet")
-MODERN = {"seq2seq": ("p10", "wtftp"), "wtftp": ("p13", "wtftp_w"), "itransformer": ("p10", "itransformer"), "patchtst": ("p10", "patchtst_r"), "dlinear": ("p10", "dlinear")}
+MODERN = {"seq2seq": ("p10", "wtftp"), "wtftp": ("p13", "wtftp_w"), "dlinear": ("p10", "dlinear"),
+          # Validation-selected configurations (P14), evaluated once on the test split after a hash lock.
+          "transformer": ("p14", "transformer"), "itransformer": ("p14", "itransformer"),
+          "patchtst": ("p14", "patchtst_r"), "trajairnet": ("p14", "trajairnet")}
+P14_CONFIG = {"transformer": {"d_model": 64, "heads": 4, "layers": 2, "ff": 128}, "patchtst_r": {"patch_len": 8, "d_model": 128}}
+FAMILIES = ("p10_", "p12b_", "p13_", "p14_")
 MAIN = ["CV (last 5 s)", "KF-CV q=4 r=15"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
 SITE2 = ["CV (last 5 s)", "KF-CV q=1 r=60"] + [f"{g} {r}" for r in PREDICTORS for g in ("iso", "merit")]
 
@@ -44,12 +49,8 @@ CI_SPECS = {
 @lru_cache(maxsize=None)
 def load(study):
     filename = "val.json" if "_val" in study else "test.json"
-    if study.startswith("p10_"):
-        site = study.split("_", 1)[1]; path = ROOT / "results/p10" / site / filename
-    elif study.startswith("p13_"):
-        site = study.split("_", 1)[1]; path = ROOT / "results/p13" / site / filename
-    elif study.startswith("p12b_"):
-        site = study.split("_", 1)[1]; path = ROOT / "results/p12b" / site / filename
+    if study.startswith(FAMILIES):
+        family, site = study.split("_", 1); path = ROOT / "results" / family / site / filename
     else:
         path = ROOT / "results" / study / filename
     return json.loads(path.read_text(encoding="utf-8"))
@@ -59,9 +60,7 @@ def source_for(display, site):
     if display in MODERN:
         family, source = MODERN[display]
         return f"{family}_{site}", source
-    return ("raw_eval_test_sota" if site == "kbtp" and display == "trajairnet" else
-            "kagc_eval_test_sota" if site == "kagc" and display == "trajairnet" else
-            "raw_eval_test_final" if site == "kbtp" else "kagc_eval_test"), display
+    return ("raw_eval_test_final" if site == "kbtp" else "kagc_eval_test"), display
 
 
 def q(value, places=1):
@@ -111,13 +110,15 @@ def predictor_parameters():
     from merit.modern_models import ModernPredictor
     out = {}
     for name in PREDICTORS:
-        if name in MODERN:
+        if name in ("transformer", "trajairnet"):
+            model = make_model(name, np.zeros(6), np.ones(6), config=P14_CONFIG.get(name))
+        elif name in MODERN:
             source = MODERN[name][1]
             cfg = ({"hidden": 96, "enc_layers": 3, "dec_layers": 1} if source == "wtftp" else
                    {"hidden": 96, "enc_layers": 3, "dec_layers": 1, "maxlevel": 1} if source == "wtftp_w" else
                    {"d_model": 128, "heads": 4, "layers": 3, "ff": 256, "dropout": .1} if source == "itransformer" else
                    {"individual": True, "moving_avg": 25} if source == "dlinear" else
-                   {"d_model": 128})
+                   P14_CONFIG["patchtst_r"])
             model = ModernPredictor(source, np.zeros(6), np.ones(6), config=cfg)
         else:
             model = make_model(name, np.zeros(6), np.ones(6))
@@ -218,10 +219,8 @@ def confidence_intervals(bootstrap=False):
 
 @lru_cache(maxsize=None)
 def errors(study):
-    if study.startswith("p10_"):
-        site = study.split("_", 1)[1]; path = ROOT / "results/p10" / site / "test_errors.npz"
-    elif study.startswith("p13_"):
-        site = study.split("_", 1)[1]; path = ROOT / "results/p13" / site / "test_errors.npz"
+    if study.startswith(FAMILIES):
+        family, site = study.split("_", 1); path = ROOT / "results" / family / site / "test_errors.npz"
     else:
         path = ROOT / "results" / study / "test_errors.npz"
     with np.load(path) as z:

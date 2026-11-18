@@ -10,6 +10,11 @@ import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+# Paper settings (epoch budget, learning rate, patience, model config); Transformer, iTransformer, PatchTST-R and
+# TrajAirNet were selected on raw validation days. Other rows train 25 epochs at 0.002 with patience 5.
+PAPER = {"transformer": (200, .001, 10, {"d_model": 64, "heads": 4, "layers": 2, "ff": 128}),
+         "itransformer": (100, .002, 10, None), "patchtst_r": (100, .002, 10, {"patch_len": 8, "d_model": 128}),
+         "trajairnet": (100, .0003, 10, {"kl_weight": .1}), "patchtst": (25, .001, 5, None)}
 from merit.evaluation import MODELS, make_model
 from merit.losses import forecast_loss
 from merit.training import ObservationReplay, load_data, validate
@@ -31,6 +36,7 @@ def main():
     p.add_argument("--report-age", action="store_true")
     p.add_argument("--budget", type=int)
     p.add_argument("--lr", type=float)
+    p.add_argument("--patience", type=int)
     p.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     p.add_argument("--output", type=Path, required=True)
     p.add_argument("--smoke", action="store_true")
@@ -45,9 +51,11 @@ def main():
         p.error("Date-disjoint training covers the processed-data direct LSTM")
     if not math.isfinite(a.kmax) or a.kmax < 0:
         p.error("--kmax must be finite and nonnegative")
-    budget = 1 if a.smoke else a.budget or {"transformer": 120, "trajairnet": 50}.get(a.row, 25)
-    lr = a.lr or (.001 if a.row in ("patchtst", "trajairnet") else .002)
-    if budget <= 0 or not math.isfinite(lr) or lr <= 0:
+    paper_budget, paper_lr, paper_patience, model_config = PAPER.get(a.row, (25, .002, 5, None))
+    budget = 1 if a.smoke else a.budget or paper_budget
+    lr = a.lr or paper_lr
+    patience = a.patience or paper_patience
+    if budget <= 0 or patience <= 0 or not math.isfinite(lr) or lr <= 0:
         p.error("Training budget and learning rate must be positive")
     torch.set_num_threads(4)
     torch.backends.cudnn.deterministic = True
@@ -58,7 +66,8 @@ def main():
     torch.manual_seed(a.seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(a.seed)
-    model = make_model(a.row, scaler.mean_, scaler.scale_, filter_cv=a.filter_cv, report_age=a.report_age).to(a.device)
+    model = make_model(a.row, scaler.mean_, scaler.scale_, filter_cv=a.filter_cv, report_age=a.report_age,
+                       config=model_config).to(a.device)
     if a.init:
         model.load_state_dict(torch.load(a.init, weights_only=True, map_location=a.device))
     noise = ObservationReplay(a.noise, kmax=a.kmax, pool=a.pool, ages=a.ages, report_age=a.report_age)
@@ -66,7 +75,7 @@ def main():
     train, val = tensors
     a.output.mkdir(parents=True, exist_ok=False)
     config = {k: v for k, v in vars(a).items() if k not in ("data", "output", "init", "ages")}
-    config.update(budget=budget, lr=lr, mean=scaler.mean_.tolist(), scale=scaler.scale_.tolist(),
+    config.update(budget=budget, lr=lr, patience=patience, model_config=model_config, mean=scaler.mean_.tolist(), scale=scaler.scale_.tolist(),
                   ages="external" if a.ages else "released KBTP", initialization=bool(a.init))
     (a.output / "config.json").write_text(json.dumps(config, indent=2), encoding="utf-8")
     best, best_epoch, bad, history = math.inf, 0, 0, []
@@ -100,7 +109,7 @@ def main():
             bad += 1
         (a.output / "history.json").write_text(json.dumps(history, indent=2), encoding="utf-8")
         print(f"epoch {epoch + 1} validation loss {score:.6f} best epoch {best_epoch}", flush=True)
-        if bad >= 5:
+        if bad >= patience:
             break
         for group in optimizer.param_groups:
             group["lr"] = lr * .5 * (1 + math.cos(math.pi * (epoch + 1) / budget))

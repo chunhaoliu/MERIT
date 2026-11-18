@@ -2,7 +2,7 @@
 
 Code, checkpoints and evaluation outputs for
 
-> C. Liu, P. Wu, S. He, and J. H. Park, *MERIT: Characterizing and Replaying the ADS-B Observation Process for Robust Aircraft Trajectory Prediction*, submitted to IEEE Transactions on Instrumentation and Measurement.
+> C. Liu, P. Wu, S. He, F. Huang, G. Pan, and J. H. Park, *MERIT: Characterizing and Replaying the ADS-B Observation Process for Robust Aircraft Trajectory Prediction*, submitted to IEEE Transactions on Instrumentation and Measurement.
 
 This core reproduction contains processed-data construction, measurement of ADS-B residuals and report ages,
 the measured-error replay generator, ten predictors and their controls, training and raw-replay evaluation,
@@ -112,10 +112,11 @@ Run each training setting for seeds 42, 123, 456, 0 and 1, using the first three
 The 175 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
 20 input-processing checkpoints, 45 training/scale/age-bank controls, and 10 date-disjoint LSTM checkpoints. Main and selected training controls
 have five seeds, while factorial, scale and fine-tuning controls have three. Files are unchanged from the
-experiment artifacts and individually smaller than 100 MB. No large-file extension is required.
+experiment artifacts and individually smaller than 100 MB. The Transformer, iTransformer and residual PatchTST
+weights are the validation-selected five-seed retrains described in `CONFIGS.md`. No large-file extension is required.
 
 The ten TrajAirNet checkpoints, totaling 701.9 MB, are excluded to keep this core repository compact.
-Its complete five-seed results at both sites, window errors, model implementation and training recipe are
+Its complete five-seed results at both sites (validation-selected setting in `results/p14`), window errors, model implementation and training recipe are
 included. Retrain those weights with `scripts/train.py` for inference reproduction of that row.
 The other controls are selected by their `group`, `row` and `seed` in `checkpoints/index.json`.
 

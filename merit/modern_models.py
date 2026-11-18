@@ -255,6 +255,12 @@ class ModernPredictor(nn.Module):
                                   pred_len=30, enc_in=6, patch_len=16, stride=8,
                                   d_model=128, n_heads=4, d_ff=256, e_layers=3,
                                   dropout=.1, activation="gelu")
+            cfg.patch_len = int(config.get("patch_len", cfg.patch_len))
+            cfg.d_model = int(config.get("d_model", cfg.d_model))
+            cfg.n_heads = int(config.get("heads", cfg.n_heads))
+            cfg.d_ff = int(config.get("ff", max(2 * cfg.d_model, cfg.d_ff)))
+            cfg.e_layers = int(config.get("layers", cfg.e_layers))
+            cfg.stride = int(config.get("stride", max(1, cfg.patch_len // 2)))
             self.core = PatchCore(cfg)
 
     def forward(self, observed, clean=None):

@@ -3924,19 +3924,26 @@
     "group": "iso",
     "row": "transformer",
     "seed": 42,
-    "sha256": "ed4ebc7c8b2bc91fef7031c04e924597798e6a4ba4bf2de30a972ede427008a7",
-    "bytes": 1826677,
+    "sha256": "7984550e96221767f138c180ed9ca0c9f12bbe5d7df35492833f1aa4441783ed",
+    "bytes": 390517,
     "settings": {
       "train_noise": "iso",
       "adsb_kmax": 10.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -3957,41 +3964,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 169.0129248774361,
-          "FDE": 347.30048951322436,
-          "day_equal_ADE": 157.20579822694512,
+          "ADE": 150.3751880709867,
+          "FDE": 305.30793844454547,
+          "day_equal_ADE": 139.79135645536132,
           "windows": 949
         },
         "unseen": {
-          "ADE": 152.28284958882563,
-          "FDE": 305.757410672223,
-          "day_equal_ADE": 150.52945322356425,
+          "ADE": 135.0356735477056,
+          "FDE": 271.04352539176574,
+          "day_equal_ADE": 133.40673148009537,
           "windows": 2258
         },
         "all": {
-          "ADE": 135.8498107393355,
-          "FDE": 276.75965483823603,
-          "day_equal_ADE": 138.91092246109818,
+          "ADE": 122.57221786662434,
+          "FDE": 248.71453696524586,
+          "day_equal_ADE": 126.20942768084473,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 216.58190858459352,
-          "FDE": 359.6122392906373,
-          "day_equal_ADE": 339.376050040585,
+          "ADE": 228.1897403039499,
+          "FDE": 364.46033726627707,
+          "day_equal_ADE": 347.35271726552224,
           "windows": 504
         },
         "unseen": {
-          "ADE": 216.58190858459352,
-          "FDE": 359.6122392906373,
-          "day_equal_ADE": 339.376050040585,
+          "ADE": 228.1897403039499,
+          "FDE": 364.46033726627707,
+          "day_equal_ADE": 347.35271726552224,
           "windows": 504
         },
         "all": {
-          "ADE": 216.58190858459352,
-          "FDE": 359.6122392906373,
-          "day_equal_ADE": 339.376050040585,
+          "ADE": 228.1897403039499,
+          "FDE": 364.46033726627707,
+          "day_equal_ADE": 347.35271726552224,
           "windows": 504
         }
       }
@@ -4002,19 +4009,26 @@
     "group": "iso",
     "row": "transformer",
     "seed": 123,
-    "sha256": "4d37fe9bf5cd2bca279dd87a904d87a004e88512798f8ff9dccaab7424efb45c",
-    "bytes": 1826677,
+    "sha256": "16c0f1dc49a5cb862b347b43eeee1090fa9fd775b5f28050f6daec651fbd8361",
+    "bytes": 390517,
     "settings": {
       "train_noise": "iso",
       "adsb_kmax": 10.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4035,41 +4049,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 158.9657382188575,
-          "FDE": 321.2373070923444,
-          "day_equal_ADE": 148.01810121306082,
+          "ADE": 148.9155080384896,
+          "FDE": 302.67493578940787,
+          "day_equal_ADE": 142.0179124677588,
           "windows": 949
         },
         "unseen": {
-          "ADE": 143.7956844076779,
-          "FDE": 287.51672462352167,
-          "day_equal_ADE": 141.17966804927167,
+          "ADE": 132.3579884560232,
+          "FDE": 266.79183790099165,
+          "day_equal_ADE": 133.7197276188495,
           "windows": 2258
         },
         "all": {
-          "ADE": 127.45985221324666,
-          "FDE": 260.7971670271001,
-          "day_equal_ADE": 128.82224535771468,
+          "ADE": 119.01094060761058,
+          "FDE": 243.85650557980978,
+          "day_equal_ADE": 121.47818883171544,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 222.81923388783227,
-          "FDE": 387.89227703901213,
-          "day_equal_ADE": 374.8728632655374,
+          "ADE": 215.09738783802254,
+          "FDE": 346.34288666313677,
+          "day_equal_ADE": 357.51032370351913,
           "windows": 504
         },
         "unseen": {
-          "ADE": 222.81923388783227,
-          "FDE": 387.89227703901213,
-          "day_equal_ADE": 374.8728632655374,
+          "ADE": 215.09738783802254,
+          "FDE": 346.34288666313677,
+          "day_equal_ADE": 357.51032370351913,
           "windows": 504
         },
         "all": {
-          "ADE": 222.81923388783227,
-          "FDE": 387.89227703901213,
-          "day_equal_ADE": 374.8728632655374,
+          "ADE": 215.09738783802254,
+          "FDE": 346.34288666313677,
+          "day_equal_ADE": 357.51032370351913,
           "windows": 504
         }
       }
@@ -4080,19 +4094,26 @@
     "group": "iso",
     "row": "transformer",
     "seed": 456,
-    "sha256": "c83d59210b31bc465733a1c81d1b801814c713e2452d7be8fef3eced2a0556f8",
-    "bytes": 1826677,
+    "sha256": "4dcc7c3853084552b29384972a66bb0a006a55ce1c152d1927a794dfe9883e0b",
+    "bytes": 390517,
     "settings": {
       "train_noise": "iso",
       "adsb_kmax": 10.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4113,41 +4134,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 172.1124823293932,
-          "FDE": 352.2471532899698,
-          "day_equal_ADE": 163.78590000512776,
+          "ADE": 162.9100057042009,
+          "FDE": 330.6506062183262,
+          "day_equal_ADE": 152.14737573441388,
           "windows": 949
         },
         "unseen": {
-          "ADE": 153.53160153648048,
-          "FDE": 309.9135563545896,
-          "day_equal_ADE": 152.32731618119516,
+          "ADE": 146.74087666125624,
+          "FDE": 295.1668249643876,
+          "day_equal_ADE": 145.09986747281815,
           "windows": 2258
         },
         "all": {
-          "ADE": 138.39518203121168,
-          "FDE": 283.761688733241,
-          "day_equal_ADE": 143.01310290371228,
+          "ADE": 133.33711787791862,
+          "FDE": 273.0002012196204,
+          "day_equal_ADE": 136.4373770458418,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 220.82424685082435,
-          "FDE": 376.6990499762485,
-          "day_equal_ADE": 360.521105559169,
+          "ADE": 249.9642103233225,
+          "FDE": 435.23946255110815,
+          "day_equal_ADE": 388.64435588132886,
           "windows": 504
         },
         "unseen": {
-          "ADE": 220.82424685082435,
-          "FDE": 376.6990499762485,
-          "day_equal_ADE": 360.521105559169,
+          "ADE": 249.9642103233225,
+          "FDE": 435.23946255110815,
+          "day_equal_ADE": 388.64435588132886,
           "windows": 504
         },
         "all": {
-          "ADE": 220.82424685082435,
-          "FDE": 376.6990499762485,
-          "day_equal_ADE": 360.521105559169,
+          "ADE": 249.9642103233225,
+          "FDE": 435.23946255110815,
+          "day_equal_ADE": 388.64435588132886,
           "windows": 504
         }
       }
@@ -4158,19 +4179,26 @@
     "group": "iso",
     "row": "transformer",
     "seed": 0,
-    "sha256": "0771bab31664523637856ba58ef1a7d61e2df53725addbcf361966e98d292dd3",
-    "bytes": 1826677,
+    "sha256": "c273b4ec0d4aae44ff03ad41c186d62b3e84e9ca829cc4cb9220c930a04b1677",
+    "bytes": 390517,
     "settings": {
       "train_noise": "iso",
       "adsb_kmax": 10.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4191,41 +4219,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 166.46214925438736,
-          "FDE": 344.125735406237,
-          "day_equal_ADE": 156.7006239896661,
+          "ADE": 144.58252515008644,
+          "FDE": 295.94808318993006,
+          "day_equal_ADE": 136.8940033418915,
           "windows": 949
         },
         "unseen": {
-          "ADE": 147.98227739435822,
-          "FDE": 299.7898745412147,
-          "day_equal_ADE": 145.95846904564343,
+          "ADE": 131.55358444450113,
+          "FDE": 266.60511876653544,
+          "day_equal_ADE": 131.43864350605185,
           "windows": 2258
         },
         "all": {
-          "ADE": 133.40453118842578,
-          "FDE": 272.50850646289507,
-          "day_equal_ADE": 136.4712943974676,
+          "ADE": 119.40500336249596,
+          "FDE": 245.98804995326395,
+          "day_equal_ADE": 121.93335379880986,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 226.70360085128945,
-          "FDE": 370.1178481167027,
-          "day_equal_ADE": 363.19056820240996,
+          "ADE": 252.5160356024,
+          "FDE": 430.44577021634865,
+          "day_equal_ADE": 405.3841178110787,
           "windows": 504
         },
         "unseen": {
-          "ADE": 226.70360085128945,
-          "FDE": 370.1178481167027,
-          "day_equal_ADE": 363.19056820240996,
+          "ADE": 252.5160356024,
+          "FDE": 430.44577021634865,
+          "day_equal_ADE": 405.3841178110787,
           "windows": 504
         },
         "all": {
-          "ADE": 226.70360085128945,
-          "FDE": 370.1178481167027,
-          "day_equal_ADE": 363.19056820240996,
+          "ADE": 252.5160356024,
+          "FDE": 430.44577021634865,
+          "day_equal_ADE": 405.3841178110787,
           "windows": 504
         }
       }
@@ -4236,19 +4264,26 @@
     "group": "iso",
     "row": "transformer",
     "seed": 1,
-    "sha256": "7adc342da81dfa7a28203038ea1ea49cb3a122c74450880facdfd81273c0f5a3",
-    "bytes": 1826677,
+    "sha256": "323b8820cd9cb5cf07e9cd4e6ab611846ff3464138a3ca9339be20d50b5d587e",
+    "bytes": 390517,
     "settings": {
       "train_noise": "iso",
       "adsb_kmax": 10.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4269,41 +4304,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 164.80123954205396,
-          "FDE": 336.3700662545922,
-          "day_equal_ADE": 152.2848613005088,
+          "ADE": 146.9497205513525,
+          "FDE": 302.3490841976011,
+          "day_equal_ADE": 134.64011872676417,
           "windows": 949
         },
         "unseen": {
-          "ADE": 146.81454419102886,
-          "FDE": 295.31581080459455,
-          "day_equal_ADE": 143.72299867270436,
+          "ADE": 132.92427581628803,
+          "FDE": 271.22129040635326,
+          "day_equal_ADE": 128.61871716175793,
           "windows": 2258
         },
         "all": {
-          "ADE": 130.09755995198495,
-          "FDE": 265.53769775008664,
-          "day_equal_ADE": 135.01676066441863,
+          "ADE": 120.16397798553986,
+          "FDE": 248.49429404858859,
+          "day_equal_ADE": 122.69526039293572,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 260.4124002991981,
-          "FDE": 444.69863656163733,
-          "day_equal_ADE": 424.0461141774349,
+          "ADE": 246.84387286383534,
+          "FDE": 418.2267676065833,
+          "day_equal_ADE": 380.94390567413734,
           "windows": 504
         },
         "unseen": {
-          "ADE": 260.4124002991981,
-          "FDE": 444.69863656163733,
-          "day_equal_ADE": 424.0461141774349,
+          "ADE": 246.84387286383534,
+          "FDE": 418.2267676065833,
+          "day_equal_ADE": 380.94390567413734,
           "windows": 504
         },
         "all": {
-          "ADE": 260.4124002991981,
-          "FDE": 444.69863656163733,
-          "day_equal_ADE": 424.0461141774349,
+          "ADE": 246.84387286383534,
+          "FDE": 418.2267676065833,
+          "day_equal_ADE": 380.94390567413734,
           "windows": 504
         }
       }
@@ -4314,19 +4349,26 @@
     "group": "merit",
     "row": "transformer",
     "seed": 42,
-    "sha256": "e3334fc00b4a1e2e9e413de2d9b42440a6b1fc772ba2ee639028024b3106e66a",
-    "bytes": 1826677,
+    "sha256": "f2fbc26faa53da01e72ba6352837cf34cc54d1450fa2eb0a0e6c134df5696607",
+    "bytes": 390517,
     "settings": {
       "train_noise": "adsb_held",
       "adsb_kmax": 2.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4347,41 +4389,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 139.79570432603367,
-          "FDE": 283.0671608377862,
-          "day_equal_ADE": 129.66263111919426,
+          "ADE": 127.75241798481827,
+          "FDE": 270.126666533022,
+          "day_equal_ADE": 118.82314469781036,
           "windows": 949
         },
         "unseen": {
-          "ADE": 123.53673692218379,
-          "FDE": 251.23504895583022,
-          "day_equal_ADE": 120.93115115144113,
+          "ADE": 115.93129952867808,
+          "FDE": 245.58126078474965,
+          "day_equal_ADE": 114.21125077081533,
           "windows": 2258
         },
         "all": {
-          "ADE": 110.32439846339093,
-          "FDE": 230.59642864373814,
-          "day_equal_ADE": 111.5105596886545,
+          "ADE": 107.10613455355238,
+          "FDE": 230.45368120865015,
+          "day_equal_ADE": 110.88348082714707,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 228.62041981774635,
-          "FDE": 392.467732718446,
-          "day_equal_ADE": 354.7288281877217,
+          "ADE": 228.09907338661685,
+          "FDE": 376.66675668446493,
+          "day_equal_ADE": 362.0578786474928,
           "windows": 504
         },
         "unseen": {
-          "ADE": 228.62041981774635,
-          "FDE": 392.467732718446,
-          "day_equal_ADE": 354.7288281877217,
+          "ADE": 228.09907338661685,
+          "FDE": 376.66675668446493,
+          "day_equal_ADE": 362.0578786474928,
           "windows": 504
         },
         "all": {
-          "ADE": 228.62041981774635,
-          "FDE": 392.467732718446,
-          "day_equal_ADE": 354.7288281877217,
+          "ADE": 228.09907338661685,
+          "FDE": 376.66675668446493,
+          "day_equal_ADE": 362.0578786474928,
           "windows": 504
         }
       }
@@ -4392,19 +4434,26 @@
     "group": "merit",
     "row": "transformer",
     "seed": 123,
-    "sha256": "80629af1fd1211c2321dd653ca68a42c4c189491901d43ad299b940654a4526e",
-    "bytes": 1826677,
+    "sha256": "1f741ed528c9be81168da5eec1b40a6dc50f4e88708c621ae5300da3c61cc28f",
+    "bytes": 390517,
     "settings": {
       "train_noise": "adsb_held",
       "adsb_kmax": 2.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4425,41 +4474,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 141.25646040616698,
-          "FDE": 287.1259936946512,
-          "day_equal_ADE": 135.13799596226067,
+          "ADE": 139.8926590481875,
+          "FDE": 284.7387051354868,
+          "day_equal_ADE": 133.68366375796256,
           "windows": 949
         },
         "unseen": {
-          "ADE": 126.92168494953084,
-          "FDE": 257.2480175930667,
-          "day_equal_ADE": 127.16574422022275,
+          "ADE": 125.15961318668413,
+          "FDE": 254.32597749608786,
+          "day_equal_ADE": 122.98967138414949,
           "windows": 2258
         },
         "all": {
-          "ADE": 114.86605672117982,
-          "FDE": 234.5549690118114,
-          "day_equal_ADE": 118.23672588090302,
+          "ADE": 113.26624930077813,
+          "FDE": 233.80224279587236,
+          "day_equal_ADE": 115.67922207475402,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 258.3338029771844,
-          "FDE": 435.1058574761479,
-          "day_equal_ADE": 384.56487605031623,
+          "ADE": 214.15159953642518,
+          "FDE": 349.6294817503536,
+          "day_equal_ADE": 345.47492023263607,
           "windows": 504
         },
         "unseen": {
-          "ADE": 258.3338029771844,
-          "FDE": 435.1058574761479,
-          "day_equal_ADE": 384.56487605031623,
+          "ADE": 214.15159953642518,
+          "FDE": 349.6294817503536,
+          "day_equal_ADE": 345.47492023263607,
           "windows": 504
         },
         "all": {
-          "ADE": 258.3338029771844,
-          "FDE": 435.1058574761479,
-          "day_equal_ADE": 384.56487605031623,
+          "ADE": 214.15159953642518,
+          "FDE": 349.6294817503536,
+          "day_equal_ADE": 345.47492023263607,
           "windows": 504
         }
       }
@@ -4470,19 +4519,26 @@
     "group": "merit",
     "row": "transformer",
     "seed": 456,
-    "sha256": "95dbb75a95283daff406afbf35b8ba3c5f0800896f3d7e3633baeeeb605b8071",
-    "bytes": 1826677,
+    "sha256": "66a33ac005b8cbf39df70c3023e64fb5a8383bd024bca3b06037d6ac62f039a8",
+    "bytes": 390517,
     "settings": {
       "train_noise": "adsb_held",
       "adsb_kmax": 2.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4503,41 +4559,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 141.26476899784097,
-          "FDE": 294.04711435248345,
-          "day_equal_ADE": 127.4422922277258,
+          "ADE": 130.3354199043411,
+          "FDE": 277.00251875596535,
+          "day_equal_ADE": 120.59592544476504,
           "windows": 949
         },
         "unseen": {
-          "ADE": 127.21708710173944,
-          "FDE": 261.4853539135491,
-          "day_equal_ADE": 125.31988933177122,
+          "ADE": 117.76655846958657,
+          "FDE": 249.12061236486576,
+          "day_equal_ADE": 115.19906114323915,
           "windows": 2258
         },
         "all": {
-          "ADE": 114.40720357603026,
-          "FDE": 239.99925545212972,
-          "day_equal_ADE": 116.75406288009012,
+          "ADE": 106.26387366221267,
+          "FDE": 226.66530902973867,
+          "day_equal_ADE": 108.26908441409365,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 219.88304576400242,
-          "FDE": 368.96979788790685,
-          "day_equal_ADE": 344.85569668176873,
+          "ADE": 230.12410566399913,
+          "FDE": 362.3537022893758,
+          "day_equal_ADE": 361.2299818052353,
           "windows": 504
         },
         "unseen": {
-          "ADE": 219.88304576400242,
-          "FDE": 368.96979788790685,
-          "day_equal_ADE": 344.85569668176873,
+          "ADE": 230.12410566399913,
+          "FDE": 362.3537022893758,
+          "day_equal_ADE": 361.2299818052353,
           "windows": 504
         },
         "all": {
-          "ADE": 219.88304576400242,
-          "FDE": 368.96979788790685,
-          "day_equal_ADE": 344.85569668176873,
+          "ADE": 230.12410566399913,
+          "FDE": 362.3537022893758,
+          "day_equal_ADE": 361.2299818052353,
           "windows": 504
         }
       }
@@ -4548,19 +4604,26 @@
     "group": "merit",
     "row": "transformer",
     "seed": 0,
-    "sha256": "2095adec55d856bf5c12912125dadd4c2b3d868d85a0d0d477f9b3f79da4e862",
-    "bytes": 1826677,
+    "sha256": "3a9ee8286d177350eb32b1431bd44edca485e279c8b0c914a75757d33c65cf4e",
+    "bytes": 390517,
     "settings": {
       "train_noise": "adsb_held",
       "adsb_kmax": 2.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4581,41 +4644,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 146.75590904121236,
-          "FDE": 305.30179816417944,
-          "day_equal_ADE": 135.91576309407301,
+          "ADE": 137.23221879056663,
+          "FDE": 284.8919271036469,
+          "day_equal_ADE": 129.48914158969004,
           "windows": 949
         },
         "unseen": {
-          "ADE": 130.4452088648168,
-          "FDE": 269.54787817070945,
-          "day_equal_ADE": 127.74135582807858,
+          "ADE": 125.6162850614685,
+          "FDE": 258.57840569362884,
+          "day_equal_ADE": 122.68022321699596,
           "windows": 2258
         },
         "all": {
-          "ADE": 117.06004681587817,
-          "FDE": 244.77932533852277,
-          "day_equal_ADE": 119.18532989076274,
+          "ADE": 114.51416024238989,
+          "FDE": 239.25417310014245,
+          "day_equal_ADE": 117.13314982445864,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 224.61841339226163,
-          "FDE": 370.54231507398003,
-          "day_equal_ADE": 374.65025760697546,
+          "ADE": 208.5625694646173,
+          "FDE": 336.4294690221356,
+          "day_equal_ADE": 346.8085268373149,
           "windows": 504
         },
         "unseen": {
-          "ADE": 224.61841339226163,
-          "FDE": 370.54231507398003,
-          "day_equal_ADE": 374.65025760697546,
+          "ADE": 208.5625694646173,
+          "FDE": 336.4294690221356,
+          "day_equal_ADE": 346.8085268373149,
           "windows": 504
         },
         "all": {
-          "ADE": 224.61841339226163,
-          "FDE": 370.54231507398003,
-          "day_equal_ADE": 374.65025760697546,
+          "ADE": 208.5625694646173,
+          "FDE": 336.4294690221356,
+          "day_equal_ADE": 346.8085268373149,
           "windows": 504
         }
       }
@@ -4626,19 +4689,26 @@
     "group": "merit",
     "row": "transformer",
     "seed": 1,
-    "sha256": "5420253de10d267cf73dfc6ca5f975002fc749dfec676e7acb518f8b969c9c62",
-    "bytes": 1826677,
+    "sha256": "a1e96718aa37a6e550e2c9b05c7c8ae1333208184566255b10d1659df28ab69d",
+    "bytes": 390517,
     "settings": {
       "train_noise": "adsb_held",
       "adsb_kmax": 2.0,
       "pool": "measured",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 120,
-      "lr": 0.002,
+      "budget": 200,
+      "lr": 0.001,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5
+      "patience": 10,
+      "source": "P14 raw-validation selection, locked before test evaluation",
+      "config": {
+        "d_model": 64,
+        "heads": 4,
+        "layers": 2,
+        "ff": 128
+      }
     },
     "mean": [
       729.493532227189,
@@ -4659,41 +4729,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 147.12382240733487,
-          "FDE": 305.0133472366262,
-          "day_equal_ADE": 138.83953053287684,
+          "ADE": 132.02894795404228,
+          "FDE": 274.67183302243126,
+          "day_equal_ADE": 125.1105185610505,
           "windows": 949
         },
         "unseen": {
-          "ADE": 133.84501661008346,
-          "FDE": 273.3003145461278,
-          "day_equal_ADE": 131.7908691728599,
+          "ADE": 120.07347062787746,
+          "FDE": 249.54780262953068,
+          "day_equal_ADE": 118.93142342042395,
           "windows": 2258
         },
         "all": {
-          "ADE": 122.1754543177003,
-          "FDE": 253.57426476011344,
-          "day_equal_ADE": 125.59139262085532,
+          "ADE": 109.07099991482208,
+          "FDE": 231.00273609919827,
+          "day_equal_ADE": 112.61298693640602,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 229.99855870813136,
-          "FDE": 385.8753692953164,
-          "day_equal_ADE": 390.8969792009852,
+          "ADE": 211.1537670030537,
+          "FDE": 338.1232789297688,
+          "day_equal_ADE": 351.5061593679585,
           "windows": 504
         },
         "unseen": {
-          "ADE": 229.99855870813136,
-          "FDE": 385.8753692953164,
-          "day_equal_ADE": 390.8969792009852,
+          "ADE": 211.1537670030537,
+          "FDE": 338.1232789297688,
+          "day_equal_ADE": 351.5061593679585,
           "windows": 504
         },
         "all": {
-          "ADE": 229.99855870813136,
-          "FDE": 385.8753692953164,
-          "day_equal_ADE": 390.8969792009852,
+          "ADE": 211.1537670030537,
+          "FDE": 338.1232789297688,
+          "day_equal_ADE": 351.5061593679585,
           "windows": 504
         }
       }
@@ -11054,17 +11124,17 @@
     "group": "modern_iso",
     "row": "itransformer",
     "seed": 42,
-    "sha256": "eef3a7e9db25729ecba8af58b9f23503396518c5909b1af08ff41186e2428e1f",
+    "sha256": "01554f612e2c7185c47edebf78e5f2271dda505b4827fbaadf68789343ed4763",
     "bytes": 1654197,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11072,7 +11142,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11093,41 +11163,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 169.97260309025168,
-          "FDE": 339.70625089429296,
-          "day_equal_ADE": 162.79190916026297,
+          "ADE": 145.42263857124547,
+          "FDE": 296.4863473043675,
+          "day_equal_ADE": 138.1061978052706,
           "windows": 949
         },
         "unseen": {
-          "ADE": 150.3181068567929,
-          "FDE": 291.9111215749207,
-          "day_equal_ADE": 148.3838078704958,
+          "ADE": 129.8576524594493,
+          "FDE": 260.22701304710677,
+          "day_equal_ADE": 126.70291821363408,
           "windows": 2258
         },
         "all": {
-          "ADE": 135.73885194674799,
-          "FDE": 266.1399660111326,
-          "day_equal_ADE": 140.43304998979056,
+          "ADE": 116.36681873204802,
+          "FDE": 235.68118375609578,
+          "day_equal_ADE": 120.35677071413284,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 272.98440084649053,
-          "FDE": 411.32382563013044,
-          "day_equal_ADE": 417.8586589133452,
+          "ADE": 261.89051686431065,
+          "FDE": 374.5022423512697,
+          "day_equal_ADE": 394.51353329244887,
           "windows": 504
         },
         "unseen": {
-          "ADE": 272.98440084649053,
-          "FDE": 411.32382563013044,
-          "day_equal_ADE": 417.8586589133452,
+          "ADE": 261.89051686431065,
+          "FDE": 374.5022423512697,
+          "day_equal_ADE": 394.51353329244887,
           "windows": 504
         },
         "all": {
-          "ADE": 272.98440084649053,
-          "FDE": 411.32382563013044,
-          "day_equal_ADE": 417.8586589133452,
+          "ADE": 261.89051686431065,
+          "FDE": 374.5022423512697,
+          "day_equal_ADE": 394.51353329244887,
           "windows": 504
         }
       }
@@ -11138,17 +11208,17 @@
     "group": "modern_iso",
     "row": "itransformer",
     "seed": 123,
-    "sha256": "7f75a3bd5d07ee555b4d09b86e0cd3b139a9ac1b8226874c0f24aa2e2abb151a",
+    "sha256": "323d65bee077d68eff7d624c34512070a9ee3c0b0862fd5a35458d816e85681b",
     "bytes": 1654197,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11156,7 +11226,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11177,41 +11247,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 174.54986927519832,
-          "FDE": 336.2580668543474,
-          "day_equal_ADE": 175.26419981837452,
+          "ADE": 148.66252343344354,
+          "FDE": 296.29035753947835,
+          "day_equal_ADE": 145.7210753257074,
           "windows": 949
         },
         "unseen": {
-          "ADE": 154.3265664465558,
-          "FDE": 291.8913456536604,
-          "day_equal_ADE": 151.5353110872233,
+          "ADE": 132.0408606433373,
+          "FDE": 260.54604350314213,
+          "day_equal_ADE": 129.2123234386193,
           "windows": 2258
         },
         "all": {
-          "ADE": 138.78988562974448,
-          "FDE": 266.1101764071097,
-          "day_equal_ADE": 143.1839057211441,
+          "ADE": 116.1027832968955,
+          "FDE": 233.90955994196997,
+          "day_equal_ADE": 119.28390990606098,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 263.96975125026637,
-          "FDE": 364.7793046450026,
-          "day_equal_ADE": 400.1969680043302,
+          "ADE": 259.77216701998174,
+          "FDE": 367.6284181115812,
+          "day_equal_ADE": 400.6703662407914,
           "windows": 504
         },
         "unseen": {
-          "ADE": 263.96975125026637,
-          "FDE": 364.7793046450026,
-          "day_equal_ADE": 400.1969680043302,
+          "ADE": 259.77216701998174,
+          "FDE": 367.6284181115812,
+          "day_equal_ADE": 400.6703662407914,
           "windows": 504
         },
         "all": {
-          "ADE": 263.96975125026637,
-          "FDE": 364.7793046450026,
-          "day_equal_ADE": 400.1969680043302,
+          "ADE": 259.77216701998174,
+          "FDE": 367.6284181115812,
+          "day_equal_ADE": 400.6703662407914,
           "windows": 504
         }
       }
@@ -11222,17 +11292,17 @@
     "group": "modern_iso",
     "row": "itransformer",
     "seed": 456,
-    "sha256": "af170afc7e1de9a479fd89e127cf721f8bb653d7ee76689f245da1a35b37ebb1",
+    "sha256": "fc951b25321e6325e6d4024f05d4d9fb5b758ac3832de8adf901982a55f4c7ab",
     "bytes": 1654197,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11240,7 +11310,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11261,41 +11331,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 168.28707362635237,
-          "FDE": 336.0907384697203,
-          "day_equal_ADE": 166.65405548970273,
+          "ADE": 149.0936726644987,
+          "FDE": 296.9169034960141,
+          "day_equal_ADE": 138.1372040918592,
           "windows": 949
         },
         "unseen": {
-          "ADE": 148.10671533630432,
-          "FDE": 288.3738372905173,
-          "day_equal_ADE": 147.0989543362216,
+          "ADE": 130.3992924976472,
+          "FDE": 257.9592553368764,
+          "day_equal_ADE": 125.75405119057935,
           "windows": 2258
         },
         "all": {
-          "ADE": 133.93015694565236,
-          "FDE": 263.94966222574635,
-          "day_equal_ADE": 137.5617090481276,
+          "ADE": 116.08775065992161,
+          "FDE": 233.24078420982264,
+          "day_equal_ADE": 118.92733378587617,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 277.9238688169152,
-          "FDE": 396.0205077181361,
-          "day_equal_ADE": 442.57840389122464,
+          "ADE": 276.3857006826754,
+          "FDE": 378.50859148844967,
+          "day_equal_ADE": 417.3247585078665,
           "windows": 504
         },
         "unseen": {
-          "ADE": 277.9238688169152,
-          "FDE": 396.0205077181361,
-          "day_equal_ADE": 442.57840389122464,
+          "ADE": 276.3857006826754,
+          "FDE": 378.50859148844967,
+          "day_equal_ADE": 417.3247585078665,
           "windows": 504
         },
         "all": {
-          "ADE": 277.9238688169152,
-          "FDE": 396.0205077181361,
-          "day_equal_ADE": 442.57840389122464,
+          "ADE": 276.3857006826754,
+          "FDE": 378.50859148844967,
+          "day_equal_ADE": 417.3247585078665,
           "windows": 504
         }
       }
@@ -11306,17 +11376,17 @@
     "group": "modern_iso",
     "row": "itransformer",
     "seed": 0,
-    "sha256": "204227b9ee870b1ce1433715957e6ca1760aac24529788400545aeb224ae9154",
+    "sha256": "1f4368e1c51a402e960604194f0d3a5733f1609c2fcbf76b88b091c54a17aaa5",
     "bytes": 1654197,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11324,7 +11394,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11345,41 +11415,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 168.1618079551621,
-          "FDE": 332.35498728570747,
-          "day_equal_ADE": 169.8169664762488,
+          "ADE": 148.6430422158426,
+          "FDE": 298.5070687031459,
+          "day_equal_ADE": 139.7902669863775,
           "windows": 949
         },
         "unseen": {
-          "ADE": 148.47417026718858,
-          "FDE": 289.74970426931117,
-          "day_equal_ADE": 146.84254269032516,
+          "ADE": 131.39865524179828,
+          "FDE": 261.04520460836744,
+          "day_equal_ADE": 129.30094115969482,
           "windows": 2258
         },
         "all": {
-          "ADE": 135.2519722136769,
-          "FDE": 265.8086378573756,
-          "day_equal_ADE": 139.7327490770342,
+          "ADE": 117.41380281316957,
+          "FDE": 235.45387444100413,
+          "day_equal_ADE": 122.59685799661769,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 262.1292259849398,
-          "FDE": 376.80243013108577,
-          "day_equal_ADE": 430.94258310356327,
+          "ADE": 260.56250320557393,
+          "FDE": 377.0476794652544,
+          "day_equal_ADE": 430.0775693225911,
           "windows": 504
         },
         "unseen": {
-          "ADE": 262.1292259849398,
-          "FDE": 376.80243013108577,
-          "day_equal_ADE": 430.94258310356327,
+          "ADE": 260.56250320557393,
+          "FDE": 377.0476794652544,
+          "day_equal_ADE": 430.0775693225911,
           "windows": 504
         },
         "all": {
-          "ADE": 262.1292259849398,
-          "FDE": 376.80243013108577,
-          "day_equal_ADE": 430.94258310356327,
+          "ADE": 260.56250320557393,
+          "FDE": 377.0476794652544,
+          "day_equal_ADE": 430.0775693225911,
           "windows": 504
         }
       }
@@ -11390,17 +11460,17 @@
     "group": "modern_iso",
     "row": "itransformer",
     "seed": 1,
-    "sha256": "c38ea93bfd15ea4ce9bcf8679949289363f59d82519448b5acd0ca1c592183e0",
+    "sha256": "10f4ac6226f8d72caefeec1470f6f81ea2d7d74615d52c0754b71dc2bb360daa",
     "bytes": 1654197,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11408,7 +11478,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11429,41 +11499,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 173.12990667008617,
-          "FDE": 339.1441634185022,
-          "day_equal_ADE": 165.9487091292078,
+          "ADE": 144.23936081836388,
+          "FDE": 291.54103091475343,
+          "day_equal_ADE": 137.42133717206076,
           "windows": 949
         },
         "unseen": {
-          "ADE": 153.03366912142587,
-          "FDE": 291.82472551916686,
-          "day_equal_ADE": 148.5252108871419,
+          "ADE": 129.70323773047576,
+          "FDE": 259.0173178536067,
+          "day_equal_ADE": 127.24714048735684,
           "windows": 2258
         },
         "all": {
-          "ADE": 138.39339625565208,
-          "FDE": 267.4807810918167,
-          "day_equal_ADE": 140.9454878740157,
+          "ADE": 117.30082604915084,
+          "FDE": 235.0392985207494,
+          "day_equal_ADE": 120.82213376674007,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 280.2171538738,
-          "FDE": 382.6455156831401,
-          "day_equal_ADE": 458.0039014197411,
+          "ADE": 258.91927050908674,
+          "FDE": 373.14029553648845,
+          "day_equal_ADE": 407.8283804575382,
           "windows": 504
         },
         "unseen": {
-          "ADE": 280.2171538738,
-          "FDE": 382.6455156831401,
-          "day_equal_ADE": 458.0039014197411,
+          "ADE": 258.91927050908674,
+          "FDE": 373.14029553648845,
+          "day_equal_ADE": 407.8283804575382,
           "windows": 504
         },
         "all": {
-          "ADE": 280.2171538738,
-          "FDE": 382.6455156831401,
-          "day_equal_ADE": 458.0039014197411,
+          "ADE": 258.91927050908674,
+          "FDE": 373.14029553648845,
+          "day_equal_ADE": 407.8283804575382,
           "windows": 504
         }
       }
@@ -11474,17 +11544,17 @@
     "group": "modern_merit",
     "row": "itransformer",
     "seed": 42,
-    "sha256": "24446ece6d81b5e47fad70d7d55c8806899fa96f506d6af57677ab9449b4e5a7",
+    "sha256": "04c30068c2f427526cab8bf076a6fa0e558983c3ad57aef9f2982fbe6547b67f",
     "bytes": 1654197,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11492,7 +11562,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11513,41 +11583,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 157.0443734859265,
-          "FDE": 315.2047720329741,
-          "day_equal_ADE": 151.68978682732433,
+          "ADE": 145.36139809686532,
+          "FDE": 295.31468710506846,
+          "day_equal_ADE": 146.91175620943238,
           "windows": 949
         },
         "unseen": {
-          "ADE": 141.32086174755014,
-          "FDE": 278.2909871079797,
-          "day_equal_ADE": 138.13512296066418,
+          "ADE": 127.4663986708392,
+          "FDE": 256.5928627314773,
+          "day_equal_ADE": 124.2988539405728,
           "windows": 2258
         },
         "all": {
-          "ADE": 126.0133941886046,
-          "FDE": 252.1404500265279,
-          "day_equal_ADE": 128.8851168876048,
+          "ADE": 112.92340488962542,
+          "FDE": 231.07632679664545,
+          "day_equal_ADE": 116.16865491503312,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 256.4194048322713,
-          "FDE": 359.1281134079507,
-          "day_equal_ADE": 382.97236468577916,
+          "ADE": 233.96949573404487,
+          "FDE": 361.1143013349342,
+          "day_equal_ADE": 356.80393082808774,
           "windows": 504
         },
         "unseen": {
-          "ADE": 256.4194048322713,
-          "FDE": 359.1281134079507,
-          "day_equal_ADE": 382.97236468577916,
+          "ADE": 233.96949573404487,
+          "FDE": 361.1143013349342,
+          "day_equal_ADE": 356.80393082808774,
           "windows": 504
         },
         "all": {
-          "ADE": 256.4194048322713,
-          "FDE": 359.1281134079507,
-          "day_equal_ADE": 382.97236468577916,
+          "ADE": 233.96949573404487,
+          "FDE": 361.1143013349342,
+          "day_equal_ADE": 356.80393082808774,
           "windows": 504
         }
       }
@@ -11558,17 +11628,17 @@
     "group": "modern_merit",
     "row": "itransformer",
     "seed": 123,
-    "sha256": "3cad680d787566700c68ea6bfc64c71c3493f6435bc9fdc05813988d15b9ea39",
+    "sha256": "c1fc10ea8334034d369b1a9d87e2d6db61bdfadde792693f3b6632834804cc4d",
     "bytes": 1654197,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11576,7 +11646,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11597,41 +11667,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 160.2644532841859,
-          "FDE": 317.68486690605,
-          "day_equal_ADE": 155.71469392688996,
+          "ADE": 140.2524445157201,
+          "FDE": 283.72429128404144,
+          "day_equal_ADE": 135.57813010989332,
           "windows": 949
         },
         "unseen": {
-          "ADE": 143.07172975073905,
-          "FDE": 279.06306860438735,
-          "day_equal_ADE": 140.2400576044882,
+          "ADE": 123.54445203396125,
+          "FDE": 248.5588012983204,
+          "day_equal_ADE": 121.0056643124647,
           "windows": 2258
         },
         "all": {
-          "ADE": 128.76097039854756,
-          "FDE": 254.12257745858568,
-          "day_equal_ADE": 133.651062152586,
+          "ADE": 107.64921824031317,
+          "FDE": 221.26957138683198,
+          "day_equal_ADE": 108.87281038752977,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 260.7769117065416,
-          "FDE": 371.7716172190009,
-          "day_equal_ADE": 390.15187168073425,
+          "ADE": 222.9692018455808,
+          "FDE": 350.32594335265065,
+          "day_equal_ADE": 343.41654472731284,
           "windows": 504
         },
         "unseen": {
-          "ADE": 260.7769117065416,
-          "FDE": 371.7716172190009,
-          "day_equal_ADE": 390.15187168073425,
+          "ADE": 222.9692018455808,
+          "FDE": 350.32594335265065,
+          "day_equal_ADE": 343.41654472731284,
           "windows": 504
         },
         "all": {
-          "ADE": 260.7769117065416,
-          "FDE": 371.7716172190009,
-          "day_equal_ADE": 390.15187168073425,
+          "ADE": 222.9692018455808,
+          "FDE": 350.32594335265065,
+          "day_equal_ADE": 343.41654472731284,
           "windows": 504
         }
       }
@@ -11642,17 +11712,17 @@
     "group": "modern_merit",
     "row": "itransformer",
     "seed": 456,
-    "sha256": "63d572dd3e86b6e72bc72b256bf0a2e09ea9cd1d094b23765e5576376853caad",
+    "sha256": "bdfeb6faa0bc45db6656e005c4615befda0d8b1fd9b1f46d43e1d1716f8e743b",
     "bytes": 1654197,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11660,7 +11730,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11681,41 +11751,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 155.75253356060523,
-          "FDE": 315.242728767646,
-          "day_equal_ADE": 155.44290846530208,
+          "ADE": 137.21552633657288,
+          "FDE": 278.9314888671058,
+          "day_equal_ADE": 130.89813882719116,
           "windows": 949
         },
         "unseen": {
-          "ADE": 137.41746121604197,
-          "FDE": 273.5100693527451,
-          "day_equal_ADE": 133.67267773578754,
+          "ADE": 121.46884906249684,
+          "FDE": 245.5737183611383,
+          "day_equal_ADE": 117.96802298140616,
           "windows": 2258
         },
         "all": {
-          "ADE": 122.7472341159981,
-          "FDE": 247.85019633739302,
-          "day_equal_ADE": 126.56695735567922,
+          "ADE": 107.81151860859565,
+          "FDE": 223.18120281281205,
+          "day_equal_ADE": 110.70672139035429,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 247.70424073935953,
-          "FDE": 386.04985927280427,
-          "day_equal_ADE": 385.33625344645696,
+          "ADE": 233.0537451477839,
+          "FDE": 344.65020069285015,
+          "day_equal_ADE": 354.4508826767318,
           "windows": 504
         },
         "unseen": {
-          "ADE": 247.70424073935953,
-          "FDE": 386.04985927280427,
-          "day_equal_ADE": 385.33625344645696,
+          "ADE": 233.0537451477839,
+          "FDE": 344.65020069285015,
+          "day_equal_ADE": 354.4508826767318,
           "windows": 504
         },
         "all": {
-          "ADE": 247.70424073935953,
-          "FDE": 386.04985927280427,
-          "day_equal_ADE": 385.33625344645696,
+          "ADE": 233.0537451477839,
+          "FDE": 344.65020069285015,
+          "day_equal_ADE": 354.4508826767318,
           "windows": 504
         }
       }
@@ -11726,17 +11796,17 @@
     "group": "modern_merit",
     "row": "itransformer",
     "seed": 0,
-    "sha256": "ad6d62f5efca4f1619899ed5a95efe991ff47e7f69d119379e654502da79bb06",
+    "sha256": "d5b9ad7e0dea1ee78fa854a88cc4a4bb503cda064412778c696acf646129ac07",
     "bytes": 1654197,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11744,7 +11814,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11765,41 +11835,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 159.8306403543579,
-          "FDE": 315.8951713448105,
-          "day_equal_ADE": 157.02816143258855,
+          "ADE": 136.26461370433753,
+          "FDE": 281.23350109352384,
+          "day_equal_ADE": 130.32136471120424,
           "windows": 949
         },
         "unseen": {
-          "ADE": 140.57193935537683,
-          "FDE": 275.39465947122585,
-          "day_equal_ADE": 137.99591911782414,
+          "ADE": 120.66492587387576,
+          "FDE": 246.85771061023544,
+          "day_equal_ADE": 118.2840622586917,
           "windows": 2258
         },
         "all": {
-          "ADE": 126.81261404380217,
-          "FDE": 251.68637235818812,
-          "day_equal_ADE": 130.7014280967903,
+          "ADE": 106.63085384847334,
+          "FDE": 222.20829251132253,
+          "day_equal_ADE": 108.81953572244943,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 265.11749805717216,
-          "FDE": 355.44374581424637,
-          "day_equal_ADE": 397.8484536306999,
+          "ADE": 231.96618500210064,
+          "FDE": 351.0701416704828,
+          "day_equal_ADE": 354.0818864298941,
           "windows": 504
         },
         "unseen": {
-          "ADE": 265.11749805717216,
-          "FDE": 355.44374581424637,
-          "day_equal_ADE": 397.8484536306999,
+          "ADE": 231.96618500210064,
+          "FDE": 351.0701416704828,
+          "day_equal_ADE": 354.0818864298941,
           "windows": 504
         },
         "all": {
-          "ADE": 265.11749805717216,
-          "FDE": 355.44374581424637,
-          "day_equal_ADE": 397.8484536306999,
+          "ADE": 231.96618500210064,
+          "FDE": 351.0701416704828,
+          "day_equal_ADE": 354.0818864298941,
           "windows": 504
         }
       }
@@ -11810,17 +11880,17 @@
     "group": "modern_merit",
     "row": "itransformer",
     "seed": 1,
-    "sha256": "04a06d639c316e2c40d35129024fe5bbac29135e7044ff9ff0d499238ed5bb7a",
+    "sha256": "a6f73d80c8aa106a8d856954b8ca874977fe2eb8fc6210d83162cc6d78df54bf",
     "bytes": 1654197,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
         "d_model": 128,
         "heads": 4,
@@ -11828,7 +11898,7 @@
         "ff": 256,
         "dropout": 0.1
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -11849,41 +11919,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 163.15547759883577,
-          "FDE": 326.01609264135953,
-          "day_equal_ADE": 161.09679066298872,
+          "ADE": 141.12920449383287,
+          "FDE": 287.9504268943247,
+          "day_equal_ADE": 137.95854574799628,
           "windows": 949
         },
         "unseen": {
-          "ADE": 143.45834040137302,
-          "FDE": 281.31232372516223,
-          "day_equal_ADE": 141.46614852306962,
+          "ADE": 122.67170544354764,
+          "FDE": 248.2828381517755,
+          "day_equal_ADE": 121.85203750598775,
           "windows": 2258
         },
         "all": {
-          "ADE": 127.13342456196713,
-          "FDE": 254.36688011465307,
-          "day_equal_ADE": 132.0481166670282,
+          "ADE": 107.56036657295017,
+          "FDE": 222.9859613178455,
+          "day_equal_ADE": 110.39895991162311,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 258.52772819720457,
-          "FDE": 354.9413664199778,
-          "day_equal_ADE": 377.67447667395334,
+          "ADE": 235.85287911929382,
+          "FDE": 343.84224521512226,
+          "day_equal_ADE": 360.32173655461315,
           "windows": 504
         },
         "unseen": {
-          "ADE": 258.52772819720457,
-          "FDE": 354.9413664199778,
-          "day_equal_ADE": 377.67447667395334,
+          "ADE": 235.85287911929382,
+          "FDE": 343.84224521512226,
+          "day_equal_ADE": 360.32173655461315,
           "windows": 504
         },
         "all": {
-          "ADE": 258.52772819720457,
-          "FDE": 354.9413664199778,
-          "day_equal_ADE": 377.67447667395334,
+          "ADE": 235.85287911929382,
+          "FDE": 343.84224521512226,
+          "day_equal_ADE": 360.32173655461315,
           "windows": 504
         }
       }
@@ -12704,21 +12774,22 @@
     "group": "modern_iso",
     "row": "patchtst_r",
     "seed": 42,
-    "sha256": "57bdc151eb3f51115bd38814e618da877fcb65b3ba6d6ca1cf0356cff7ecf97c",
-    "bytes": 1710133,
+    "sha256": "aee771e46e0d8ea1276029ea02e478dcd027c3185af01522572909fdd91d3868",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -12739,41 +12810,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 294.73920433111726,
-          "FDE": 567.9985732968511,
-          "day_equal_ADE": 324.4495944933503,
+          "ADE": 237.1766279410005,
+          "FDE": 446.8935576025765,
+          "day_equal_ADE": 270.7006122413167,
           "windows": 949
         },
         "unseen": {
-          "ADE": 279.95976590016727,
-          "FDE": 523.3227943711142,
-          "day_equal_ADE": 291.9144197991553,
+          "ADE": 222.94906067468662,
+          "FDE": 415.82443755227484,
+          "day_equal_ADE": 234.5517749159592,
           "windows": 2258
         },
         "all": {
-          "ADE": 237.71008169640402,
-          "FDE": 458.4432716604491,
-          "day_equal_ADE": 245.93574752844845,
+          "ADE": 188.6516771720077,
+          "FDE": 366.58590517207773,
+          "day_equal_ADE": 199.60351790220432,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 479.01475272626044,
-          "FDE": 520.6461451895511,
-          "day_equal_ADE": 908.0874031360235,
+          "ADE": 471.0728999816131,
+          "FDE": 470.0665287164751,
+          "day_equal_ADE": 914.7360641033762,
           "windows": 504
         },
         "unseen": {
-          "ADE": 479.01475272626044,
-          "FDE": 520.6461451895511,
-          "day_equal_ADE": 908.0874031360235,
+          "ADE": 471.0728999816131,
+          "FDE": 470.0665287164751,
+          "day_equal_ADE": 914.7360641033762,
           "windows": 504
         },
         "all": {
-          "ADE": 479.01475272626044,
-          "FDE": 520.6461451895511,
-          "day_equal_ADE": 908.0874031360235,
+          "ADE": 471.0728999816131,
+          "FDE": 470.0665287164751,
+          "day_equal_ADE": 914.7360641033762,
           "windows": 504
         }
       }
@@ -12784,21 +12855,22 @@
     "group": "modern_iso",
     "row": "patchtst_r",
     "seed": 123,
-    "sha256": "96bb47969820a127ca9081b16cffd0e0f3bb6a98308f53871e81df778c57d34d",
-    "bytes": 1710133,
+    "sha256": "0be58122eb8b0d3c7542f194ce73316139dd496e142d1ef87cb097ab426a762e",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -12819,41 +12891,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 293.31060568977955,
-          "FDE": 558.1023128789451,
-          "day_equal_ADE": 330.6809199723211,
+          "ADE": 244.41353868203853,
+          "FDE": 461.6958382485434,
+          "day_equal_ADE": 273.2314151815244,
           "windows": 949
         },
         "unseen": {
-          "ADE": 278.47628093716236,
-          "FDE": 517.4501413096059,
-          "day_equal_ADE": 292.5483719732964,
+          "ADE": 228.44899034106976,
+          "FDE": 424.41286957471823,
+          "day_equal_ADE": 236.9512631778517,
           "windows": 2258
         },
         "all": {
-          "ADE": 233.52924271329215,
-          "FDE": 451.25620247560073,
-          "day_equal_ADE": 242.82911738660297,
+          "ADE": 189.4762772869384,
+          "FDE": 367.98048547963094,
+          "day_equal_ADE": 199.2475054383913,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 518.7857764599445,
-          "FDE": 554.9683740618534,
-          "day_equal_ADE": 970.1626512079755,
+          "ADE": 498.39877817417107,
+          "FDE": 468.95990943824546,
+          "day_equal_ADE": 993.8619926220256,
           "windows": 504
         },
         "unseen": {
-          "ADE": 518.7857764599445,
-          "FDE": 554.9683740618534,
-          "day_equal_ADE": 970.1626512079755,
+          "ADE": 498.39877817417107,
+          "FDE": 468.95990943824546,
+          "day_equal_ADE": 993.8619926220256,
           "windows": 504
         },
         "all": {
-          "ADE": 518.7857764599445,
-          "FDE": 554.9683740618534,
-          "day_equal_ADE": 970.1626512079755,
+          "ADE": 498.39877817417107,
+          "FDE": 468.95990943824546,
+          "day_equal_ADE": 993.8619926220256,
           "windows": 504
         }
       }
@@ -12864,21 +12936,22 @@
     "group": "modern_iso",
     "row": "patchtst_r",
     "seed": 456,
-    "sha256": "6721525419522f0849a202b0ee43e43cc1c204e84d37009eef6e5a21ad0138bb",
-    "bytes": 1710133,
+    "sha256": "7aa710d50ca7d25d90915abb64185925d2dea34fd094d20f1daf34e3aec02024",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -12899,41 +12972,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 291.15640620158104,
-          "FDE": 568.1872886739791,
-          "day_equal_ADE": 310.97578087960875,
+          "ADE": 240.30867294922754,
+          "FDE": 452.15807154432486,
+          "day_equal_ADE": 268.4406569649043,
           "windows": 949
         },
         "unseen": {
-          "ADE": 277.36723363354855,
-          "FDE": 529.1982849663896,
-          "day_equal_ADE": 285.4223381410804,
+          "ADE": 227.71671267019883,
+          "FDE": 419.5842335500855,
+          "day_equal_ADE": 236.50352722937185,
           "windows": 2258
         },
         "all": {
-          "ADE": 239.6271491149397,
-          "FDE": 468.86418636016367,
-          "day_equal_ADE": 244.84337043600962,
+          "ADE": 187.62410525428237,
+          "FDE": 365.1792950300463,
+          "day_equal_ADE": 197.99932400912118,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 416.0372705108225,
-          "FDE": 506.9998810256258,
-          "day_equal_ADE": 750.903966085285,
+          "ADE": 492.5196575691837,
+          "FDE": 470.86814690684673,
+          "day_equal_ADE": 972.1309386309871,
           "windows": 504
         },
         "unseen": {
-          "ADE": 416.0372705108225,
-          "FDE": 506.9998810256258,
-          "day_equal_ADE": 750.903966085285,
+          "ADE": 492.5196575691837,
+          "FDE": 470.86814690684673,
+          "day_equal_ADE": 972.1309386309871,
           "windows": 504
         },
         "all": {
-          "ADE": 416.0372705108225,
-          "FDE": 506.9998810256258,
-          "day_equal_ADE": 750.903966085285,
+          "ADE": 492.5196575691837,
+          "FDE": 470.86814690684673,
+          "day_equal_ADE": 972.1309386309871,
           "windows": 504
         }
       }
@@ -12944,21 +13017,22 @@
     "group": "modern_iso",
     "row": "patchtst_r",
     "seed": 0,
-    "sha256": "d6722a16bad778e6fe27e4eb62911b3d80c21b74d925c3aacc9c1a89a13cf265",
-    "bytes": 1710133,
+    "sha256": "38b4a8d6827f94bc53a50abab630e3a10e56fe7fc98a2a2b460b848564002136",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -12979,41 +13053,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 295.13492013503037,
-          "FDE": 562.5582400412841,
-          "day_equal_ADE": 329.44848852834133,
+          "ADE": 242.34641234910373,
+          "FDE": 452.7023830638484,
+          "day_equal_ADE": 272.67955122830807,
           "windows": 949
         },
         "unseen": {
-          "ADE": 277.9292325919293,
-          "FDE": 520.2032459577215,
-          "day_equal_ADE": 291.9995265885907,
+          "ADE": 228.2996812982621,
+          "FDE": 418.8472097315216,
+          "day_equal_ADE": 238.980174685556,
           "windows": 2258
         },
         "all": {
-          "ADE": 234.69612908796756,
-          "FDE": 455.4394021544853,
-          "day_equal_ADE": 242.84482912447695,
+          "ADE": 187.79532156401035,
+          "FDE": 363.40656423824424,
+          "day_equal_ADE": 199.25130159549516,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 453.7108552954425,
-          "FDE": 515.9031807946591,
-          "day_equal_ADE": 821.3312275441791,
+          "ADE": 496.53451483586196,
+          "FDE": 463.4556533664712,
+          "day_equal_ADE": 986.044615328016,
           "windows": 504
         },
         "unseen": {
-          "ADE": 453.7108552954425,
-          "FDE": 515.9031807946591,
-          "day_equal_ADE": 821.3312275441791,
+          "ADE": 496.53451483586196,
+          "FDE": 463.4556533664712,
+          "day_equal_ADE": 986.044615328016,
           "windows": 504
         },
         "all": {
-          "ADE": 453.7108552954425,
-          "FDE": 515.9031807946591,
-          "day_equal_ADE": 821.3312275441791,
+          "ADE": 496.53451483586196,
+          "FDE": 463.4556533664712,
+          "day_equal_ADE": 986.044615328016,
           "windows": 504
         }
       }
@@ -13024,21 +13098,22 @@
     "group": "modern_iso",
     "row": "patchtst_r",
     "seed": 1,
-    "sha256": "32b9269442121c5b53faaa1a3fd565243482d2d6888cc5fdaef43d28701642d9",
-    "bytes": 1710133,
+    "sha256": "9ddc1c8e7e6f212354d60dbe4f67ce5aa256e6cb0eed1e7660d105b8989be179",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "iso",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13059,41 +13134,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 293.8053045209625,
-          "FDE": 566.1010166977857,
-          "day_equal_ADE": 326.99796479693447,
+          "ADE": 240.68757994829917,
+          "FDE": 459.0180898903769,
+          "day_equal_ADE": 269.4024640349197,
           "windows": 949
         },
         "unseen": {
-          "ADE": 280.2732773500937,
-          "FDE": 525.7100121164228,
-          "day_equal_ADE": 292.3541239266384,
+          "ADE": 227.53076200511302,
+          "FDE": 424.1102969569437,
+          "day_equal_ADE": 237.2910252647308,
           "windows": 2258
         },
         "all": {
-          "ADE": 237.98256374772347,
-          "FDE": 458.5878710878237,
-          "day_equal_ADE": 245.96701435471942,
+          "ADE": 188.6518329011723,
+          "FDE": 370.3511406144194,
+          "day_equal_ADE": 198.40440153468353,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 469.70289608583556,
-          "FDE": 525.0766897665148,
-          "day_equal_ADE": 855.7307467069959,
+          "ADE": 454.0949434886675,
+          "FDE": 462.245147336222,
+          "day_equal_ADE": 901.2454008820587,
           "windows": 504
         },
         "unseen": {
-          "ADE": 469.70289608583556,
-          "FDE": 525.0766897665148,
-          "day_equal_ADE": 855.7307467069959,
+          "ADE": 454.0949434886675,
+          "FDE": 462.245147336222,
+          "day_equal_ADE": 901.2454008820587,
           "windows": 504
         },
         "all": {
-          "ADE": 469.70289608583556,
-          "FDE": 525.0766897665148,
-          "day_equal_ADE": 855.7307467069959,
+          "ADE": 454.0949434886675,
+          "FDE": 462.245147336222,
+          "day_equal_ADE": 901.2454008820587,
           "windows": 504
         }
       }
@@ -13104,21 +13179,22 @@
     "group": "modern_merit",
     "row": "patchtst_r",
     "seed": 42,
-    "sha256": "debf88ed4444e6fa2de962f69bdfd8e19ab14a00e8592cdf17f13042a4d3b634",
-    "bytes": 1710133,
+    "sha256": "3136597c3a4f2cf0ac57f54b686d44b99a184a64d06fd828baa9642894fe1659",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13139,41 +13215,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 284.8751891932479,
-          "FDE": 568.0188226697685,
-          "day_equal_ADE": 299.43145621288585,
+          "ADE": 251.1470227369996,
+          "FDE": 500.9492492442663,
+          "day_equal_ADE": 258.0003672276224,
           "windows": 949
         },
         "unseen": {
-          "ADE": 270.9291611187501,
-          "FDE": 532.708977462682,
-          "day_equal_ADE": 277.4070399027726,
+          "ADE": 237.71509260984843,
+          "FDE": 461.18605335186754,
+          "day_equal_ADE": 237.1678384326213,
           "windows": 2258
         },
         "all": {
-          "ADE": 239.98133926957493,
-          "FDE": 478.3742082185648,
-          "day_equal_ADE": 242.4463954698029,
+          "ADE": 213.27512382168965,
+          "FDE": 410.864480823595,
+          "day_equal_ADE": 215.06426171583098,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 353.5591479360676,
-          "FDE": 482.4332412621094,
-          "day_equal_ADE": 588.2102544284735,
+          "ADE": 314.90351848591826,
+          "FDE": 469.2426041532169,
+          "day_equal_ADE": 485.6589011545744,
           "windows": 504
         },
         "unseen": {
-          "ADE": 353.5591479360676,
-          "FDE": 482.4332412621094,
-          "day_equal_ADE": 588.2102544284735,
+          "ADE": 314.90351848591826,
+          "FDE": 469.2426041532169,
+          "day_equal_ADE": 485.6589011545744,
           "windows": 504
         },
         "all": {
-          "ADE": 353.5591479360676,
-          "FDE": 482.4332412621094,
-          "day_equal_ADE": 588.2102544284735,
+          "ADE": 314.90351848591826,
+          "FDE": 469.2426041532169,
+          "day_equal_ADE": 485.6589011545744,
           "windows": 504
         }
       }
@@ -13184,21 +13260,22 @@
     "group": "modern_merit",
     "row": "patchtst_r",
     "seed": 123,
-    "sha256": "9454ccbe9dcecfb2186808d31606b6bbb5d5dfdb4bbbdd624ac62efdea2dcd36",
-    "bytes": 1710133,
+    "sha256": "e42d59108652981b46f395aaab3462c193d93b7818d519e679b6d10103c518b6",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13219,41 +13296,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 258.6174803238826,
-          "FDE": 526.7520746495945,
-          "day_equal_ADE": 274.79317002813434,
+          "ADE": 255.988199065911,
+          "FDE": 510.67941913768726,
+          "day_equal_ADE": 262.56590181638387,
           "windows": 949
         },
         "unseen": {
-          "ADE": 243.48765309329957,
-          "FDE": 483.4584062554528,
-          "day_equal_ADE": 250.77500730453184,
+          "ADE": 232.79859412107908,
+          "FDE": 458.71587742360987,
+          "day_equal_ADE": 235.7453896388617,
           "windows": 2258
         },
         "all": {
-          "ADE": 214.744825317217,
-          "FDE": 433.1245074946198,
-          "day_equal_ADE": 220.74629058384772,
+          "ADE": 207.11815847546688,
+          "FDE": 407.73024673602106,
+          "day_equal_ADE": 209.73223112418725,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 361.9827031953359,
-          "FDE": 466.1605839141929,
-          "day_equal_ADE": 613.7009307903992,
+          "ADE": 304.8026894476022,
+          "FDE": 477.9029861215964,
+          "day_equal_ADE": 473.69064083479054,
           "windows": 504
         },
         "unseen": {
-          "ADE": 361.9827031953359,
-          "FDE": 466.1605839141929,
-          "day_equal_ADE": 613.7009307903992,
+          "ADE": 304.8026894476022,
+          "FDE": 477.9029861215964,
+          "day_equal_ADE": 473.69064083479054,
           "windows": 504
         },
         "all": {
-          "ADE": 361.9827031953359,
-          "FDE": 466.1605839141929,
-          "day_equal_ADE": 613.7009307903992,
+          "ADE": 304.8026894476022,
+          "FDE": 477.9029861215964,
+          "day_equal_ADE": 473.69064083479054,
           "windows": 504
         }
       }
@@ -13264,21 +13341,22 @@
     "group": "modern_merit",
     "row": "patchtst_r",
     "seed": 456,
-    "sha256": "2df6e412af1bf6276753093894679bf4cd26e708625e42cbdfa42a30391a6ff6",
-    "bytes": 1710133,
+    "sha256": "719ceadef3c1b14763415060981253f68aa0eef45bb44bb60764fe583fbf336a",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13299,41 +13377,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 266.20458299565877,
-          "FDE": 540.6649120023928,
-          "day_equal_ADE": 281.9578817120187,
+          "ADE": 257.7620583897535,
+          "FDE": 482.87248284978847,
+          "day_equal_ADE": 275.093847597674,
           "windows": 949
         },
         "unseen": {
-          "ADE": 250.50460257001578,
-          "FDE": 495.4898022738673,
-          "day_equal_ADE": 257.02470083331843,
+          "ADE": 238.93507989917478,
+          "FDE": 443.13000961714073,
+          "day_equal_ADE": 246.69662609550522,
           "windows": 2258
         },
         "all": {
-          "ADE": 221.0629965866553,
-          "FDE": 440.55901816326866,
-          "day_equal_ADE": 225.4955179556685,
+          "ADE": 209.71823663149644,
+          "FDE": 389.24353450497824,
+          "day_equal_ADE": 212.49560521182596,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 364.1993983404712,
-          "FDE": 483.5343366867686,
-          "day_equal_ADE": 558.1469113915657,
+          "ADE": 379.70167011830995,
+          "FDE": 456.84600068426295,
+          "day_equal_ADE": 627.1538259323562,
           "windows": 504
         },
         "unseen": {
-          "ADE": 364.1993983404712,
-          "FDE": 483.5343366867686,
-          "day_equal_ADE": 558.1469113915657,
+          "ADE": 379.70167011830995,
+          "FDE": 456.84600068426295,
+          "day_equal_ADE": 627.1538259323562,
           "windows": 504
         },
         "all": {
-          "ADE": 364.1993983404712,
-          "FDE": 483.5343366867686,
-          "day_equal_ADE": 558.1469113915657,
+          "ADE": 379.70167011830995,
+          "FDE": 456.84600068426295,
+          "day_equal_ADE": 627.1538259323562,
           "windows": 504
         }
       }
@@ -13344,21 +13422,22 @@
     "group": "modern_merit",
     "row": "patchtst_r",
     "seed": 0,
-    "sha256": "1f81f12285af427c778b5921f39dadfd88de02b5e7dfed98563dab6a36b47642",
-    "bytes": 1710133,
+    "sha256": "ad224638ef7660260b895ada530ebaaa91ac12904300c055919ecda2ae1d04f5",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13379,41 +13458,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 262.76054588783796,
-          "FDE": 535.1066095571625,
-          "day_equal_ADE": 272.6740952598816,
+          "ADE": 256.4396963055215,
+          "FDE": 488.55665175486797,
+          "day_equal_ADE": 253.03060128135553,
           "windows": 949
         },
         "unseen": {
-          "ADE": 248.59802110700093,
-          "FDE": 497.1709359468539,
-          "day_equal_ADE": 253.2991668467455,
+          "ADE": 246.39972042687378,
+          "FDE": 462.36497452158846,
+          "day_equal_ADE": 245.688629218898,
           "windows": 2258
         },
         "all": {
-          "ADE": 220.39023847790767,
-          "FDE": 441.71894816782657,
-          "day_equal_ADE": 224.47417168054415,
+          "ADE": 218.52267816206572,
+          "FDE": 411.20802097958074,
+          "day_equal_ADE": 219.25359502333546,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 372.2628160826258,
-          "FDE": 453.9097417662046,
-          "day_equal_ADE": 585.4931137045837,
+          "ADE": 311.3773450071044,
+          "FDE": 454.004425035495,
+          "day_equal_ADE": 469.47797460198524,
           "windows": 504
         },
         "unseen": {
-          "ADE": 372.2628160826258,
-          "FDE": 453.9097417662046,
-          "day_equal_ADE": 585.4931137045837,
+          "ADE": 311.3773450071044,
+          "FDE": 454.004425035495,
+          "day_equal_ADE": 469.47797460198524,
           "windows": 504
         },
         "all": {
-          "ADE": 372.2628160826258,
-          "FDE": 453.9097417662046,
-          "day_equal_ADE": 585.4931137045837,
+          "ADE": 311.3773450071044,
+          "FDE": 454.004425035495,
+          "day_equal_ADE": 469.47797460198524,
           "windows": 504
         }
       }
@@ -13424,21 +13503,22 @@
     "group": "modern_merit",
     "row": "patchtst_r",
     "seed": 1,
-    "sha256": "1a5eb93331bb423b4358c9ea1fa2c1a1fd6ed66936bc49272875fde56ffae845",
-    "bytes": 1710133,
+    "sha256": "52dcffc6671bd582113c9c743e0118d0f9d984f06c69e1eb34e04319984b93b7",
+    "bytes": 1833013,
     "settings": {
       "train_noise": "merit",
       "train_data": "processed",
       "staleness": "kbtp",
-      "budget": 25,
+      "budget": 100,
       "lr": 0.002,
       "batch": 256,
       "clean_probability": 0.35,
-      "patience": 5,
+      "patience": 10,
       "config": {
+        "patch_len": 8,
         "d_model": 128
       },
-      "source": "locked runtime artifact"
+      "source": "P14 raw-validation selection, locked before test evaluation"
     },
     "mean": [
       729.493532227189,
@@ -13459,41 +13539,41 @@
     "metrics": {
       "kbtp_test": {
         "strict_unseen": {
-          "ADE": 261.2435505887271,
-          "FDE": 532.3590454553694,
-          "day_equal_ADE": 274.71652832469175,
+          "ADE": 234.2869739364777,
+          "FDE": 470.778733495235,
+          "day_equal_ADE": 243.61943866626478,
           "windows": 949
         },
         "unseen": {
-          "ADE": 244.5437966117555,
-          "FDE": 486.0594674800658,
-          "day_equal_ADE": 250.43317911076707,
+          "ADE": 214.75916622403503,
+          "FDE": 423.8625986046848,
+          "day_equal_ADE": 217.8926247645928,
           "windows": 2258
         },
         "all": {
-          "ADE": 216.4750079077529,
-          "FDE": 433.2480183169753,
-          "day_equal_ADE": 220.60576104627083,
+          "ADE": 193.85322416613633,
+          "FDE": 379.02456791505614,
+          "day_equal_ADE": 197.75176765349235,
           "windows": 13247
         }
       },
       "kagc_test": {
         "strict_unseen": {
-          "ADE": 347.27489284119537,
-          "FDE": 466.65713311909303,
-          "day_equal_ADE": 577.437300354632,
+          "ADE": 310.21826157466495,
+          "FDE": 452.9292393049973,
+          "day_equal_ADE": 502.89537561378074,
           "windows": 504
         },
         "unseen": {
-          "ADE": 347.27489284119537,
-          "FDE": 466.65713311909303,
-          "day_equal_ADE": 577.437300354632,
+          "ADE": 310.21826157466495,
+          "FDE": 452.9292393049973,
+          "day_equal_ADE": 502.89537561378074,
           "windows": 504
         },
         "all": {
-          "ADE": 347.27489284119537,
-          "FDE": 466.65713311909303,
-          "day_equal_ADE": 577.437300354632,
+          "ADE": 310.21826157466495,
+          "FDE": 452.9292393049973,
+          "day_equal_ADE": 502.89537561378074,
           "windows": 504
         }
       }

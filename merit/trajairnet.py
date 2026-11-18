@@ -83,8 +83,9 @@ class TemporalBlock(nn.Module):
 
 
 class TrajAirNet(nn.Module):
-    def __init__(self, mean, scale):
+    def __init__(self, mean, scale, *, kl_weight=1.0):
         super().__init__()
+        self.kl_weight = float(kl_weight)
         self.register_buffer("state_mean", torch.as_tensor(mean, dtype=torch.float32))
         self.register_buffer("state_scale", torch.as_tensor(scale, dtype=torch.float32))
         self.history_encoder = nn.Sequential(TemporalBlock(2, 256, 1), TemporalBlock(256, 256, 2),
@@ -137,7 +138,7 @@ class TrajAirNet(nn.Module):
         mean, logvar = self.posterior_mean(posterior), self.posterior_logvar(posterior)
         z = mean + torch.randn_like(mean) * torch.exp(.5 * logvar)
         prediction = self.decode(observed, condition, z)
-        # Upstream's RMSE + sum KL per aircraft, then batch mean. No KL tuning.
+        # Upstream's RMSE + sum KL per aircraft, then batch mean; the paper setting weights KL by 0.1.
         reconstruction = (prediction[:, :, :2] - target[:, :, :2]).square().mean((1, 2)).clamp_min(1e-12).sqrt()
         kl = -.5 * (1 + logvar - mean.square() - logvar.exp()).sum(-1)
-        return (reconstruction + kl).mean()
+        return (reconstruction + self.kl_weight * kl).mean()

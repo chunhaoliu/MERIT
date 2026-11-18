@@ -31,9 +31,9 @@ def make_model(row, mean, scale, *, filter_cv=None, report_age=False, config=Non
     if row == "patchtst":
         return PatchTSTReference(mean, scale)
     if row == "transformer":
-        return TrajectoryTransformer(mean, scale)
+        return TrajectoryTransformer(mean, scale, **(config or {}))
     if row == "trajairnet":
-        return TrajAirNet(mean, scale)
+        return TrajAirNet(mean, scale, **(config or {}))
     return EndpointResidual(row, mean, scale, True, filter_cv=filter_cv, report_age=report_age)
 
 
