@@ -100,7 +100,8 @@ def measurement():
     v = ci["replay"]["repeat_fraction"]
     out["kbtp_repeat"] = [f"{q(v['value'] * 100)} [{q(v['ci95'][0] * 100)}, {q(v['ci95'][1] * 100)}]"]
     replay = json.loads((folder / "replay_statistics.json").read_text())
-    out["kagc_repeat"] = [q(replay["kagc_repeat_fraction"] * 100, 0)]
+    lo, hi = replay["kagc_repeat_ci95"]
+    out["kagc_repeat"] = [f"{q(replay['kagc_repeat_fraction'] * 100)} [{q(lo * 100)}, {q(hi * 100)}]"]
     out["days"] = [str(summary["days"]), str(kagc["days"])]
     return out
 

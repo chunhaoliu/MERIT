@@ -1,3 +1,8 @@
 {
-  "kagc_repeat_fraction": 0.9301804898167606
+  "kagc_repeat_fraction": 0.9301804898167606,
+  "kagc_repeat_ci95": [
+    0.9241600727871273,
+    0.936152772816745
+  ],
+  "kagc_repeat_ci_note": "day-cluster bootstrap, 1000 draws, seed 0, over the 85 KAGC training-period days with replay windows"
 }
