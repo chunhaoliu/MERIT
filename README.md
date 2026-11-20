@@ -27,7 +27,7 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `scripts/train.py` | paper training settings for all ten predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
 | `scripts/reproduce_tables.py` | source-data-free reproduction of 443 printed cells: Tables I-VI, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
-| `scripts/draw_figures.py` | redraws Figures 1, 2, 3 and 5 from bundled derived statistics and errors |
+| `scripts/draw_figures.py` | redraws Figures 2, 3 and 5 from bundled derived statistics and errors |
 | `checkpoints/` | 175 checkpoints, 457.8 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
 | `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
@@ -122,7 +122,7 @@ Its complete five-seed results at both sites (validation-selected setting in `re
 included. Retrain those weights with `scripts/train.py` for inference reproduction of that row.
 The other controls are selected by their `group`, `row` and `seed` in `checkpoints/index.json`.
 
-The ten PDF panels reproduce Figures 1, 2, 3 and 5. Figure 1 shows the KBTP site setup and measurement chain.
+The eight PDF panels reproduce Figures 2, 3 and 5.
 Figure 2 shows KBTP residual structure and displayed-position ages at the two sites. Figure 3 shows residual
 influence by range and speed. Figure 5 shows KBTP horizon errors, the KAGC window-error tail and age-dependent
 gains with 95% day-cluster bootstrap bars. Drawing uses only bundled statistics and window errors.

@@ -1,4 +1,4 @@
-"""Recreate Figures 1, 2, 3 and 5 of MERIT from the released derived statistics.
+"""Recreate Figures 2, 3 and 5 of MERIT from the released derived statistics.
 
 Experimental panels are 2.30 by 1.82 inches with aligned physical plot areas.
 Insert PDFs without width/scale options and typeset panel captions with subfig.
@@ -217,59 +217,6 @@ def influence(out):
         print("influence", letter, np.round(x, 1))
 
 
-def setup(out):
-    """Figure 1 panels showing the site tracks and measurement chain."""
-    from matplotlib.patches import Rectangle
-    data = np.load(RESULTS / "figure_setup.npz")
-    tracks, offsets, runway = data["tracks_en_km"], data["offsets"], data["runway_ends_en_km"]
-    fig = plt.figure(figsize=(2.12, 2.05))
-    ax = fig.add_axes([.42 / 2.12, .36 / 2.05, 1.6 / 2.12, 1.6 / 2.05])
-    for lo, hi in zip(offsets[:-1], offsets[1:]):
-        ax.plot(tracks[lo:hi, 0], tracks[lo:hi, 1], color="#9e9e9e", linewidth=.3, alpha=.6)
-    theta = np.linspace(0, 2 * np.pi, 361)
-    for radius in (5, 10, 20):
-        ax.plot(radius * np.cos(theta), radius * np.sin(theta), "--", color="black", linewidth=.45)
-        ax.text(radius * .72, -radius * .72, f"{radius} km", fontsize=6, ha="left", va="top",
-                bbox=dict(facecolor="white", edgecolor="none", pad=.3))
-    ax.plot(runway[:, 0], runway[:, 1], color="black", linewidth=1.6, solid_capstyle="butt")
-    ax.plot(0, 0, marker="^", color="black", markersize=4.5, linestyle="none")
-    ax.text(1.2, 1.2, "Receiver (KBTP)", fontsize=6.5, ha="left", va="bottom",
-            bbox=dict(facecolor="white", edgecolor="none", pad=.3))
-    ax.set_xlim(-25, 25); ax.set_ylim(-25, 25); ax.set_aspect("equal")
-    ax.set_xticks([-20, -10, 0, 10, 20]); ax.set_yticks([-20, -10, 0, 10, 20])
-    ax.set_xlabel("East (km)"); ax.set_ylabel("North (km)")
-    save(fig, out, "fig_setup_a")
-    plt.close(fig)
-
-    W, H, bw, bh, gx, gy = 4.6, 2.05, 1.28, .42, .35, .30
-    fig = plt.figure(figsize=(W, H)); ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.set_axis_off()
-    col = lambda c: .025 + c * (bw + gx); row = lambda r: H - .16 - bh - r * (bh + gy)
-    def box(c, r, text, measured=False):
-        ax.add_patch(Rectangle((col(c), row(r)), bw, bh, facecolor="#eeeeee" if measured else "white",
-                               edgecolor="black", linewidth=.6, joinstyle="miter"))
-        ax.text(col(c) + bw / 2, row(r) + bh / 2, text, ha="center", va="center", fontsize=7, linespacing=1.15)
-    def arrow(p, q):
-        ax.annotate("", q, p, arrowprops=dict(arrowstyle="-|>", linewidth=.6, color="black", mutation_scale=7, shrinkA=0, shrinkB=0))
-    note = dict(fontsize=6.5, style="italic", color="#444444")
-    box(0, 0, "Aircraft GNSS\nposition"); box(1, 0, "ADS-B broadcast\n(1090ES / UAT)"); box(2, 0, "Ground receiver\n(Stratux)")
-    box(2, 1, "Time-stamped\nreport log"); box(1, 1, "Causal replay\n(1 Hz)"); box(2, 2, "Local quadratic\n" + r"fit, $\pm h$")
-    box(0, 1, "Report-age bank $a_{1:T}$\n32 249 histories", True)
-    box(1, 2, r"Residual pool $(e_\parallel, e_\perp)$" + "\n578 438 pairs", True)
-    ym = lambda r: row(r) + bh / 2; xm = lambda c: col(c) + bw / 2
-    for c in (0, 1):
-        arrow((col(c) + bw, ym(0)), (col(c + 1), ym(0)))
-    ax.text(col(1) - gx / 2, row(0) + bh + .04, "GNSS/encoding error", ha="center", va="bottom", **note)
-    ax.text(col(2) - gx / 2, row(0) + bh + .04, "reception gaps", ha="center", va="bottom", **note)
-    arrow((xm(2), row(0)), (xm(2), row(1) + bh))
-    ax.text(xm(2) - .06, row(0) - gy / 2, "update timing", ha="right", va="center", **note)
-    arrow((col(2), ym(1)), (col(1) + bw, ym(1))); arrow((col(1), ym(1)), (col(0) + bw, ym(1)))
-    arrow((xm(2), row(1)), (xm(2), row(2) + bh)); arrow((col(2), ym(2)), (col(1) + bw, ym(2)))
-    ax.add_patch(Rectangle((col(0) + .05, ym(2) - .05), .1, .1, facecolor="#eeeeee", edgecolor="black", linewidth=.6))
-    ax.text(col(0) + .2, ym(2), "measured model,\nreplayed in training", ha="left", va="center", fontsize=6.5, linespacing=1.15)
-    save(fig, out, "fig_setup_b")
-    plt.close(fig)
-
-
 def cases(out):
     """Strict-unseen windows (median-gain selection in the airborne stale decile): history age and horizon error."""
     data = np.load(RESULTS / "figure_cases.npz")
@@ -317,12 +264,12 @@ def cases(out):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("outputs/figures"), help="figure output directory")
-    parser.add_argument("--only", nargs="+", choices=["setup", "error_structure", "influence", "results", "cases"], default=None)
+    parser.add_argument("--only", nargs="+", choices=["error_structure", "influence", "results", "cases"], default=None)
     args = parser.parse_args()
     style()
-    figures = {"setup": setup, "error_structure": error_structure, "influence": influence,
+    figures = {"error_structure": error_structure, "influence": influence,
                "results": results, "cases": cases}
-    selected = args.only or ("setup", "error_structure", "influence", "results")
+    selected = args.only or ("error_structure", "influence", "results")
     for name, draw in figures.items():
         if name in selected:
             draw(args.output)
