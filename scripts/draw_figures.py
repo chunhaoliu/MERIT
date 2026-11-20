@@ -32,8 +32,9 @@ def style():
                          "axes.edgecolor": "black", "axes.labelpad": 2,
                          "figure.facecolor": "white", "figure.frameon": False,
                          "axes.facecolor": "white", "axes.axisbelow": True,
-                         "axes.grid": False,
-                         "legend.frameon": False, "legend.fontsize": 6.5,
+                         "axes.grid": True, "grid.color": "#d0d0d0", "grid.linewidth": .4,
+                         "legend.frameon": True, "legend.fancybox": False, "legend.framealpha": 1,
+                         "legend.edgecolor": "black", "patch.linewidth": .5, "legend.fontsize": 6.5,
                          "legend.handlelength": 1.8, "legend.handletextpad": .45,
                          "legend.labelspacing": .25, "legend.borderaxespad": .45,
                          "xtick.direction": "in", "ytick.direction": "in",
@@ -94,7 +95,7 @@ def error_structure(out):
     ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), ":", color=GREY, linewidth=.9,
             label="Gaussian, along-track MAD")
     ax.set_yscale("log"); ax.set_xlabel("Position residual (m)"); ax.set_ylabel("Density")
-    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 8)
+    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 60)
     ax.yaxis.set_major_locator(matplotlib.ticker.LogLocator(base=10, numticks=7))
     ax.yaxis.set_major_formatter(matplotlib.ticker.LogFormatterMathtext(base=10))
     ax.tick_params(axis="y", labelsize=7.5)  # Log exponents remain above 5 pt.
@@ -109,7 +110,6 @@ def error_structure(out):
                                    ("sigma25_rho0.8_half10", GREY, ":", "^", r"Synthetic AR(1), $\rho=0.8$")):
         c = summary["calibration"][key]["acf_clipped"]
         ax.plot(lags, [c[str(l)] for l in lags], ls, color=color, linewidth=1.0, marker=marker, markersize=3, label=label)
-    ax.axhline(0, color="#aaaaaa", linewidth=.4, linestyle="--")
     ax.set_xlabel("Lag (s)"); ax.set_ylabel("Residual autocorrelation"); ax.set_xticks(lags)
     ax.set_xlim(.5, 10.5); ax.set_ylim(-.82, .56)
     ax.legend(loc="lower left")
@@ -117,8 +117,7 @@ def error_structure(out):
     kagc = np.load(ROOT / "merit/ages_kagc.npz")["changed_position_age_s"].ravel()
     for a, color, ls, lw, label in ((age, BLUE, "-", 1.2, "KBTP"), (kagc, "#333333", "--", 1.0, "KAGC")):
         x = np.sort(a)
-        ax.plot(x, np.arange(1, len(x) + 1) / len(x), ls, color=color, linewidth=lw,
-                label=f"{label} (median {np.median(a):.1f} s)")
+        ax.plot(x, np.arange(1, len(x) + 1) / len(x), ls, color=color, linewidth=lw, label=label)
     ax.set_xscale("log"); ax.set_xlim(.05, 100); ax.set_ylim(0, 1.03); ax.set_xlabel("Displayed-position age (s)")
     ax.set_xticks([.1, 1, 10, 100], labels=["0.1", "1", "10", "100"])
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
@@ -137,12 +136,10 @@ def results(out):
     fig, axes = panel_row()
     ax = axes[0]; h = np.arange(1, 31)
     iso, mer = get("iso direct")[strict].mean(0), get("merit direct")[strict].mean(0)
-    ax.fill_between(h, mer, iso, color=MERIT, alpha=.15, linewidth=0)
     for curve, label, color, ls, marker in ((iso, "LSTM, isotropic", BLUE, "--", "s"), (mer, "LSTM, MERIT", MERIT, "-", "o")):
         ax.plot(h, curve, ls, color=color, linewidth=1.4 if color == MERIT else 1.0,
                 marker=marker, markersize=2.6, markevery=[4, 9, 14, 19, 24, 29],
                 markerfacecolor="white" if color != MERIT else color, markeredgewidth=.6, label=label)
-    ax.text(.97, .05, f"$-${iso[-1] - mer[-1]:.0f} m at 30 s", transform=ax.transAxes, ha="right", fontsize=6.5, color=MERIT)
     ax.set_xlabel("Prediction horizon (s)"); ax.set_ylabel("Displacement error (m)")
     ax.set_xticks([0, 10, 20, 30]); ax.set_xlim(0, 31); ax.set_ylim(0, None)
     ax.legend(loc="upper left")
@@ -157,7 +154,6 @@ def results(out):
         ax.step(v, 1 - np.arange(len(v)) / len(v), ls, where="post", color=color, linewidth=lw, label=label)
         print("kagc P95", label, round(float(np.percentile(v, 95))))
     ax.axhline(.05, color="#aaaaaa", linewidth=.4, linestyle="--")
-    ax.text(2350, .055, "P95", ha="right", va="bottom", fontsize=6.5, color="#555555")
     ax.set_yscale("log"); ax.set_ylim(.01, 1.2); ax.set_xlim(0, 2400)
     ax.set_yticks([.01, .1, 1], labels=["0.01", "0.1", "1"])
     ax.set_xticks([0, 500, 1000, 1500, 2000])
@@ -199,34 +195,35 @@ def cases(out):
     pred = {"Isotropic": data["iso_m"], "MERIT": data["merit_m"]}
     age = data["changed_position_age_s"]
     stale = data["mean_age_s"]
-    fig, axes = panel_row(left=.40)
-    for i, ax in enumerate(axes):
-        box = ax.get_position(); ax.set_position([box.x0, box.y0, box.width - .32 / fig.get_figwidth(), box.height])
-        # History (t <= 0): age of the displayed position, the input the predictor receives.
-        # Future (t > 0): displacement error of each predictor over the horizon.
-        twin = ax.twinx()
-        twin.fill_between(np.arange(-59, 1), age[i], step="mid", color="#cccccc", linewidth=0)
-        twin.set_ylim(0, max(6, 1.15 * age[i].max()) * 2.2); twin.set_yticks([0, 2, 4, 6] if age[i].max() <= 6 else [0, 5, 10])
-        twin.tick_params(axis="y", labelsize=6.5, colors="#555555", right=True)
-        twin.set_ylabel("Displayed age (s)", color="#555555", fontsize=7); twin.yaxis.set_label_coords(1.2, .23)
+    # Each panel: history axis (displayed-position age, t <= 0) beside horizon axis (error, t > 0).
+    width = 3 * EXPERIMENT_WIDTH + 2 * GUTTER; height = EXPERIMENT_HEIGHT
+    fig = plt.figure(figsize=(width, height))
+    left, hist_w, gap, fut_w = .38, .80, .06, .66
+    for i in range(3):
+        x0 = i * (EXPERIMENT_WIDTH + GUTTER) + left
+        ax_age = fig.add_axes([x0 / width, .35 / height, hist_w / width, 1.39 / height])
+        ax = fig.add_axes([(x0 + hist_w + gap) / width, .35 / height, fut_w / width, 1.39 / height])
+        ax_age.fill_between(np.arange(-59, 1), age[i], step="mid", color="#bdbdbd", linewidth=0)
+        ax_age.set_xlim(-60, 0); ax_age.set_xticks([-60, -40, -20, 0]); ax_age.set_ylim(0, 1.1 * max(1, age[i].max()))
+        ax_age.yaxis.set_major_locator(matplotlib.ticker.MaxNLocator(nbins=4, integer=True))
+        ax_age.set_ylabel("Displayed age (s)")
+        ax_age.set_xlabel("Time relative to prediction (s)")
+        ax_age.xaxis.set_label_coords((hist_w + gap + fut_w) / 2 / hist_w, -.11)
         steps = np.arange(1, 31)
         for k, color, ls in (("Isotropic", BLUE, "--"), ("MERIT", MERIT, "-")):
             e = np.linalg.norm(pred[k][i] - ref[i], axis=-1)
             ax.plot(steps, e, ls, color=color, linewidth=1.4 if k == "MERIT" else 1.0,
                     label=k)
-        ax.axvline(0, color="black", linewidth=.5)
-        ax.set_zorder(twin.get_zorder() + 1); ax.patch.set_visible(False)
-        ax.set_xlim(-60, 30); ax.set_xticks([-60, -40, -20, 0, 10, 20, 30]); ax.set_ylim(0, None)
-        ax.tick_params(right=False)
-        ax.set_xlabel("Time relative to prediction (s)"); ax.set_ylabel("Displacement error (m)")
+        ax.set_xlim(0, 30); ax.set_xticks([10, 20, 30]); ax.set_ylim(0, None)
+        ax.tick_params(axis="y", labelleft=False, labelright=True)
+        ax.yaxis.set_label_position("right"); ax.set_ylabel("Displacement error (m)")
         if i == 0:
             ax.legend(loc="upper left", handlelength=1.6)
         print(f"case {chr(97 + i)}: window {case_windows[i]}, mean age {stale[i]:.1f} s, max {age[i].max():.1f} s")
-    width, height = fig.get_figwidth(), fig.get_figheight()
     fig.canvas.draw()
     for i, letter in enumerate("abc"):
-        for j in range(3):
-            fig.axes[j].set_visible(i == j); fig.axes[3 + j].set_visible(i == j)
+        for j, a in enumerate(fig.axes):
+            a.set_visible(j // 2 == i)
         left = i * (EXPERIMENT_WIDTH + GUTTER)
         save(fig, out, f"fig_cases_{letter}", Bbox.from_extents(left, 0, left + EXPERIMENT_WIDTH, height))
     plt.close(fig)
