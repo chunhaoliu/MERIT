@@ -1,4 +1,4 @@
-"""Recompute Tables I-V and the control results quoted in the text, without source data.
+"""Recompute Tables I-VI and the control results quoted in the text, without source data.
 
 Uses frozen measurement summaries and per-seed evaluation results. Standard deviations
 use ddof=1. Paired intervals use 2000 day-cluster draws, seed 0; --bootstrap also
@@ -104,6 +104,25 @@ def measurement():
     out["kagc_repeat"] = [f"{q(replay['kagc_repeat_fraction'] * 100)} [{q(lo * 100)}, {q(hi * 100)}]"]
     out["days"] = [str(summary["days"]), str(kagc["days"])]
     return out
+
+
+def uncertainty_budget():
+    folder = ROOT / "results/measurement"
+    ci = json.loads((folder / "day_ci.json").read_text())
+    summary = json.loads((folder / "summary.json").read_text())
+    rec = json.loads((folder / "recovery.json").read_text())
+    half_width = lambda v, f=1: (v["ci95"][1] - v["ci95"][0]) / 2 / 1.96 * f
+    rows = {k: [] for k in ("day", "half_window", "combined", "expanded", "bias")}
+    for c, places in (("along", 2), ("cross", 3)):
+        v = ci[c]["mad"]; mads = [summary["raw"][f"half{h}"][c]["mad"] for h in (5, 10, 15)]
+        a, b = half_width(v), (max(mads) - min(mads)) / 2 / np.sqrt(3)
+        u = float(np.hypot(a, b))
+        rows["day"].append(q(a, places)); rows["half_window"].append(q(b, 2))
+        rows["combined"].append(q(u, 2)); rows["expanded"].append(q(2 * u, 1 if c == "along" else 2))
+        rows["bias"].append(q(v["value"] * rec["true"][c]["mad"] / rec["half10"][c]["mad"] - v["value"], 1 if c == "along" else 2))
+    r = half_width(ci["replay"]["repeat_fraction"], 100)
+    rows["day"].append(q(r)); rows["combined"].append(q(r)); rows["expanded"].append(q(2 * r))
+    return rows
 
 
 def predictor_parameters():
@@ -299,8 +318,8 @@ def text_results():
 
 
 def recompute(bootstrap=False):
-    return {"I": measurement(), "II": predictor_parameters(), "III": main_table("kbtp", bootstrap), "IV": main_table("kagc", bootstrap),
-            "V": components(), "CI": confidence_intervals(bootstrap), "Text": text_results()}
+    return {"I": measurement(), "II": uncertainty_budget(), "III": predictor_parameters(), "IV": main_table("kbtp", bootstrap),
+            "V": main_table("kagc", bootstrap), "VI": components(), "CI": confidence_intervals(bootstrap), "Text": text_results()}
 
 
 def main():

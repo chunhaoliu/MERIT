@@ -15,10 +15,10 @@ from merit.synthetic import generate_aircraft_trajectories
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--raw", type=Path, help="site raw_data directory")
-    p.add_argument("--train-replay", type=Path, help="training-period replay NPZ for day CIs")
+    p.add_argument("--train-replay", type=Path, help="training-period replay NPZ for day CIs and influence")
     p.add_argument("--synthetic-cache", type=Path, help="optional known-track cache for estimator calibration")
     p.add_argument("--output", type=Path, required=True)
-    p.add_argument("--mode", choices=["measure", "recovery", "day-ci"], default="measure")
+    p.add_argument("--mode", choices=["measure", "recovery", "day-ci", "influence"], default="measure")
     p.add_argument("--pool", type=Path, default=ROOT / "merit/residual_pool.npz")
     p.add_argument("--halves", nargs="+", type=float, default=[5, 10, 15])
     p.add_argument("--clip", type=float, default=50.)
@@ -30,15 +30,26 @@ def main():
     p.add_argument("--skip-calibration", action="store_true")
     a = p.parse_args()
     if a.mode != "recovery" and a.raw is None:
-        p.error("--raw is required for measurement and day CIs")
-    if a.mode == "day-ci" and a.train_replay is None:
-        p.error("--train-replay is required for day CIs")
+        p.error("--raw is required for measurement, day CIs and influence")
+    if a.mode in ("day-ci", "influence") and a.train_replay is None:
+        p.error("--train-replay is required for day CIs and influence")
     for source in (a.raw, a.train_replay, a.synthetic_cache):
         if source is not None and (a.output.resolve() == source.resolve() or a.output.resolve().is_relative_to(source.resolve())):
             raise ValueError("Choose a measurement output outside the input sources")
     a.output.mkdir(parents=True, exist_ok=False)
     m.TRAIN_REPLAY = a.train_replay
     m.SYNTHETIC = a.synthetic_cache
+    if a.mode == "influence":
+        days = m.train_days(a.raw)
+        payload = m.influence(days[:a.max_days or None], half=a.pool_half)
+        (a.output / "influence.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        for key in ("residual_range", "residual_speed", "timing_range"):
+            print(key)
+            for row in payload[key]["bins"]:
+                print(f"  {row['lo']:.0f}-{row['hi'] or 'inf'} n={row['n']} median={row['median']:.0f}",
+                      {k: round(v["value"], 3) for k, v in row.items() if isinstance(v, dict)})
+        print("pooled", payload["pooled"])
+        return 0
     needs_synthetic = a.mode == "recovery" or (a.mode == "measure" and not a.skip_calibration)
     if needs_synthetic and m.SYNTHETIC is None:
         m.SYNTHETIC = a.output / "synthetic.pkl"

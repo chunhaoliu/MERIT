@@ -32,7 +32,7 @@ Strict-unseen applies to trajectory overlap. Aircraft identity may recur. The ex
 preceded the final replay design. Subsequent selections used validation, and later comparisons were fixed
 before their test evaluations. KAGC test data entered no design choice.
 
-## Error measurement, Section III and Table I
+## Error measurement, Section III and Tables I-II
 
 First appearances of changed latitude/longitude, altitude above 1,500 ft, gaps <=10 s, segments with >=40
 updates. Local quadratic fits use half widths 5/10/15 s, at least seven observations, and coverage extending
@@ -84,7 +84,7 @@ KL weight) were trained with seed 42 and ranked by KBTP raw-validation strict-un
 were retrained with five seeds, hash-locked, and evaluated once on the KBTP test days and at KAGC
 (`results/p14`). DLinear's selected setting gave the same printed metrics as its released checkpoints, which are kept.
 
-## Training and input controls, Tables III-V and text
+## Training and input controls, Tables IV-VI and text
 
 Each row below uses `python scripts/train.py --data data --row direct --seed <seed> --output <fresh_run>`
 plus the listed arguments. The index records each released checkpoint's exact settings.
@@ -113,7 +113,7 @@ eligible training-period days. It retains the processed-training scaler. The fac
 ablations use seeds 42/123/456. Selected main/raw/heuristic/age-bank/input comparisons use all five seeds,
 as do the `near0`, `matched_stale` and date-disjoint groups (`results/p8_*`).
 
-Table V has seven residual/timing rows and five alternative remedies. Its no-timing matched-isotropic KBTP
+Table VI has seven residual/timing rows and five alternative remedies. Its no-timing matched-isotropic KBTP
 cells use the five-seed `gauss direct` results in `raw_eval_test_final`; its KAGC cells use the three-seed
 `iso_matched direct` results in `kagc_eval_test_2x2`. Measured residuals without timing use the three-seed
 `measured direct` results in `raw_eval_test_2x2` / `kagc_eval_test_2x2`. These cells carry a dagger.
@@ -144,11 +144,11 @@ each window's errors across seeds, then takes the 95th percentile of window ADE.
 adjustment. A stored p=0 indicates floating-point underflow. The measurement CIs use the separate 1,000-draw
 procedure above. Reference-smoothing sensitivity uses Savitzky-Golay width 7, order 2, on future references only.
 
-Tables III and IV compare each MERIT predictor with its own isotropic counterpart. Saved comparisons in
+Tables IV and V compare each MERIT predictor with its own isotropic counterpart. Saved comparisons in
 the main reports target the direct LSTM, so the other predictors' paired CIs are recomputed from their
-window errors. Table II counts trainable parameters, in millions, at the manuscript's displayed precision.
-Figure 3(c) uses 1,000 day-cluster draws with `RandomState(0)`, shared by the two predictors within each bin
-and advanced across bins; quantile bins have inclusive bounds. Figure 4 retains the seed-42 case selection
+window errors. Table III counts trainable parameters, in millions, at the manuscript's displayed precision.
+Figure 5(c) uses 1,000 day-cluster draws with `RandomState(0)`, shared by the two predictors within each bin
+and advanced across bins; quantile bins have inclusive bounds. The case panels (`--only cases`, no longer in the paper) retain the seed-42 case selection
 and uses the bundled 3x60 displayed-position ages and 3x30 prediction/reference positions; source window
 indices, timestamps, dates and aircraft identifiers are omitted.
 

@@ -199,7 +199,7 @@ class DataAndStatistics(unittest.TestCase):
 
     def test_all_printed_cells(self):
         expected = json.loads((ROOT / "results/paper_tables.json").read_text(encoding="utf-8"))
-        self.assertEqual(sum(len(cells) for rows in expected.values() for cells in rows.values()), 430)
+        self.assertEqual(sum(len(cells) for rows in expected.values() for cells in rows.values()), 443)
         self.assertEqual(recompute(), expected)
         self.assertEqual(recompute(bootstrap=True), expected)
 

@@ -23,11 +23,11 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `merit/patchtst.py`, `merit/transformer.py`, `merit/trajairnet.py` | attention and single-aircraft generative predictors |
 | `merit/residual_pool.npz`, `merit/ages_*.npz` | 578,438 paired residuals and complete KBTP/KAGC training-period age banks |
 | `scripts/prepare_data.py` | rebuilds from public sources and checks container and array hashes |
-| `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks and Table I CIs |
+| `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks, influence data and Table I CIs |
 | `scripts/train.py` | paper training settings for all ten predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
-| `scripts/reproduce_tables.py` | source-data-free reproduction of 430 printed cells: Tables I-V, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
-| `scripts/draw_figures.py` | redraws Figures 1, 3 and 4 from bundled derived statistics, errors and recentered case data |
+| `scripts/reproduce_tables.py` | source-data-free reproduction of 443 printed cells: Tables I-VI, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
+| `scripts/draw_figures.py` | redraws Figures 1, 2, 3 and 5 from bundled derived statistics and errors |
 | `checkpoints/` | 175 checkpoints, 457.8 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
 | `results/runs.json` | 1,551 raw-evaluation records with explicit study, site, split, seed and subset labels |
@@ -50,8 +50,9 @@ python scripts/draw_figures.py --output outputs/figures
 `reproduce_tables.py` exits with status 0 when every printed cell agrees. The optional bootstrap regenerates
 all paired prediction CIs from seed-averaged window errors, including intervals otherwise read from saved reports. Table I uses the frozen measurement summaries
 and measurement bootstrap outputs. Raw-log measurement, including its day bootstrap, has a separate entry point.
-Table II checks trainable parameter counts. Tables III and IV pair isotropic and MERIT training for ten predictors,
-with a separate relative-change CI for each predictor and subset; Table IV also reports P95. Table V contains
+Table II recomputes the uncertainty budget from the day bootstrap, half-window and recovery results.
+Table III checks trainable parameter counts. Tables IV and V pair isotropic and MERIT training for ten predictors,
+with a separate relative-change CI for each predictor and subset; Table V also reports P95. Table VI contains
 seven residual/timing combinations and five alternative remedies, with three-seed cells marked by a dagger.
 All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
 
@@ -97,6 +98,7 @@ LSTM isotropic/MERIT strict-unseen comparison. Retraining can vary with the nume
 python scripts/measure_error.py --raw <KBTP_raw_data> --output outputs/measurement
 python scripts/measure_error.py --mode recovery --output outputs/recovery
 python scripts/measure_error.py --mode day-ci --raw <KBTP_raw_data> --train-replay data/raw_replay/train.npz --output outputs/measurement_ci
+python scripts/measure_error.py --mode influence --raw <KBTP_raw_data> --train-replay data/raw_replay/train.npz --output outputs/measurement_influence
 python scripts/train.py --data data --row direct --noise merit --seed 42 --output runs/merit_direct_s42
 python scripts/train.py --data data --row direct --noise iso --seed 42 --output runs/iso_direct_s42
 python scripts/train.py --data data --row trajairnet --noise merit --seed 42 --output runs/merit_trajairnet_s42
@@ -120,10 +122,10 @@ Its complete five-seed results at both sites (validation-selected setting in `re
 included. Retrain those weights with `scripts/train.py` for inference reproduction of that row.
 The other controls are selected by their `group`, `row` and `seed` in `checkpoints/index.json`.
 
-The nine PDF panels reproduce Figures 1, 3 and 4. Figure 1 shows KBTP residual structure and contrasts
-displayed-position ages at the two sites. Figure 3 shows KBTP horizon errors, the KAGC window-error tail and age-dependent gains
-with 95% day-cluster bootstrap bars. Figure 4 shows each case's 60 s displayed-position age history and
-30-step displacement errors. Drawing uses only bundled statistics, window errors and de-identified cases.
+The ten PDF panels reproduce Figures 1, 2, 3 and 5. Figure 1 shows the KBTP site setup and measurement chain.
+Figure 2 shows KBTP residual structure and displayed-position ages at the two sites. Figure 3 shows residual
+influence by range and speed. Figure 5 shows KBTP horizon errors, the KAGC window-error tail and age-dependent
+gains with 95% day-cluster bootstrap bars. Drawing uses only bundled statistics and window errors.
 
 ## Third-party implementation
 

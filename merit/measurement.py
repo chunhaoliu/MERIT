@@ -183,3 +183,119 @@ def day_ci(days, half, clip, draws=1000, seed=0):
                   for s in point[g]} for g in point}
     result.update(days=len(per_day), replay_days=len(keys), half=half, draws=draws)
     return result
+
+
+def _influence_segments(days, gap=GAP_S, min_updates=MIN_UPDATES, half=10.0):
+    """Decompose residuals with receiver range, fitted speed and day."""
+    from .coordinates import RECEIVER
+    out = {k: [] for k in ("along", "cross", "range_m", "speed_mps", "altitude_m", "day")}
+    lat_r, lon_r = np.radians(RECEIVER)
+    for day in days:
+        day_name = os.path.basename(day)[:8]
+        for path in glob.glob(os.path.join(day, "*.csv")):
+            try:
+                frame = pd.read_csv(path, usecols=["ID", "Time", "Altitude", "Lat", "Lon"])
+            except pd.errors.EmptyDataError:
+                continue
+            stamps = pd.to_datetime(frame["Time"], format="%H:%M:%S.%f", errors="coerce")
+            frame["t"] = (stamps - stamps.dt.normalize()).dt.total_seconds()
+            for _, g in frame.dropna().groupby("ID", sort=False):
+                g = g.sort_values("t", kind="stable")
+                g = g[((g.Lat.diff() != 0) | (g.Lon.diff() != 0)) & (g.Altitude > MIN_ALT_FT)]
+                if len(g) < min_updates:
+                    continue
+                t = g.t.to_numpy()
+                lat0, lon0 = np.radians(g.Lat.mean()), np.radians(g.Lon.mean())
+                x = R_EARTH * (np.radians(g.Lon.to_numpy()) - lon0) * np.cos(lat0)
+                y = R_EARTH * (np.radians(g.Lat.to_numpy()) - lat0)
+                xf = R_EARTH * (np.radians(g.Lon.to_numpy()) - lon_r) * np.cos(lat_r)
+                yf = R_EARTH * (np.radians(g.Lat.to_numpy()) - lat_r)
+                alt = g.Altitude.to_numpy(dtype=float) * 0.3048
+                for idx in np.split(np.arange(len(t)), np.where(np.diff(t) > gap)[0] + 1):
+                    if len(idx) < min_updates or not np.all(np.diff(t[idx]) > 0):
+                        continue
+                    ts = t[idx] - t[idx][0]
+                    rx, vx = fit_center(ts, x[idx], half)
+                    ry, vy = fit_center(ts, y[idx], half)
+                    speed = np.hypot(vx, vy)
+                    valid = np.isfinite(speed) & (speed > MIN_SPEED) & np.isfinite(rx) & np.isfinite(ry)
+                    ux = np.divide(vx, speed, out=np.zeros_like(vx), where=speed > 0)
+                    uy = np.divide(vy, speed, out=np.zeros_like(vy), where=speed > 0)
+                    along, cross = rx * ux + ry * uy, -rx * uy + ry * ux
+                    if not np.any(valid):
+                        continue
+                    out["along"].append(along[valid]); out["cross"].append(cross[valid])
+                    range_m = np.hypot(xf[idx], yf[idx])
+                    out["range_m"].append(range_m[valid]); out["speed_mps"].append(speed[valid])
+                    out["altitude_m"].append(alt[idx][valid]); out["day"].append(np.full(valid.sum(), day_name, dtype="U8"))
+    return {k: np.concatenate(v) if v else np.empty(0, dtype=("U8" if k == "day" else float)) for k, v in out.items()}
+
+
+def _merge_influence_edges(values, edges, minimum=2000):
+    edges = list(edges)
+    while len(edges) > 2:
+        counts, _ = np.histogram(values, bins=edges)
+        small = np.flatnonzero(counts < minimum)
+        if not len(small):
+            break
+        i = int(small[0])
+        if i == 0:
+            del edges[1]
+        elif i == len(counts) - 1:
+            del edges[-2]
+        elif counts[i - 1] <= counts[i + 1]:
+            del edges[i]
+        else:
+            del edges[i + 1]
+    return edges
+
+
+def _day_cluster(values, day, fn, draws=1000, seed=0):
+    """Point value and day-cluster bootstrap 95% interval."""
+    groups = [values[day == d] for d in np.unique(day)]
+    if not groups:
+        return {"value": None, "ci95": [None, None]}
+    rng = np.random.RandomState(seed)
+    boot = [fn(np.concatenate([groups[i] for i in rng.randint(0, len(groups), len(groups))])) for _ in range(draws)]
+    return {"value": float(fn(values)), "ci95": [float(np.percentile(boot, q)) for q in (2.5, 97.5)]}
+
+
+def influence(days, half=10.0, draws=1000, seed=0):
+    """Residual spread versus receiver range and fitted speed, plus replay timing by range."""
+    from .coordinates import RECEIVER, runway_geometry
+    mad = lambda z: 1.4826 * np.median(np.abs(z - np.median(z)))
+    res = _influence_segments(days, half=half)
+
+    def rows(key, values, edges, day, stats):
+        out = []
+        for lo, hi in zip(edges[:-1], edges[1:]):
+            m = (values >= lo) & (values < hi)
+            row = {"lo": float(lo), "hi": float(hi) if np.isfinite(hi) else None, "n": int(m.sum()),
+                   "median": float(np.median(values[m]))}
+            for name, (v, fn) in stats.items():
+                row[name] = _day_cluster(v[m], day[m], fn, draws, seed)
+            out.append(row)
+        return {"variable": key, "bins": out}
+
+    resid_stats = {f"{c}_{s}": (res[c], fn) for c in ("along", "cross")
+                   for s, fn in (("mad", mad), ("p95", lambda z: np.percentile(np.abs(z), 95)))}
+    range_edges = _merge_influence_edges(res["range_m"], [0, 2000, 4000, 6000, 8000, 12000, np.inf])
+    speed_edges = np.quantile(res["speed_mps"], np.linspace(0, 1, 6)); speed_edges[-1] = np.inf
+    origin, axes = runway_geometry()
+    z = np.load(TRAIN_REPLAY)
+    xy, age = z["history_xy_m"], z["changed_position_age_s"]
+    rng_m = np.linalg.norm(xy - (-origin) @ axes.T, axis=-1)
+    rday = np.repeat(z["day"], xy.shape[1] - 1)
+    rep = np.all(xy[:, 1:] == xy[:, :-1], axis=2).ravel().astype(float)
+    r1, a1 = rng_m[:, 1:].ravel(), age[:, 1:].ravel()
+    timing_edges = _merge_influence_edges(r1, [0, 1000, 2000, 3000, 4000, 5000, np.inf])
+    timing_stats = {"median_age_s": (a1, np.median), "p90_age_s": (a1, lambda v: np.percentile(v, 90)),
+                    "repeat_fraction": (rep, np.mean)}
+    return {"schema": "merit_adsb_influence_v2", "receiver_lat_lon": list(RECEIVER), "range": "horizontal distance from the receiver (m)",
+            "days": [os.path.basename(d)[:8] for d in days], "half_window_s": half, "draws": draws, "seed": seed,
+            "residual_range": rows("range_m", res["range_m"], range_edges, res["day"], resid_stats),
+            "residual_speed": rows("speed_mps", res["speed_mps"], speed_edges, res["day"], resid_stats),
+            "timing_range": rows("range_m", r1, timing_edges, rday, timing_stats),
+            "pooled": {"n": int(len(res["along"])), "along_mad": float(mad(res["along"])), "cross_mad": float(mad(res["cross"])),
+                       "median_age_s": float(np.median(a1)), "repeat_fraction": float(rep.mean()),
+                       "median_altitude_m": float(np.median(res["altitude_m"]))}}
