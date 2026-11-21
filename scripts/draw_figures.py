@@ -20,6 +20,7 @@ RESULTS = ROOT / "results"
 # Okabe-Ito colors, with vermilion and a heavier stroke reserved for MERIT.
 BLUE, MERIT, GREY = "#0072B2", "#D55E00", "#777777"
 RESIDUAL = "#C00000"  # position residuals; blue is reserved for report timing
+ISO, CROSS, REF = "#7E2F8E", "#009E73", "#E69F00"  # solid lines, separated by color
 PAGE_WIDTH, GUTTER = 7.16, .07
 EXPERIMENT_WIDTH, EXPERIMENT_HEIGHT = 2.30, 1.82
 
@@ -83,17 +84,16 @@ def error_structure(out):
     fig, axes = panel_row()
     ax = axes[0]
     bins = np.linspace(-150, 150, 301)
-    for key, color, ls, label in (("along", RESIDUAL, "-", "Along-track"),
-                                  ("cross", "#333333", "--", "Cross-track")):
+    for key, color, label in (("along", RESIDUAL, "Along-track"), ("cross", CROSS, "Cross-track")):
         r = pool[key]
         density, edges = np.histogram(r, bins=bins, density=True)
         visible = (edges[:-1] >= -100) & (edges[1:] <= 100)
         shown = np.flatnonzero(visible)
         ax.stairs(np.maximum(density[visible], 1e-5), edges[shown[0]:shown[-1] + 2], baseline=None,
-                  color=color, linestyle=ls, linewidth=1.0, label=label)
+                  color=color, linewidth=1.0, label=label)
     # Gaussian with the along-track scaled MAD: the measured tail lies far above it.
     r = pool["along"]; sd = 1.4826 * np.median(np.abs(r - np.median(r))); g = np.linspace(-100, 100, 401)
-    ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), ":", color=GREY, linewidth=.9,
+    ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), color=REF, linewidth=1.0,
             label="Gaussian, along-track MAD")
     ax.set_yscale("log"); ax.set_xlabel("Position residual (m)"); ax.set_ylabel("Density")
     ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 60)
@@ -106,19 +106,19 @@ def error_structure(out):
     ax = axes[1]
     lags = [1, 2, 3, 5, 10]
     measured = summary["raw"]["half10"]["along"]["acf_clipped"]
-    ax.plot(lags, [measured[str(l)] for l in lags], "o-", color=RESIDUAL, markersize=3, linewidth=1.0, label="Measured along-track")
-    for key, color, ls, marker, label in (("sigma25_rho0_half10", "#444444", "--", "s", "Synthetic white noise"),
-                                   ("sigma25_rho0.8_half10", GREY, ":", "^", r"Synthetic AR(1), $\rho=0.8$")):
+    ax.plot(lags, [measured[str(l)] for l in lags], color=RESIDUAL, linewidth=1.2, label="Measured along-track")
+    for key, color, label in (("sigma25_rho0_half10", CROSS, "Synthetic white noise"),
+                              ("sigma25_rho0.8_half10", REF, r"Synthetic AR(1), $\rho=0.8$")):
         c = summary["calibration"][key]["acf_clipped"]
-        ax.plot(lags, [c[str(l)] for l in lags], ls, color=color, linewidth=1.0, marker=marker, markersize=3, label=label)
+        ax.plot(lags, [c[str(l)] for l in lags], color=color, linewidth=1.0, label=label)
     ax.set_xlabel("Lag (s)"); ax.set_ylabel("Residual autocorrelation"); ax.set_xticks(lags)
     ax.set_xlim(.5, 10.5); ax.set_ylim(-.82, .56)
     ax.legend(loc="lower left")
     ax = axes[2]
     kagc = np.load(ROOT / "merit/ages_kagc.npz")["changed_position_age_s"].ravel()
-    for a, color, ls, lw, label in ((age, BLUE, "-", 1.2, "KBTP"), (kagc, "#333333", "--", 1.0, "KAGC")):
+    for a, color, label in ((age, BLUE, "KBTP"), (kagc, REF, "KAGC")):
         x = np.sort(a)
-        ax.plot(x, np.arange(1, len(x) + 1) / len(x), ls, color=color, linewidth=lw, label=label)
+        ax.plot(x, np.arange(1, len(x) + 1) / len(x), color=color, linewidth=1.1, label=label)
     ax.set_xscale("log"); ax.set_xlim(.05, 100); ax.set_ylim(0, 1.03); ax.set_xlabel("Displayed-position age (s)")
     ax.set_xticks([.1, 1, 10, 100], labels=["0.1", "1", "10", "100"])
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
@@ -137,10 +137,8 @@ def results(out):
     fig, axes = panel_row()
     ax = axes[0]; h = np.arange(1, 31)
     iso, mer = get("iso direct")[strict].mean(0), get("merit direct")[strict].mean(0)
-    for curve, label, color, ls, marker in ((iso, "LSTM, isotropic", BLUE, "--", "s"), (mer, "LSTM, MERIT", MERIT, "-", "o")):
-        ax.plot(h, curve, ls, color=color, linewidth=1.4 if color == MERIT else 1.0,
-                marker=marker, markersize=2.6, markevery=[4, 9, 14, 19, 24, 29],
-                markerfacecolor="white" if color != MERIT else color, markeredgewidth=.6, label=label)
+    for curve, label, color in ((iso, "LSTM, isotropic", ISO), (mer, "LSTM, MERIT", MERIT)):
+        ax.plot(h, curve, color=color, linewidth=1.3 if color == MERIT else 1.0, label=label)
     ax.set_xlabel("Prediction horizon (s)"); ax.set_ylabel("Displacement error (m)")
     ax.set_xticks([0, 10, 20, 30]); ax.set_xlim(0, 31); ax.set_ylim(0, None)
     ax.legend(loc="upper left")
@@ -148,11 +146,11 @@ def results(out):
     # (b) Second site: fraction of windows whose ADE exceeds a level, so the tail is visible.
     k = np.load(RESULTS / "kagc_eval_test/test_errors.npz")
     kn = list(k["names"]); ax = axes[1]
-    for n, label, color, ls, lw in (([x for x in kn if x.startswith("KF-CV")][0], "KF-CV (KAGC-tuned)", "#555555", ":", 1.0),
-                                    ("iso direct", "LSTM, isotropic", BLUE, "--", 1.0),
-                                    ("merit direct", "LSTM, MERIT", MERIT, "-", 1.4)):
+    for n, label, color, lw in (([x for x in kn if x.startswith("KF-CV")][0], "KF-CV (KAGC-tuned)", CROSS, 1.0),
+                                ("iso direct", "LSTM, isotropic", ISO, 1.0),
+                                ("merit direct", "LSTM, MERIT", MERIT, 1.3)):
         v = np.sort(k["errors"][kn.index(n)].mean(1))
-        ax.step(v, 1 - np.arange(len(v)) / len(v), ls, where="post", color=color, linewidth=lw, label=label)
+        ax.step(v, 1 - np.arange(len(v)) / len(v), where="post", color=color, linewidth=lw, label=label)
         print("kagc P95", label, round(float(np.percentile(v, 95))))
     ax.axhline(.05, color="#aaaaaa", linewidth=.4, linestyle="--")
     ax.set_yscale("log"); ax.set_ylim(.01, 1.2); ax.set_xlim(0, 2400)
@@ -163,28 +161,20 @@ def results(out):
 
     ax = axes[2]; s = z["mean_staleness_s"]; day = z["day"]
     edges = np.quantile(s, [0, .2, .4, .6, .8, .95, 1])
-    rng = np.random.RandomState(0)
-    centers, gains, bars, counts = [], [], [], []
+    centers, gains, counts = [], [], []
     for lo, hi in zip(edges[:-1], edges[1:]):
         m = (s >= lo) & (s <= hi)
         centers.append(np.median(s[m])); counts.append(m.sum())
-        row, ci = [], []
-        groups = [np.flatnonzero(m & (day == d)) for d in np.unique(day[m])]
-        draws = [np.concatenate([groups[g] for g in rng.randint(0, len(groups), len(groups))]) for _ in range(1000)]
-        for r in ("direct", "projection"):
-            a, b = get(f"merit {r}").mean(1), get(f"iso {r}").mean(1)
-            row.append(100 * (1 - a[m].mean() / b[m].mean()))
-            ci.append(np.percentile([100 * (1 - a[d].mean() / b[d].mean()) for d in draws], [2.5, 97.5]))
-        gains.append(row); bars.append(ci)
-    gains, bars = np.array(gains), np.array(bars)
-    for c, (label, color, fmt, lw, face) in enumerate((("LSTM", "black", "o-", 1.2, "black"), ("LSTM+Fixed", GREY, "s--", 1.0, "white"))):
-        ax.errorbar(np.array(centers) * (.975 if c == 0 else 1.025), gains[:, c], yerr=[gains[:, c] - bars[:, c, 0], bars[:, c, 1] - gains[:, c]], fmt=fmt, color=color,
-                    markersize=3, markerfacecolor=face, markeredgewidth=.6, linewidth=lw, elinewidth=.6, capsize=1.5, label=label)
+        gains.append([100 * (1 - get(f"merit {r}").mean(1)[m].mean() / get(f"iso {r}").mean(1)[m].mean())
+                      for r in ("direct", "projection")])
+    gains = np.array(gains)
+    for c, (label, color, lw) in enumerate((("LSTM", MERIT, 1.3), ("LSTM+Fixed", ISO, 1.0))):
+        ax.plot(centers, gains[:, c], color=color, linewidth=lw, label=label)
     ax.set_xscale("log"); ax.set_xlabel("Window-mean position age (s)"); ax.set_ylabel("ADE reduction (%)")
     ax.set_xticks([.5, 1, 2, 4]); ax.set_xticklabels(["0.5", "1", "2", "4"]); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_ylim(0, None); ax.legend(loc="lower right")
     save_panels(fig, out, "fig_results")
-    print("staleness bins", np.round(centers, 2), "gain", np.round(gains[:, 0], 1), "ci", np.round(bars[:, 0], 1), "n", counts)
+    print("staleness bins", np.round(centers, 2), "gain", np.round(gains[:, 0], 1), "n", counts)
 
 
 def influence(out):
@@ -196,14 +186,11 @@ def influence(out):
         fig = plt.figure(figsize=(width, height))
         ax = fig.add_axes([left / width, bottom / height, (width - left - right) / width, (height - bottom - top) / height])
         bins = data[key]["bins"]; x = np.array([b["median"] for b in bins]) * scale
-        for comp, color, marker, ls, label in (("along", RESIDUAL, "o", "-", "Along-track"), ("cross", "#444444", "s", "--", "Cross-track")):
-            y = np.array([b[f"{comp}_mad"]["value"] for b in bins]); ci = np.array([b[f"{comp}_mad"]["ci95"] for b in bins])
-            ax.errorbar(x, y, yerr=[y - ci[:, 0], ci[:, 1] - y], color=color, marker=marker, linestyle=ls, linewidth=1.0,
-                        markersize=3, markerfacecolor="white" if comp == "cross" else color, markeredgewidth=.6,
-                        capsize=1.5, elinewidth=.6, label=label)
+        for comp, color, label in (("along", RESIDUAL, "Along-track"), ("cross", CROSS, "Cross-track")):
+            ax.plot(x, [b[f"{comp}_mad"]["value"] for b in bins], color=color, linewidth=1.1, label=label)
         if letter == "b":
             k = np.median([b["along_mad"]["value"] / b["median"] for b in bins]); v = np.linspace(20, 100, 81)
-            ax.plot(v, k * v, ":", color=GREY, linewidth=.9, label=f"{k:.2f} s $\\times$ speed")
+            ax.plot(v, k * v, color=REF, linewidth=1.0, label=f"{k:.2f} s $\\times$ speed")
             print("along MAD / speed", round(k, 3))
         ax.set_yscale("log"); ax.set_ylim(1, 100)
         ax.set_yticks([1, 5, 10, 50], labels=["1", "5", "10", "50"])
@@ -222,7 +209,7 @@ def influence(out):
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_axes([left / width, bottom / height, (width - left - right) / width, (height - bottom - top) / height])
     bins = np.arange(.04, .2801, .01)
-    ax.hist(spread[spread < split], bins=bins, color="#444444", label=f"Below {split:.2f} s ({np.sum(spread < split)} aircraft)")
+    ax.hist(spread[spread < split], bins=bins, color=REF, label=f"Below {split:.2f} s ({np.sum(spread < split)} aircraft)")
     ax.hist(spread[spread >= split], bins=bins, color=BLUE, label=f"Above {split:.2f} s ({np.sum(spread >= split)} aircraft)")
     ax.axvline(split, color=GREY, linestyle=":", linewidth=.9)
     ax.set_xlim(.04, .28); ax.set_xlabel(r"Per-aircraft timing spread, MAD$(e_\parallel/v)$ (s)"); ax.set_ylabel("Aircraft")
