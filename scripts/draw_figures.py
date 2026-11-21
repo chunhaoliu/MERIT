@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 # Okabe-Ito colors, with vermilion and a heavier stroke reserved for MERIT.
 BLUE, MERIT, GREY = "#0072B2", "#D55E00", "#777777"
+RESIDUAL = "#C00000"  # position residuals; blue is reserved for report timing
 PAGE_WIDTH, GUTTER = 7.16, .07
 EXPERIMENT_WIDTH, EXPERIMENT_HEIGHT = 2.30, 1.82
 
@@ -82,7 +83,7 @@ def error_structure(out):
     fig, axes = panel_row()
     ax = axes[0]
     bins = np.linspace(-150, 150, 301)
-    for key, color, ls, label in (("along", BLUE, "-", "Along-track"),
+    for key, color, ls, label in (("along", RESIDUAL, "-", "Along-track"),
                                   ("cross", "#333333", "--", "Cross-track")):
         r = pool[key]
         density, edges = np.histogram(r, bins=bins, density=True)
@@ -105,7 +106,7 @@ def error_structure(out):
     ax = axes[1]
     lags = [1, 2, 3, 5, 10]
     measured = summary["raw"]["half10"]["along"]["acf_clipped"]
-    ax.plot(lags, [measured[str(l)] for l in lags], "o-", color=BLUE, markersize=3, linewidth=1.0, label="Measured along-track")
+    ax.plot(lags, [measured[str(l)] for l in lags], "o-", color=RESIDUAL, markersize=3, linewidth=1.0, label="Measured along-track")
     for key, color, ls, marker, label in (("sigma25_rho0_half10", "#444444", "--", "s", "Synthetic white noise"),
                                    ("sigma25_rho0.8_half10", GREY, ":", "^", r"Synthetic AR(1), $\rho=0.8$")):
         c = summary["calibration"][key]["acf_clipped"]
@@ -156,7 +157,7 @@ def results(out):
     ax.axhline(.05, color="#aaaaaa", linewidth=.4, linestyle="--")
     ax.set_yscale("log"); ax.set_ylim(.01, 1.2); ax.set_xlim(0, 2400)
     ax.set_yticks([.01, .1, 1], labels=["0.01", "0.1", "1"])
-    ax.set_xticks([0, 500, 1000, 1500, 2000])
+    ax.set_xticks([0, 500, 1000, 1500, 2000], labels=["", "500", "1000", "1500", "2000"])
     ax.set_xlabel("Window ADE (m)"); ax.set_ylabel("Fraction of windows exceeding")
     ax.legend(loc="upper right")
 
@@ -176,8 +177,8 @@ def results(out):
             ci.append(np.percentile([100 * (1 - a[d].mean() / b[d].mean()) for d in draws], [2.5, 97.5]))
         gains.append(row); bars.append(ci)
     gains, bars = np.array(gains), np.array(bars)
-    for c, (label, color, fmt, lw, face) in enumerate((("LSTM", MERIT, "o-", 1.4, MERIT), ("LSTM+Fixed", BLUE, "s--", 1.0, "white"))):
-        ax.errorbar(centers, gains[:, c], yerr=[gains[:, c] - bars[:, c, 0], bars[:, c, 1] - gains[:, c]], fmt=fmt, color=color,
+    for c, (label, color, fmt, lw, face) in enumerate((("LSTM", "black", "o-", 1.2, "black"), ("LSTM+Fixed", GREY, "s--", 1.0, "white"))):
+        ax.errorbar(np.array(centers) * (.975 if c == 0 else 1.025), gains[:, c], yerr=[gains[:, c] - bars[:, c, 0], bars[:, c, 1] - gains[:, c]], fmt=fmt, color=color,
                     markersize=3, markerfacecolor=face, markeredgewidth=.6, linewidth=lw, elinewidth=.6, capsize=1.5, label=label)
     ax.set_xscale("log"); ax.set_xlabel("Window-mean position age (s)"); ax.set_ylabel("ADE reduction (%)")
     ax.set_xticks([.5, 1, 2, 4]); ax.set_xticklabels(["0.5", "1", "2", "4"]); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
@@ -195,7 +196,7 @@ def influence(out):
         fig = plt.figure(figsize=(width, height))
         ax = fig.add_axes([left / width, bottom / height, (width - left - right) / width, (height - bottom - top) / height])
         bins = data[key]["bins"]; x = np.array([b["median"] for b in bins]) * scale
-        for comp, color, marker, ls, label in (("along", BLUE, "o", "-", "Along-track"), ("cross", "#444444", "s", "--", "Cross-track")):
+        for comp, color, marker, ls, label in (("along", RESIDUAL, "o", "-", "Along-track"), ("cross", "#444444", "s", "--", "Cross-track")):
             y = np.array([b[f"{comp}_mad"]["value"] for b in bins]); ci = np.array([b[f"{comp}_mad"]["ci95"] for b in bins])
             ax.errorbar(x, y, yerr=[y - ci[:, 0], ci[:, 1] - y], color=color, marker=marker, linestyle=ls, linewidth=1.0,
                         markersize=3, markerfacecolor="white" if comp == "cross" else color, markeredgewidth=.6,
@@ -204,7 +205,7 @@ def influence(out):
             k = np.median([b["along_mad"]["value"] / b["median"] for b in bins]); v = np.linspace(20, 100, 81)
             ax.plot(v, k * v, ":", color=GREY, linewidth=.9, label=f"{k:.2f} s $\\times$ speed")
             print("along MAD / speed", round(k, 3))
-        ax.set_yscale("log"); ax.set_ylim(1, 50)
+        ax.set_yscale("log"); ax.set_ylim(1, 100)
         ax.set_yticks([1, 5, 10, 50], labels=["1", "5", "10", "50"])
         ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.set_xlabel(xlabel); ax.set_ylabel("Scaled MAD (m)")
@@ -217,6 +218,7 @@ def influence(out):
         print("influence", letter, np.round(x, 1))
     stamps = json.loads((RESULTS / "measurement/timestamps.json").read_text(encoding="utf-8"))
     spread, split = np.array(stamps["aircraft_timing_mad_s"]), stamps["aircraft_split_s"]
+    height = 1.25
     fig = plt.figure(figsize=(width, height))
     ax = fig.add_axes([left / width, bottom / height, (width - left - right) / width, (height - bottom - top) / height])
     bins = np.arange(.04, .2801, .01)
