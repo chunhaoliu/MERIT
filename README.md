@@ -26,7 +26,7 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks, influence data, log time-stamp statistics and Table I CIs |
 | `scripts/train.py` | paper training settings for all ten predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
-| `scripts/reproduce_tables.py` | source-data-free reproduction of 443 printed cells: Tables I-VI, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
+| `scripts/reproduce_tables.py` | source-data-free reproduction of the printed cells: Tables I-VI, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
 | `scripts/draw_figures.py` | redraws Figures 2, 3 and 5 from bundled derived statistics and errors |
 | `checkpoints/` | 175 checkpoints, 457.8 MB, with settings, SHA-256 and reference metrics in `index.json` |
 | `results/` | full-precision per-seed raw/processed metrics, validation ablations, test factorials, input processing, smoothing sensitivity and window-error arrays |
@@ -108,13 +108,13 @@ python scripts/train.py --data data --row direct --noise merit --date-disjoint -
 
 The residual-pool reconstruction matched the released NPZ byte for byte. Recovery can regenerate its known
 synthetic tracks locally, or read `--synthetic-cache`. `CONFIGS.md` gives the remaining control settings.
-Run each training setting for seeds 42, 123, 456, 0 and 1, using the first three for the factorial/validation ablations.
+Run each training setting for seeds 42, 123, 456, 0 and 1, using the first three for the validation ablations.
 
 ## Checkpoint coverage
 
 The 175 weights comprise 50 main checkpoints for LSTM, LSTM+Fixed, LSTM+NARF, PatchTST and Transformer,
 20 input-processing checkpoints, 45 training/scale/age-bank controls, and 10 date-disjoint LSTM checkpoints. Main and selected training controls
-have five seeds, while factorial, scale and fine-tuning controls have three. Files are unchanged from the
+have five seeds, while bundled factorial, scale and fine-tuning controls have three (`CONFIGS.md` lists the later factorial seeds). Files are unchanged from the
 experiment artifacts and individually smaller than 100 MB. The Transformer, iTransformer and residual PatchTST
 weights are the validation-selected five-seed retrains described in `CONFIGS.md`. No large-file extension is required.
 
@@ -123,9 +123,9 @@ Its complete five-seed results at both sites (validation-selected setting in `re
 included. Retrain those weights with `scripts/train.py` for inference reproduction of that row.
 The other controls are selected by their `group`, `row` and `seed` in `checkpoints/index.json`.
 
-The eight PDF panels reproduce Figures 2, 3 and 5.
+The nine PDF panels reproduce Figures 2, 3 and 5.
 Figure 2 shows KBTP residual structure and displayed-position ages at the two sites. Figure 3 shows residual
-influence by range and speed. Figure 5 shows KBTP horizon errors, the KAGC window-error tail and age-dependent
+influence by range and speed and the per-aircraft timing spread. Figure 5 shows KBTP horizon errors, the KAGC window-error tail and age-dependent
 gains with 95% day-cluster bootstrap bars. Drawing uses only bundled statistics and window errors.
 
 ## Third-party implementation

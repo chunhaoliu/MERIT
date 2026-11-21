@@ -106,6 +106,7 @@ plus the listed arguments. The index records each released checkpoint's exact se
 | MERIT plus age (`merit_age`) | `--noise merit --report-age` |
 | Matched residuals, measured ages, age input (`iso_stale_age`) | `--noise merit --pool gaussian:12.35 --report-age` |
 | Near-zero residuals plus measured ages (`near0`) | `--noise merit --pool gaussian:0.01 --kmax 2` |
+| Near-zero residuals without timing (`near0none`) | `--noise measured --pool gaussian:0.01 --kmax 2` |
 | Date-disjoint isotropic / MERIT (`dd_iso`, `dd_merit`) | `--noise iso --date-disjoint` / `--noise merit --kmax 2 --date-disjoint` |
 
 Raw-data training uses 28,644 input/reference windows and 3,605 selection windows from the final eight
@@ -113,12 +114,12 @@ eligible training-period days. It retains the processed-training scaler. The fac
 ablations use seeds 42/123/456. Selected main/raw/heuristic/age-bank/input comparisons use all five seeds,
 as do the `near0`, `matched_stale` and date-disjoint groups (`results/p8_*`).
 
-Table VI has seven residual/timing rows and five alternative remedies. Its no-timing matched-isotropic KBTP
-cells use the five-seed `gauss direct` results in `raw_eval_test_final`; its KAGC cells use the three-seed
-`iso_matched direct` results in `kagc_eval_test_2x2`. Measured residuals without timing use the three-seed
-`measured direct` results in `raw_eval_test_2x2` / `kagc_eval_test_2x2`. These cells carry a dagger.
-The paired effect of adding measured ages to matched isotropic residuals uses the same three seeds on
-both sides (`iso_matched_stale direct` versus `iso_matched direct`), separately from the five-seed table rows.
+Table VI(a) is a five-seed residual-by-timing factorial and Table VI(b) lists the alternative remedies.
+The factorial window errors are in `results/factorial_kbtp` and `results/factorial_kagc`; raw-data training at
+KAGC is in `results/kagc_eval_test_raw`. Seeds 0 and 1 of the measured-residual group and all near-zero/no-timing
+seeds were trained later with the same settings in Python 3.12 and PyTorch 2.14; a seed-42 rerun gave a strict
+KBTP ADE of 125.0 m against 125.1 m originally. These seven weights are not bundled. The validation step-length
+distances quoted in Section V-D are in `results/measurement/fidelity.json`.
 Validation ablations, scale bounds, raw fine-tuning and the KAGC-age sensitivity remain text controls.
 
 Date-disjoint retraining keeps the official training scenes whose tracks match same-aircraft raw reports on a

@@ -179,7 +179,7 @@ def results(out):
     for c, (label, color, fmt, lw, face) in enumerate((("LSTM", MERIT, "o-", 1.4, MERIT), ("LSTM+Fixed", BLUE, "s--", 1.0, "white"))):
         ax.errorbar(centers, gains[:, c], yerr=[gains[:, c] - bars[:, c, 0], bars[:, c, 1] - gains[:, c]], fmt=fmt, color=color,
                     markersize=3, markerfacecolor=face, markeredgewidth=.6, linewidth=lw, elinewidth=.6, capsize=1.5, label=label)
-    ax.set_xscale("log"); ax.set_xlabel("Median history age (s)"); ax.set_ylabel("ADE reduction (%)")
+    ax.set_xscale("log"); ax.set_xlabel("Window-mean position age (s)"); ax.set_ylabel("ADE reduction (%)")
     ax.set_xticks([.5, 1, 2, 4]); ax.set_xticklabels(["0.5", "1", "2", "4"]); ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_ylim(0, None); ax.legend(loc="lower right")
     save_panels(fig, out, "fig_results")
@@ -187,9 +187,9 @@ def results(out):
 
 
 def influence(out):
-    """Column-width panels showing residual spread versus range and speed."""
+    """Column-width panels: residual spread versus range and speed, and per-aircraft timing spread."""
     data = json.loads((RESULTS / "measurement/influence.json").read_text(encoding="utf-8"))
-    width, height, left, right, bottom, top = 3.45, 1.75, .54, .08, .40, .10
+    width, height, left, right, bottom, top = 3.45, 1.08, .54, .08, .34, .05
     for letter, key, scale, xlabel in (("a", "residual_range", 1e-3, "Range from receiver (km)"),
                                        ("b", "residual_speed", 1, "Ground speed (m/s)")):
         fig = plt.figure(figsize=(width, height))
@@ -205,16 +205,28 @@ def influence(out):
             ax.plot(v, k * v, ":", color=GREY, linewidth=.9, label=f"{k:.2f} s $\\times$ speed")
             print("along MAD / speed", round(k, 3))
         ax.set_yscale("log"); ax.set_ylim(1, 50)
-        ax.set_yticks([1, 2, 5, 10, 20, 50], labels=["1", "2", "5", "10", "20", "50"])
+        ax.set_yticks([1, 5, 10, 50], labels=["1", "5", "10", "50"])
         ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
         ax.set_xlabel(xlabel); ax.set_ylabel("Scaled MAD (m)")
         ax.set_xlim(*((20, 100) if letter == "b" else (0, 22)))
         if letter == "a":
             ax.set_xticks([0, 5, 10, 15, 20])
-        ax.legend(loc="upper left", ncol=2 if letter == "a" else 1)
+        ax.legend(loc="upper left", ncol=2 if letter == "a" else 3)
         save(fig, out, f"fig_influence_{letter}")
         plt.close(fig)
         print("influence", letter, np.round(x, 1))
+    stamps = json.loads((RESULTS / "measurement/timestamps.json").read_text(encoding="utf-8"))
+    spread, split = np.array(stamps["aircraft_timing_mad_s"]), stamps["aircraft_split_s"]
+    fig = plt.figure(figsize=(width, height))
+    ax = fig.add_axes([left / width, bottom / height, (width - left - right) / width, (height - bottom - top) / height])
+    bins = np.arange(.04, .2801, .01)
+    ax.hist(spread[spread < split], bins=bins, color="#444444", label=f"Below {split:.2f} s ({np.sum(spread < split)} aircraft)")
+    ax.hist(spread[spread >= split], bins=bins, color=BLUE, label=f"Above {split:.2f} s ({np.sum(spread >= split)} aircraft)")
+    ax.axvline(split, color=GREY, linestyle=":", linewidth=.9)
+    ax.set_xlim(.04, .28); ax.set_xlabel(r"Per-aircraft timing spread, MAD$(e_\parallel/v)$ (s)"); ax.set_ylabel("Aircraft")
+    ax.legend(loc="upper right")
+    save(fig, out, "fig_influence_c")
+    plt.close(fig)
 
 
 def cases(out):

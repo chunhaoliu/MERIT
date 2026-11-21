@@ -41,6 +41,24 @@ def compare(target, other, day, mask, draws=2000, seed=0):
                 days=len(groups))
 
 
+def bootstrap_p(target, other, day, mask, draws=20000, seed=0):
+    """Two-sided day-cluster bootstrap p-value of the relative ADE change of target vs other."""
+    _, index = np.unique(day[mask], return_inverse=True)
+    a, b = np.bincount(index, target[mask].mean(1)), np.bincount(index, other[mask].mean(1))
+    sample = np.random.RandomState(seed).randint(0, len(a), (draws, len(a)))
+    ratios = a[sample].sum(1) / b[sample].sum(1) - 1
+    return min(1., 2 * (min(np.sum(ratios <= 0), np.sum(ratios >= 0)) + 1) / (draws + 1))
+
+
+def holm(p_values):
+    """Holm step-down adjusted p-values."""
+    adjusted, top = np.empty(len(p_values)), 0.
+    for rank, i in enumerate(np.argsort(p_values)):
+        top = max(top, min(1., (len(p_values) - rank) * p_values[i]))
+        adjusted[i] = top
+    return adjusted
+
+
 def compare_p95(target, other, day, draws=2000, seed=0):
     """Relative change of the 95th-percentile window ADE of target vs other, day-cluster bootstrap 95% CI."""
     a, b = target.mean(1), other.mean(1)

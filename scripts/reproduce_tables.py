@@ -41,8 +41,6 @@ CI_SPECS = {
     "filter MERIT KBTP strict": ("raw_eval_test_mb", "merit direct", "ftp_merit direct", "strict_unseen"),
     "age input KAGC": ("kagc_eval_test_mb", "merit direct", "merit_age direct", "all"),
     "age input residual structure KBTP strict": ("raw_eval_test_mb", "merit_age direct", "iso_stale_age direct", "strict_unseen"),
-    "measured timing KBTP strict (three seeds)": ("raw_eval_test_2x2", "iso_matched_stale direct", "iso_matched direct", "strict_unseen"),
-    "measured timing KAGC (three seeds)": ("kagc_eval_test_2x2", "iso_matched_stale direct", "iso_matched direct", "all"),
 }
 
 
@@ -201,31 +199,24 @@ def main_table(site, bootstrap=False):
 
 
 def components():
-    # Seven residual/timing combinations, followed by five alternative remedies.
-    specs = [
-        ("Isotropic | no timing", "raw_eval_test_final", "iso direct", "kagc_eval_test", "iso direct", False, False),
-        ("Matched isotropic | no timing", "raw_eval_test_final", "gauss direct", "kagc_eval_test_2x2", "iso_matched direct", False, True),
-        ("Measured | no timing", "raw_eval_test_2x2", "measured direct", "kagc_eval_test_2x2", "measured direct", True, True),
-        ("Near-zero | Bernoulli", "raw_eval_test_heur", "heur direct", "kagc_eval_test", "heur direct", False, False),
-        ("Near-zero | measured ages", "p8_kbtp", "near0 direct", "p8_kagc", "near0 direct", False, False),
-        ("Matched isotropic | measured ages", "p8_kbtp", "matched_stale direct", "p8_kagc", "matched_stale direct", False, False),
-        ("Measured (MERIT) | measured ages", "raw_eval_test_final", "merit direct", "kagc_eval_test", "merit direct", False, False),
-        ("Raw-data training", "raw_eval_test_final", "raw direct", None, None, False, False),
-        ("Isotropic + Kalman front end", "raw_eval_test_mb", "ftp_iso direct", "kagc_eval_test_mb", "ftp_iso direct", False, False),
-        ("MERIT + Kalman front end", "raw_eval_test_mb", "ftp_merit direct", "kagc_eval_test_mb", "ftp_merit direct", False, False),
-        ("Matched isotropic + ages + age input", "raw_eval_test_mb", "iso_stale_age direct", "kagc_eval_test_mb", "iso_stale_age direct", False, False),
-        ("MERIT + age input", "raw_eval_test_mb", "merit_age direct", "kagc_eval_test_mb", "merit_age direct", False, False),
-    ]
+    # Residual x timing factorial (KBTP strict, KAGC ADE and P95), then the alternative remedies.
     out = {}
-    for label, kb, bn, ka, an, kb_three, ka_three in specs:
-        cells = [metric(load(kb), bn, s, "ADE") + ("\u2020" if kb_three else "") for s in ("strict_unseen", "all")]
-        if ka is None:
-            cells += ["--", "--"]
-        else:
-            e, _, _ = errors(ka)
-            mark = "\u2020" if ka_three else ""
-            cells += [metric(load(ka), an, "all", "ADE") + mark, q(np.percentile(e[an].mean(1), 95), 0) + mark]
-        out[label] = cells
+    for label, name in (("Isotropic", "iso"), ("Near-zero", "near0none"), ("Matched isotropic", "matched"), ("Measured", "measured"),
+                        ("Near-zero + ages", "near0"), ("Matched isotropic + ages", "matchedage"), ("Measured + ages (MERIT)", "merit")):
+        e, _, _ = errors("factorial_kagc")
+        out[label] = [metric(load("factorial_kbtp"), f"{name} direct", "strict_unseen", "ADE"),
+                      metric(load("factorial_kagc"), f"{name} direct", "all", "ADE"), q(np.percentile(e[f"{name} direct"].mean(1), 95), 0)]
+    for label, kb, bn, ka, an in (
+            ("MERIT", "raw_eval_test_final", "merit direct", "kagc_eval_test", "merit direct"),
+            ("Near-zero + Bernoulli repeats", "raw_eval_test_heur", "heur direct", "kagc_eval_test", "heur direct"),
+            ("Raw-data training", "raw_eval_test_final", "raw direct", "kagc_eval_test_raw", "raw direct"),
+            ("Isotropic + Kalman front end", "raw_eval_test_mb", "ftp_iso direct", "kagc_eval_test_mb", "ftp_iso direct"),
+            ("MERIT + Kalman front end", "raw_eval_test_mb", "ftp_merit direct", "kagc_eval_test_mb", "ftp_merit direct"),
+            ("Matched isotropic + ages + age input", "raw_eval_test_mb", "iso_stale_age direct", "kagc_eval_test_mb", "iso_stale_age direct"),
+            ("MERIT + age input", "raw_eval_test_mb", "merit_age direct", "kagc_eval_test_mb", "merit_age direct")):
+        e, _, _ = errors(ka)
+        out[label] = [metric(load(kb), bn, s, "ADE") for s in ("strict_unseen", "all")] + [
+            metric(load(ka), an, "all", "ADE"), q(np.percentile(e[an].mean(1), 95), 0)]
     return out
 
 
@@ -253,7 +244,7 @@ def signed(value):
 
 def text_results():
     """Date-disjoint retraining, five-seed timing controls and tail-error intervals quoted in the text."""
-    from merit.statistics import compare, compare_p95
+    from merit.statistics import bootstrap_p, compare, compare_p95, holm
     out = {}
 
     def ade(label, study, target, other, strict=False, values=True, intervals=True):
@@ -314,6 +305,48 @@ def text_results():
     out["training epoch cost"] = [q(statistics.fmean(by_mode["iso"]), 2), q(statistics.fmean(by_mode["merit"]), 2)]
     old_patch = load("raw_eval_test_final")
     out["original PatchTST strict ADE"] = [metric(old_patch, "iso patchtst", "strict_unseen", "ADE"), metric(old_patch, "merit patchtst", "strict_unseen", "ADE"), signed(-0.296)]
+    # Five-seed observation-model factorial and raw-data training at KAGC.
+    for site, study, strict in (("KBTP strict", "factorial_kbtp", True), ("KAGC", "factorial_kagc", False)):
+        ade(f"ages on near-zero residuals {site}", study, "near0 direct", "near0none direct", strict)
+        ade(f"ages alone vs residuals alone {site}", study, "near0 direct", "measured direct", strict)
+    e, _, mask = errors("factorial_kbtp")
+    out["matched-noise factorial KBTP strict"] = [q(e[n + " direct"][mask].mean()) for n in ("matched", "matchedage", "measured")]
+    ade("matched plus ages KAGC", "factorial_kagc", "matchedage direct", "matched direct")
+    ade("matched to measured residuals KAGC", "factorial_kagc", "measured direct", "matched direct")
+    ade("MERIT vs raw-data training KAGC", "kagc_eval_test_raw", "merit direct", "raw direct")
+    e, day, _ = errors("kagc_eval_test_raw")
+    c = compare(e["merit direct"][:, -1:], e["raw direct"][:, -1:], day, np.ones(len(day), bool), draws=2000, seed=0)
+    out["MERIT vs raw-data training KAGC FDE"] = [q(e["raw direct"][:, -1].mean()), q(e["merit direct"][:, -1].mean()),
+                                                  signed(c["change"])] + [signed(v) for v in c["ci95"]]
+    c = compare_p95(e["merit direct"], e["raw direct"], day, draws=2000, seed=0)
+    out["MERIT vs raw-data training KAGC P95"] = [q(c["p95"][1], 0), q(c["p95"][0], 0), signed(c["change"])] + [signed(v) for v in c["ci95"]]
+    fidelity = json.loads((ROOT / "results/measurement/fidelity.json").read_text())["models"]
+    without = [v["W1_KBTP"] for k, v in fidelity.items() if k.endswith("| none")]
+    aged = [v["W1_KBTP"] for k, v in fidelity.items() if k.endswith("measured ages")]
+    out["validation step-length W1"] = [q(min(without), 2), q(max(without), 2), q(min(aged), 2), q(max(aged), 2),
+                                        q(min(v["W1_KAGC"] for v in fidelity.values()), 2)]
+    # Holm adjustment across the ten predictors on each site's primary windows.
+    for site, label in (("kbtp", "KBTP strict"), ("kagc", "KAGC")):
+        changes, p_values = [], []
+        for display in PREDICTORS:
+            study, source = source_for(display, site)
+            e, day, mask = errors(study)
+            mask = mask if site == "kbtp" else np.ones(len(day), bool)
+            changes.append(e[f"merit {source}"][mask].mean() / e[f"iso {source}"][mask].mean() - 1)
+            p_values.append(bootstrap_p(e[f"merit {source}"], e[f"iso {source}"], day, mask))
+        improved = holm(p_values)[np.array(changes) < 0]
+        out[f"Holm improvements {label}"] = [str(len(improved)), f"{np.ceil(improved.max() * 1000) / 1000:.3f}"]
+    # Earlier default budgets versus the validation-selected configurations, KBTP strict.
+    cells, narrowed = [], 0
+    for display, study in (("transformer", "raw_eval_test_final"), ("itransformer", "p10_kbtp"), ("patchtst", "raw_eval_test_final"),
+                           ("dlinear", "p10_kbtp"), ("trajairnet", "raw_eval_test_sota")):
+        e, day, mask = errors(study)
+        old = compare(e[f"merit {display}"], e[f"iso {display}"], day, mask, draws=2000, seed=0)["change"]
+        tuned_study, source = source_for(display, "kbtp")
+        e, _, mask = errors(tuned_study)
+        narrowed += e[f"merit {source}"][mask].mean() / e[f"iso {source}"][mask].mean() - 1 > old
+        cells.append(signed(old))
+    out["default-budget changes and narrowed count"] = cells + [str(narrowed)]
     return out
 
 
