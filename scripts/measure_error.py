@@ -18,7 +18,7 @@ def main():
     p.add_argument("--train-replay", type=Path, help="training-period replay NPZ for day CIs and influence")
     p.add_argument("--synthetic-cache", type=Path, help="optional known-track cache for estimator calibration")
     p.add_argument("--output", type=Path, required=True)
-    p.add_argument("--mode", choices=["measure", "recovery", "day-ci", "influence"], default="measure")
+    p.add_argument("--mode", choices=["measure", "recovery", "day-ci", "influence", "timestamps"], default="measure")
     p.add_argument("--pool", type=Path, default=ROOT / "merit/residual_pool.npz")
     p.add_argument("--halves", nargs="+", type=float, default=[5, 10, 15])
     p.add_argument("--clip", type=float, default=50.)
@@ -30,7 +30,7 @@ def main():
     p.add_argument("--skip-calibration", action="store_true")
     a = p.parse_args()
     if a.mode != "recovery" and a.raw is None:
-        p.error("--raw is required for measurement, day CIs and influence")
+        p.error("--raw is required for measurement, day CIs, influence and timestamps")
     if a.mode in ("day-ci", "influence") and a.train_replay is None:
         p.error("--train-replay is required for day CIs and influence")
     for source in (a.raw, a.train_replay, a.synthetic_cache):
@@ -49,6 +49,11 @@ def main():
                 print(f"  {row['lo']:.0f}-{row['hi'] or 'inf'} n={row['n']} median={row['median']:.0f}",
                       {k: round(v["value"], 3) for k, v in row.items() if isinstance(v, dict)})
         print("pooled", payload["pooled"])
+        return 0
+    if a.mode == "timestamps":
+        payload = m.timestamps(m.train_days(a.raw)[:a.max_days or None], half=a.pool_half)
+        (a.output / "timestamps.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        print(json.dumps({k: v for k, v in payload.items() if k != "days"}, indent=1))
         return 0
     needs_synthetic = a.mode == "recovery" or (a.mode == "measure" and not a.skip_calibration)
     if needs_synthetic and m.SYNTHETIC is None:

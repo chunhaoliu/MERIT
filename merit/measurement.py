@@ -188,7 +188,7 @@ def day_ci(days, half, clip, draws=1000, seed=0):
 def _influence_segments(days, gap=GAP_S, min_updates=MIN_UPDATES, half=10.0):
     """Decompose residuals with receiver range, fitted speed and day."""
     from .coordinates import RECEIVER
-    out = {k: [] for k in ("along", "cross", "range_m", "speed_mps", "altitude_m", "day")}
+    out = {k: [] for k in ("along", "cross", "range_m", "speed_mps", "altitude_m", "day", "id")}
     lat_r, lon_r = np.radians(RECEIVER)
     for day in days:
         day_name = os.path.basename(day)[:8]
@@ -199,7 +199,7 @@ def _influence_segments(days, gap=GAP_S, min_updates=MIN_UPDATES, half=10.0):
                 continue
             stamps = pd.to_datetime(frame["Time"], format="%H:%M:%S.%f", errors="coerce")
             frame["t"] = (stamps - stamps.dt.normalize()).dt.total_seconds()
-            for _, g in frame.dropna().groupby("ID", sort=False):
+            for aircraft, g in frame.dropna().groupby("ID", sort=False):
                 g = g.sort_values("t", kind="stable")
                 g = g[((g.Lat.diff() != 0) | (g.Lon.diff() != 0)) & (g.Altitude > MIN_ALT_FT)]
                 if len(g) < min_updates:
@@ -228,7 +228,72 @@ def _influence_segments(days, gap=GAP_S, min_updates=MIN_UPDATES, half=10.0):
                     range_m = np.hypot(xf[idx], yf[idx])
                     out["range_m"].append(range_m[valid]); out["speed_mps"].append(speed[valid])
                     out["altitude_m"].append(alt[idx][valid]); out["day"].append(np.full(valid.sum(), day_name, dtype="U8"))
+                    out["id"].append(np.full(valid.sum(), aircraft, dtype=np.int64))
     return {k: np.concatenate(v) if v else np.empty(0, dtype=("U8" if k == "day" else float)) for k, v in out.items()}
+
+
+def timestamps(days, half=10.0, min_residuals=2000, split_s=.10, seed=0):
+    """Log time-stamp semantics and per-aircraft timing spread MAD(e_along / speed); Student-t fits of the residuals.
+    Each log row is a snapshot of the receiver's target table: Time is the last message time of the aircraft and
+    Age the time since then when the row was written, so a Time repeats in successive snapshots."""
+    import scipy.stats
+    mad = lambda z: 1.4826 * np.median(np.abs(z - np.median(z)))
+    q = lambda v: {f"p{p}": float(np.percentile(v, p)) for p in (10, 50, 90)}
+    res = _influence_segments(days, half=half)
+    delta = res["along"] / res["speed_mps"]
+    spacing, write_delay, no_position = [], [], {}
+    for day in days:
+        for path in glob.glob(os.path.join(day, "*.csv")):
+            try:
+                frame = pd.read_csv(path, usecols=["ID", "Time", "Altitude", "Lat", "Lon", "Age"]).dropna()
+            except pd.errors.EmptyDataError:
+                continue
+            frame = frame[frame.Altitude > MIN_ALT_FT]
+            frame["t"] = pd.to_timedelta(frame.Time).dt.total_seconds()
+            for aircraft, g in frame.groupby("ID", sort=False):
+                g = g.sort_values(["t", "Age"], kind="stable")
+                written = np.diff((g.t + g.Age).to_numpy())
+                spacing.append(written[written > 0])
+                g = g.drop_duplicates("Time")  # first snapshot of each time stamp
+                changed = ((g.Lat.diff() != 0) | (g.Lon.diff() != 0)).to_numpy()
+                write_delay.append(g.Age.to_numpy()[changed])
+                n, k = no_position.get(aircraft, (0, 0))
+                no_position[aircraft] = (n + len(g) - 1, k + int((~changed[1:]).sum()))
+    spacing, write_delay = np.concatenate(spacing), np.concatenate(write_delay)
+    ids, counts = np.unique(res["id"], return_counts=True)
+    rows = []
+    for aircraft, n in zip(ids[counts >= min_residuals], counts[counts >= min_residuals]):
+        m = res["id"] == aircraft
+        stamps, unchanged = no_position[aircraft]
+        rows.append({"id": int(aircraft), "n": int(n), "days": int(len(np.unique(res["day"][m]))),
+                     "timing_mad_s": float(mad(delta[m])), "median_speed_mps": float(np.median(res["speed_mps"][m])),
+                     "no_position_stamp_fraction": unchanged / max(stamps, 1)})
+    groups = {}
+    for name, keep in (("low", lambda r: r["timing_mad_s"] < split_s), ("high", lambda r: r["timing_mad_s"] >= split_s)):
+        g = [r for r in rows if keep(r)]
+        if not g:
+            continue
+        groups[name] = {"aircraft": len(g), "residual_share": sum(r["n"] for r in g) / sum(r["n"] for r in rows),
+                        "timing_mad_s": q([r["timing_mad_s"] for r in g]),
+                        "no_position_stamp_fraction": q([r["no_position_stamp_fraction"] for r in g]),
+                        "median_speed_mps": float(np.median([r["median_speed_mps"] for r in g]))}
+    rng = np.random.RandomState(seed)
+    fits = {}
+    for c in ("along", "cross"):
+        kept = res[c][np.abs(res[c]) < 500]  # as for the replay pool
+        sample = rng.choice(kept, min(200000, len(kept)), replace=False)
+        nu, loc, scale = scipy.stats.t.fit(sample)
+        fits[c] = {"nu": float(nu), "loc": float(loc), "scale": float(scale),
+                   "p1_p99_m": [float(np.percentile(res[c], 1)), float(np.percentile(res[c], 99))],
+                   "delta_aic_vs_t": {d: float(2 * 2 - 2 * getattr(scipy.stats, d).logpdf(sample, *getattr(scipy.stats, d).fit(sample)).sum()
+                                               - (2 * 3 - 2 * scipy.stats.t.logpdf(sample, nu, loc, scale).sum()))
+                                      for d in ("norm", "laplace")}}
+    stamps = sum(v[0] for v in no_position.values()); unchanged = sum(v[1] for v in no_position.values())
+    return {"schema": "merit_adsb_timestamps_v1", "days": [os.path.basename(d)[:8] for d in days], "half_window_s": half,
+            "snapshot_spacing_s": q(spacing), "write_delay_of_new_positions_s": q(write_delay),
+            "no_position_stamp_fraction": unchanged / stamps, "pooled_timing_mad_s": float(mad(delta)),
+            "aircraft_min_residuals": min_residuals, "aircraft_split_s": split_s, "aircraft_groups": groups,
+            "student_t": fits}
 
 
 def _merge_influence_edges(values, edges, minimum=2000):

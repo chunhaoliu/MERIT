@@ -23,7 +23,7 @@ Baseline configurations and the evaluation protocol are in `CONFIGS.md`.
 | `merit/patchtst.py`, `merit/transformer.py`, `merit/trajairnet.py` | attention and single-aircraft generative predictors |
 | `merit/residual_pool.npz`, `merit/ages_*.npz` | 578,438 paired residuals and complete KBTP/KAGC training-period age banks |
 | `scripts/prepare_data.py` | rebuilds from public sources and checks container and array hashes |
-| `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks, influence data and Table I CIs |
+| `scripts/measure_error.py` | regenerates measurement summaries, the pool, recovery checks, influence data, log time-stamp statistics and Table I CIs |
 | `scripts/train.py` | paper training settings for all ten predictors and the training/input controls |
 | `scripts/evaluate.py` | released-checkpoint evaluation, CV/KF-CV, per-seed metric checks, day bootstrap and Wilcoxon |
 | `scripts/reproduce_tables.py` | source-data-free reproduction of 443 printed cells: Tables I-VI, paired CIs, and the validation, date-disjoint, timing, tail-error and figure results quoted in the text |
@@ -99,6 +99,7 @@ python scripts/measure_error.py --raw <KBTP_raw_data> --output outputs/measureme
 python scripts/measure_error.py --mode recovery --output outputs/recovery
 python scripts/measure_error.py --mode day-ci --raw <KBTP_raw_data> --train-replay data/raw_replay/train.npz --output outputs/measurement_ci
 python scripts/measure_error.py --mode influence --raw <KBTP_raw_data> --train-replay data/raw_replay/train.npz --output outputs/measurement_influence
+python scripts/measure_error.py --mode timestamps --raw <KBTP_raw_data> --output outputs/measurement_timestamps
 python scripts/train.py --data data --row direct --noise merit --seed 42 --output runs/merit_direct_s42
 python scripts/train.py --data data --row direct --noise iso --seed 42 --output runs/iso_direct_s42
 python scripts/train.py --data data --row trajairnet --noise merit --seed 42 --output runs/merit_trajairnet_s42
