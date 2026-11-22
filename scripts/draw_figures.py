@@ -28,15 +28,15 @@ EXPERIMENT_WIDTH, EXPERIMENT_HEIGHT = 2.30, 1.82
 def style():
     plt.rcParams.update({"font.family": "serif", "font.serif": ["Times New Roman", "DejaVu Serif"],
                          "mathtext.fontset": "stix",
-                         "font.size": 7.5, "axes.labelsize": 8, "xtick.labelsize": 7, "ytick.labelsize": 7,
+                         "font.size": 9, "axes.labelsize": 9, "xtick.labelsize": 9, "ytick.labelsize": 9,
                          "pdf.fonttype": 42, "svg.fonttype": "none",
                          "axes.spines.top": True, "axes.spines.right": True, "axes.linewidth": .6,
                          "axes.edgecolor": "black", "axes.labelpad": 2,
                          "figure.facecolor": "white", "figure.frameon": False,
                          "axes.facecolor": "white", "axes.axisbelow": True,
-                         "axes.grid": True, "grid.color": "#d0d0d0", "grid.linewidth": .4,
+                         "axes.grid": False,
                          "legend.frameon": True, "legend.fancybox": False, "legend.framealpha": 1,
-                         "legend.edgecolor": "black", "patch.linewidth": .5, "legend.fontsize": 6.5,
+                         "legend.edgecolor": "black", "patch.linewidth": .5, "legend.fontsize": 9,
                          "legend.handlelength": 1.8, "legend.handletextpad": .45,
                          "legend.labelspacing": .25, "legend.borderaxespad": .45,
                          "xtick.direction": "in", "ytick.direction": "in",
@@ -96,10 +96,10 @@ def error_structure(out):
     ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), color=REF, linewidth=1.0,
             label="Gaussian, along-track MAD")
     ax.set_yscale("log"); ax.set_xlabel("Position residual (m)"); ax.set_ylabel("Density")
-    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 60)
-    ax.yaxis.set_major_locator(matplotlib.ticker.LogLocator(base=10, numticks=7))
+    ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 1e4)
+    ax.set_yticks([1e-4, 1e-2, 1, 1e2, 1e4])
+    ax.yaxis.set_minor_locator(matplotlib.ticker.NullLocator())
     ax.yaxis.set_major_formatter(matplotlib.ticker.LogFormatterMathtext(base=10))
-    ax.tick_params(axis="y", labelsize=7.5)  # Log exponents remain above 5 pt.
     ax.get_xticklabels()[0].set_ha("left")
     ax.get_xticklabels()[-1].set_ha("right")
     ax.legend(loc="upper left")
@@ -112,8 +112,8 @@ def error_structure(out):
         c = summary["calibration"][key]["acf_clipped"]
         ax.plot(lags, [c[str(l)] for l in lags], color=color, linewidth=1.0, label=label)
     ax.set_xlabel("Lag (s)"); ax.set_ylabel("Residual autocorrelation"); ax.set_xticks(lags)
-    ax.set_xlim(.5, 10.5); ax.set_ylim(-.82, .56)
-    ax.legend(loc="lower left")
+    ax.set_xlim(.5, 10.5); ax.set_ylim(-.82, 1.5); ax.set_yticks([-.5, 0, .5, 1])
+    ax.legend(loc="upper right")
     ax = axes[2]
     kagc = np.load(ROOT / "merit/ages_kagc.npz")["changed_position_age_s"].ravel()
     for a, color, label in ((age, BLUE, "KBTP"), (kagc, REF, "KAGC")):
@@ -123,7 +123,8 @@ def error_structure(out):
     ax.set_xticks([.1, 1, 10, 100], labels=["0.1", "1", "10", "100"])
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_ylabel("Cumulative fraction")
-    ax.legend(loc="lower right")
+    ax.get_xticklabels()[-1].set_ha("right")
+    ax.legend(loc="upper left", handlelength=1.1)
     save_panels(fig, out, "fig_error")
     print("error c medians", np.median(age), np.median(kagc))
 
@@ -146,7 +147,7 @@ def results(out):
     # (b) Second site: fraction of windows whose ADE exceeds a level, so the tail is visible.
     k = np.load(RESULTS / "kagc_eval_test/test_errors.npz")
     kn = list(k["names"]); ax = axes[1]
-    for n, label, color, lw in (([x for x in kn if x.startswith("KF-CV")][0], "KF-CV (KAGC-tuned)", CROSS, 1.0),
+    for n, label, color, lw in (([x for x in kn if x.startswith("KF-CV")][0], "KF-CV (local)", CROSS, 1.0),
                                 ("iso direct", "LSTM, isotropic", ISO, 1.0),
                                 ("merit direct", "LSTM, MERIT", MERIT, 1.3)):
         v = np.sort(k["errors"][kn.index(n)].mean(1))
@@ -156,7 +157,7 @@ def results(out):
     ax.set_yscale("log"); ax.set_ylim(.01, 1.2); ax.set_xlim(0, 2400)
     ax.set_yticks([.01, .1, 1], labels=["0.01", "0.1", "1"])
     ax.set_xticks([0, 500, 1000, 1500, 2000], labels=["", "500", "1000", "1500", "2000"])
-    ax.set_xlabel("Window ADE (m)"); ax.set_ylabel("Fraction of windows exceeding")
+    ax.set_xlabel("Window ADE (m)"); ax.set_ylabel("Exceedance fraction")
     ax.legend(loc="upper right")
 
     ax = axes[2]; s = z["mean_staleness_s"]; day = z["day"]
@@ -180,7 +181,7 @@ def results(out):
 def influence(out):
     """Column-width panels: residual spread versus range and speed, and per-aircraft timing spread."""
     data = json.loads((RESULTS / "measurement/influence.json").read_text(encoding="utf-8"))
-    width, height, left, right, bottom, top = 3.45, 1.08, .54, .08, .34, .05
+    width, height, left, right, bottom, top = 3.45, 1.16, .54, .08, .34, .05
     for letter, key, scale, xlabel in (("a", "residual_range", 1e-3, "Range from receiver (km)"),
                                        ("b", "residual_speed", 1, "Ground speed (m/s)")):
         fig = plt.figure(figsize=(width, height))
@@ -190,7 +191,7 @@ def influence(out):
             ax.plot(x, [b[f"{comp}_mad"]["value"] for b in bins], color=color, linewidth=1.1, label=label)
         if letter == "b":
             k = np.median([b["along_mad"]["value"] / b["median"] for b in bins]); v = np.linspace(20, 100, 81)
-            ax.plot(v, k * v, color=REF, linewidth=1.0, label=f"{k:.2f} s $\\times$ speed")
+            ax.plot(v, k * v, color=REF, linewidth=1.0, label=f"{k:.2f} s $\\times\\, v$")
             print("along MAD / speed", round(k, 3))
         ax.set_yscale("log"); ax.set_ylim(1, 100)
         ax.set_yticks([1, 5, 10, 50], labels=["1", "5", "10", "50"])
@@ -199,7 +200,9 @@ def influence(out):
         ax.set_xlim(*((20, 100) if letter == "b" else (0, 22)))
         if letter == "a":
             ax.set_xticks([0, 5, 10, 15, 20])
-        ax.legend(loc="upper left", ncol=2 if letter == "a" else 3)
+        else:
+            ax.set_xticks([20, 40, 60, 80, 100]); ax.get_xticklabels()[-1].set_ha("right")
+        ax.legend(loc="upper left", ncol=2 if letter == "a" else 3, columnspacing=.9, handlelength=1.3)
         save(fig, out, f"fig_influence_{letter}")
         plt.close(fig)
         print("influence", letter, np.round(x, 1))
