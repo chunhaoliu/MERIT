@@ -94,7 +94,7 @@ def error_structure(out):
     # Gaussian with the along-track scaled MAD: the measured tail lies far above it.
     r = pool["along"]; sd = 1.4826 * np.median(np.abs(r - np.median(r))); g = np.linspace(-100, 100, 401)
     ax.plot(g, np.exp(-.5 * (g / sd) ** 2) / (sd * np.sqrt(2 * np.pi)), color=REF, linewidth=1.0,
-            label="Gaussian, along-track MAD")
+            label="Gaussian, same MAD")
     ax.set_yscale("log"); ax.set_xlabel("Position residual (m)"); ax.set_ylabel("Density")
     ax.set_xlim(-100, 100); ax.set_ylim(1e-5, 1e4)
     ax.set_yticks([1e-4, 1e-2, 1, 1e2, 1e4])
@@ -124,7 +124,7 @@ def error_structure(out):
     ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_ylabel("Cumulative fraction")
     ax.get_xticklabels()[-1].set_ha("right")
-    ax.legend(loc="upper left", handlelength=1.1)
+    ax.legend(loc="lower right", handlelength=1.1)
     save_panels(fig, out, "fig_error")
     print("error c medians", np.median(age), np.median(kagc))
 
@@ -193,15 +193,16 @@ def influence(out):
             k = np.median([b["along_mad"]["value"] / b["median"] for b in bins]); v = np.linspace(20, 100, 81)
             ax.plot(v, k * v, color=REF, linewidth=1.0, label=f"{k:.2f} s $\\times\\, v$")
             print("along MAD / speed", round(k, 3))
-        ax.set_yscale("log"); ax.set_ylim(1, 100)
+        ax.set_yscale("log"); ax.set_ylim(1, 200)
         ax.set_yticks([1, 5, 10, 50], labels=["1", "5", "10", "50"])
         ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
-        ax.set_xlabel(xlabel); ax.set_ylabel("Scaled MAD (m)")
+        ax.set_xlabel(xlabel); ax.set_ylabel("MAD (m)")
         ax.set_xlim(*((20, 100) if letter == "b" else (0, 22)))
         if letter == "a":
             ax.set_xticks([0, 5, 10, 15, 20])
         else:
             ax.set_xticks([20, 40, 60, 80, 100]); ax.get_xticklabels()[-1].set_ha("right")
+        ax.get_xticklabels()[0].set_ha("left")
         ax.legend(loc="upper left", ncol=2 if letter == "a" else 3, columnspacing=.9, handlelength=1.3)
         save(fig, out, f"fig_influence_{letter}")
         plt.close(fig)
