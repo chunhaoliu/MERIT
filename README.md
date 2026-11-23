@@ -2,7 +2,7 @@
 
 Code, checkpoints and evaluation outputs for
 
-> C. Liu, P. Wu, S. He, F. Huang, G. Pan, and J. H. Park, *MERIT: Characterizing and Replaying the ADS-B Observation Process for Robust Aircraft Trajectory Prediction*, submitted to IEEE Transactions on Instrumentation and Measurement.
+> C. Liu, P. Wu, F. Huang, G. Pan, and J. H. Park, *MERIT: Characterizing and Replaying the ADS-B Observation Process for Robust Aircraft Trajectory Prediction*, submitted to IEEE Transactions on Instrumentation and Measurement.
 
 This core reproduction contains processed-data construction, measurement of ADS-B residuals and report ages,
 the measured-error replay generator, ten predictors and their controls, training and raw-replay evaluation,
@@ -53,7 +53,7 @@ and measurement bootstrap outputs. Raw-log measurement, including its day bootst
 Table II recomputes the uncertainty budget from the day bootstrap, half-window and recovery results.
 Table III checks trainable parameter counts. Tables IV and V pair isotropic and MERIT training for ten predictors,
 with a separate relative-change CI for each predictor and subset; Table V also reports P95. Table VI contains
-seven residual/timing combinations and five alternative remedies, with three-seed cells marked by a dagger.
+seven residual/timing combinations and six alternative remedies.
 All printed values use direct one-step rounding of the full-precision results. The JSON results retain full precision.
 
 ### Preparing source data
